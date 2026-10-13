@@ -1,11 +1,68 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
+import Layout from "../layouts/Layout.astro";
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+const products = [
+  {
+    slug: "premium-crystal-set",
+    title: "Raw Healing Crystal Set",
+    price: "₹799",
+    category: "Crystals",
+    image: "/images/crystals.jpg",
+    amazonUrl: "https://amazon.in/dp/YOUR_ASIN_1"
+  },
+  {
+    slug: "neo-cube-magnets",
+    title: "Neodymium Magnetic Spheres",
+    price: "₹599",
+    category: "Magnets",
+    image: "/images/magnets.jpg",
+    amazonUrl: "https://amazon.in/dp/YOUR_ASIN_2"
+  }
+];
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Brand Name | Premium Stationery, Magnets & Crystals">
+  <!-- Hero Section -->
+  <section class="relative bg-white border-b border-gray-100 py-20 lg:py-32">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <span class="text-xs font-semibold uppercase tracking-widest text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full">Crafted for Quality</span>
+      <h1 class="text-4xl sm:text-6xl font-extrabold text-gray-900 tracking-tight mt-6">
+        Elevate Your Everyday <span class="text-indigo-600">Essentials</span>
+      </h1>
+      <p class="max-w-2xl mx-auto text-lg text-gray-600 mt-4">
+        Discover our hand-picked collection of high-performance magnets, precision pens, aesthetic stationery, and natural crystals.
+      </p>
+      <div class="mt-8 flex justify-center gap-4">
+        <a href="#products" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-8 py-3.5 rounded-xl shadow-sm transition">
+          Explore Catalog
+        </a>
+        <a href="/warranty" class="bg-white hover:bg-gray-50 text-gray-900 border border-gray-300 font-semibold px-8 py-3.5 rounded-xl transition">
+          Register Warranty
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Product Showcase Grid -->
+  <section id="products" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <div class="flex items-center justify-between mb-8">
+      <h2 class="text-2xl font-bold text-gray-900">Featured Products</h2>
+      <span class="text-sm text-gray-500">Available on Amazon & Direct</span>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      {products.map((product) => (
+        <a href={`/products/${product.slug}`} class="group bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition">
+          <div class="aspect-square bg-gray-100 flex items-center justify-center text-gray-400 group-hover:bg-gray-200 transition">
+            [ Image: {product.title} ]
+          </div>
+          <div class="p-6">
+            <span class="text-xs font-semibold uppercase tracking-wider text-indigo-600">{product.category}</span>
+            <h3 class="text-lg font-bold text-gray-900 mt-1 group-hover:text-indigo-600 transition">{product.title}</h3>
+            <p class="text-base font-semibold text-gray-900 mt-2">{product.price}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
 </Layout>

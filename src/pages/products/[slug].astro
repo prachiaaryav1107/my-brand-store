@@ -1,0 +1,84 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+// Example static paths generation for SSG
+export async function getStaticPaths() {
+  const products = [
+    { 
+      slug: "premium-crystal-set", 
+      title: "Raw Healing Crystal Set", 
+      price: "₹799", 
+      amazonUrl: "https://amazon.in/dp/YOUR_ASIN_1",
+      image: "/images/crystals.jpg",
+      description: "Hand-selected natural raw crystals for positive energy and home decor."
+    },
+    { 
+      slug: "neo-cube-magnets", 
+      title: "Neodymium Magnetic Spheres", 
+      price: "₹599", 
+      amazonUrl: "https://amazon.in/dp/YOUR_ASIN_2",
+      image: "/images/magnets.jpg",
+      description: "Ultra-strong rare-earth magnetic balls for stress relief and creative desk setups."
+    }
+  ];
+
+  return products.map(product => ({
+    params: { slug: product.slug },
+    props: { product },
+  }));
+}
+
+const { product } = Astro.props;
+---
+
+<Layout title={`${product.title} | Brand Store`}>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+      
+      <!-- Product Image Gallery -->
+      <div class="bg-gray-100 rounded-2xl overflow-hidden aspect-square flex items-center justify-center border border-gray-200">
+        <!-- Replace with actual img tag once assets are added -->
+        <span class="text-gray-400 font-medium">[ High-Res Image: {product.title} ]</span>
+      </div>
+
+      <!-- Product Details & Actions -->
+      <div class="flex flex-col space-y-6">
+        <div>
+          <span class="text-xs font-semibold uppercase tracking-wider text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full">Best Seller</span>
+          <h1 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-3">{product.title}</h1>
+          <p class="text-2xl font-bold text-gray-900 mt-2">{product.price}</p>
+        </div>
+
+        <p class="text-gray-600 leading-relaxed">{product.description}</p>
+
+        <hr class="border-gray-200" />
+
+        <!-- Dual Call to Action Area -->
+        <div class="space-y-4">
+          <!-- Primary CTA: Amazon -->
+          <a 
+            href={product.amazonUrl} 
+            target="_blank" 
+            rel="noopener noreferrer"
+            class="w-full flex items-center justify-center bg-amber-400 hover:bg-amber-500 text-gray-900 font-bold py-4 px-8 rounded-xl shadow-sm transition transform active:scale-[0.99]"
+          >
+            Buy Securely on Amazon
+          </a>
+
+          <!-- Secondary CTA: Razorpay Direct Checkout (Uncomment when ready) -->
+          <div class="p-6 bg-white border border-gray-200 rounded-xl shadow-sm">
+            <h3 class="text-sm font-semibold text-gray-900 mb-2">Direct Purchase (Free Shipping Over ₹500)</h3>
+            <p class="text-xs text-gray-500 mb-4">Shipped directly from our warehouse via Shiprocket.</p>
+            
+            <!-- Paste your Razorpay Payment Button Script Here -->
+            <!-- <script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_xxxxxx" async> </script> -->
+            <div class="bg-gray-100 text-gray-400 text-xs py-3 text-center rounded-lg border border-dashed border-gray-300">
+              Razorpay Button Embedded Here
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</Layout>
