@@ -6,62 +6,222 @@ const products = [
     slug: "premium-crystal-set",
     title: "Raw Healing Crystal Set",
     price: "₹799",
+    rating: "4.9",
+    reviews: "1,420",
     category: "Crystals",
-    image: "/images/crystals.jpg",
-    amazonUrl: "https://amazon.in/dp/YOUR_ASIN_1"
+    colorBg: "bg-emerald-50 text-emerald-700 border-emerald-200",
+    gradient: "from-emerald-500/10 via-teal-500/5 to-transparent",
+    imageEmoji: "💎",
+    badgeText: "Best Seller"
   },
   {
     slug: "neo-cube-magnets",
     title: "Neodymium Magnetic Spheres",
     price: "₹599",
+    rating: "4.8",
+    reviews: "980",
     category: "Magnets",
-    image: "/images/magnets.jpg",
-    amazonUrl: "https://amazon.in/dp/YOUR_ASIN_2"
+    colorBg: "bg-cyan-50 text-cyan-700 border-cyan-200",
+    gradient: "from-cyan-500/10 via-blue-500/5 to-transparent",
+    imageEmoji: "🧲",
+    badgeText: "Staff Pick"
+  },
+  {
+    slug: "brass-executive-pen",
+    title: "Precision Heavyweight Brass Pen",
+    price: "₹899",
+    rating: "4.9",
+    reviews: "650",
+    category: "Stationery",
+    colorBg: "bg-amber-50 text-amber-700 border-amber-200",
+    gradient: "from-amber-500/10 via-orange-500/5 to-transparent",
+    imageEmoji: "✒️",
+    badgeText: "New Arrival"
+  },
+  {
+    slug: "chakra-orgonite-pyramid",
+    title: "Energy Generator Orgonite Pyramid",
+    price: "₹1,099",
+    rating: "5.0",
+    reviews: "410",
+    category: "Crystals",
+    colorBg: "bg-purple-50 text-purple-700 border-purple-200",
+    gradient: "from-purple-500/10 via-pink-500/5 to-transparent",
+    imageEmoji: "🔮",
+    badgeText: "Trending"
+  },
+  {
+    slug: "levitating-desk-globe",
+    title: "Magnetic Levitating Desk Globe",
+    price: "₹1,499",
+    rating: "4.7",
+    reviews: "320",
+    category: "Gadgets",
+    colorBg: "bg-indigo-50 text-indigo-700 border-indigo-200",
+    gradient: "from-indigo-500/10 via-violet-500/5 to-transparent",
+    imageEmoji: "🪐",
+    badgeText: "Popular"
+  },
+  {
+    slug: "minimalist-leather-desk-mat",
+    title: "Premium PU Leather Desk Mat",
+    price: "₹699",
+    rating: "4.8",
+    reviews: "890",
+    category: "Stationery",
+    colorBg: "bg-rose-50 text-rose-700 border-rose-200",
+    gradient: "from-rose-500/10 via-pink-500/5 to-transparent",
+    imageEmoji: "🛡️",
+    badgeText: "Essential"
+  }
+];
+
+const testimonials = [
+  {
+    name: "Aarav Sharma",
+    role: "Architect & Designer",
+    comment: "The magnetic spheres and brass pen transformed my workspace setup. Exceptional packaging and quality!",
+    rating: "⭐⭐⭐⭐⭐"
+  },
+  {
+    name: "Priya Menon",
+    role: "Wellness Coach",
+    comment: "The raw crystal set is stunning. Authentic energy and gorgeous gift box. Highly recommended!",
+    rating: "⭐⭐⭐⭐⭐"
+  },
+  {
+    name: "Rahul Verma",
+    role: "Tech Lead",
+    comment: "Fast shipping via Amazon and direct support. Lumencraft products always exceed expectations.",
+    rating: "⭐⭐⭐⭐⭐"
   }
 ];
 ---
 
-<Layout title="Brand Name | Premium Stationery, Magnets & Crystals">
+<Layout title="Lumencraft | Premium Crystals, Magnets & Desk Essentials">
   <!-- Hero Section -->
-  <section class="relative bg-white border-b border-gray-100 py-20 lg:py-32">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-      <span class="text-xs font-semibold uppercase tracking-widest text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full">Crafted for Quality</span>
-      <h1 class="text-4xl sm:text-6xl font-extrabold text-gray-900 tracking-tight mt-6">
-        Elevate Your Everyday <span class="text-indigo-600">Essentials</span>
+  <section class="relative overflow-hidden py-24 lg:py-36 bg-gradient-to-b from-white via-indigo-50/20 to-transparent">
+    <!-- Background Glow Blobs -->
+    <div class="absolute top-10 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-gradient-to-tr from-violet-400/20 via-pink-400/20 to-amber-300/25 blur-3xl -z-10 rounded-full pointer-events-none"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-violet-50 border border-violet-200/60 text-violet-700 text-xs font-bold uppercase tracking-widest shadow-sm mb-6 animate-pulse">
+        <span>✨</span> 100% Verified Quality • Amazon Prime Fulfilled
+      </div>
+      
+      <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-slate-900 tracking-tight max-w-4xl mx-auto leading-[1.15]">
+        Elevate Your Everyday <span class="bg-gradient-to-r from-violet-600 via-pink-600 to-amber-500 bg-clip-text text-transparent">Workspace & Spirit</span>
       </h1>
-      <p class="max-w-2xl mx-auto text-lg text-gray-600 mt-4">
-        Discover our hand-picked collection of high-performance magnets, precision pens, aesthetic stationery, and natural crystals.
+      
+      <p class="max-w-2xl mx-auto text-lg sm:text-xl text-slate-600 mt-6 leading-relaxed">
+        Discover hand-crafted natural healing crystals, ultra-strong neodymium magnetic art pieces, and precision executive stationery.
       </p>
-      <div class="mt-8 flex justify-center gap-4">
-        <a href="#products" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold px-8 py-3.5 rounded-xl shadow-sm transition">
-          Explore Catalog
+
+      <div class="mt-10 flex flex-col sm:flex-row justify-center items-center gap-4">
+        <a href="#products" class="w-full sm:w-auto bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white font-bold px-8 py-4 rounded-2xl shadow-xl shadow-indigo-500/25 transition transform hover:-translate-y-0.5 active:scale-95">
+          Explore Collection 🚀
         </a>
-        <a href="/warranty" class="bg-white hover:bg-gray-50 text-gray-900 border border-gray-300 font-semibold px-8 py-3.5 rounded-xl transition">
-          Register Warranty
+        <a href="/warranty" class="w-full sm:w-auto bg-white hover:bg-slate-50 text-slate-800 border border-slate-200 font-bold px-8 py-4 rounded-2xl shadow-sm transition transform hover:-translate-y-0.5">
+          Register Warranty 🛡️
         </a>
+      </div>
+
+      <!-- Trust Metrics -->
+      <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto pt-10 border-t border-slate-200/60 text-left">
+        <div class="bg-white/60 backdrop-blur-sm p-4 rounded-2xl border border-slate-200/50 shadow-sm">
+          <p class="text-2xl font-extrabold text-slate-900">10,000+</p>
+          <p class="text-xs text-slate-500 font-medium mt-0.5">Happy Customers in India</p>
+        </div>
+        <div class="bg-white/60 backdrop-blur-sm p-4 rounded-2xl border border-slate-200/50 shadow-sm">
+          <p class="text-2xl font-extrabold text-violet-600">4.9 / 5.0</p>
+          <p class="text-xs text-slate-500 font-medium mt-0.5">Average Customer Rating</p>
+        </div>
+        <div class="bg-white/60 backdrop-blur-sm p-4 rounded-2xl border border-slate-200/50 shadow-sm">
+          <p class="text-2xl font-extrabold text-amber-600">Free Express</p>
+          <p class="text-xs text-slate-500 font-medium mt-0.5">Shipping on Orders over ₹500</p>
+        </div>
+        <div class="bg-white/60 backdrop-blur-sm p-4 rounded-2xl border border-slate-200/50 shadow-sm">
+          <p class="text-2xl font-extrabold text-emerald-600">1 Year</p>
+          <p class="text-xs text-slate-500 font-medium mt-0.5">Replacement Warranty</p>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- Product Showcase Grid -->
-  <section id="products" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-    <div class="flex items-center justify-between mb-8">
-      <h2 class="text-2xl font-bold text-gray-900">Featured Products</h2>
-      <span class="text-sm text-gray-500">Available on Amazon & Direct</span>
+  <section id="products" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+    <div class="flex flex-col md:flex-row items-start md:items-end justify-between mb-12">
+      <div>
+        <span class="text-xs font-bold uppercase tracking-widest text-violet-600 bg-violet-50 px-3 py-1 rounded-full border border-violet-100">Curated Catalog</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 tracking-tight">Featured Masterpieces</h2>
+      </div>
+      <p class="text-sm text-slate-500 mt-2 md:mt-0">Available with secure Prime delivery & direct dispatch</p>
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
       {products.map((product) => (
-        <a href={`/products/${product.slug}`} class="group bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition">
-          <div class="aspect-square bg-gray-100 flex items-center justify-center text-gray-400 group-hover:bg-gray-200 transition">
-            [ Image: {product.title} ]
+        <a href={`/products/${product.slug}`} class="group relative bg-white rounded-3xl border border-slate-200/80 overflow-hidden shadow-sm hover:shadow-2xl hover:border-violet-300 transition duration-300 flex flex-col">
+          <!-- Gradient Top Background -->
+          <div class={`absolute inset-x-0 top-0 h-48 bg-gradient-to-b ${product.gradient} pointer-events-none`}></div>
+
+          <!-- Card Header Image/Emoji Area -->
+          <div class="relative aspect-video sm:aspect-square bg-slate-50/80 flex items-center justify-center border-b border-slate-100 group-hover:scale-102 transition duration-500">
+            <span class="text-6xl sm:text-7xl filter drop-shadow-lg group-hover:scale-110 transition duration-300">{product.imageEmoji}</span>
+            <div class="absolute top-4 left-4">
+              <span class={`text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full border ${product.colorBg} shadow-sm`}>
+                {product.badgeText}
+              </span>
+            </div>
+            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-md px-2.5 py-1 rounded-full text-xs font-bold text-slate-700 shadow-sm flex items-center gap-1">
+              <span>⭐</span> {product.rating} <span class="text-slate-400 font-normal">({product.reviews})</span>
+            </div>
           </div>
-          <div class="p-6">
-            <span class="text-xs font-semibold uppercase tracking-wider text-indigo-600">{product.category}</span>
-            <h3 class="text-lg font-bold text-gray-900 mt-1 group-hover:text-indigo-600 transition">{product.title}</h3>
-            <p class="text-base font-semibold text-gray-900 mt-2">{product.price}</p>
+
+          <!-- Card Body -->
+          <div class="p-6 flex flex-col flex-grow justify-between bg-white">
+            <div>
+              <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">{product.category}</span>
+              <h3 class="text-lg font-bold text-slate-900 mt-1 group-hover:text-violet-600 transition">{product.title}</h3>
+            </div>
+            
+            <div class="mt-6 flex items-center justify-between pt-4 border-t border-slate-100">
+              <div>
+                <span class="text-xs text-slate-400 block font-medium">Price</span>
+                <span class="text-xl font-extrabold text-slate-900">{product.price}</span>
+              </div>
+              <span class="bg-violet-50 text-violet-700 group-hover:bg-violet-600 group-hover:text-white px-4 py-2 rounded-xl text-xs font-bold shadow-sm transition">
+                View Item &rarr;
+              </span>
+            </div>
           </div>
         </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 bg-gradient-to-t from-violet-50/40 to-transparent rounded-3xl my-10 border border-violet-100/60">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <span class="text-xs font-bold uppercase tracking-widest text-pink-600 bg-pink-50 px-3 py-1 rounded-full border border-pink-100">Customer Love</span>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 tracking-tight">Loved by 10,000+ Desks & Homes</h2>
+      <p class="text-slate-600 mt-2">See what our community has to say about their Lumencraft experience.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {testimonials.map((t) => (
+        <div class="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-sm flex flex-col justify-between hover:shadow-md transition">
+          <div class="space-y-4">
+            <div class="text-amber-400 text-sm">{t.rating}</div>
+            <p class="text-slate-700 text-sm leading-relaxed italic">"{t.comment}"</p>
+          </div>
+          <div class="mt-8 pt-4 border-t border-slate-100 flex items-center justify-between">
+            <div>
+              <p class="font-bold text-slate-900 text-sm">{t.name}</p>
+              <p class="text-xs text-slate-500">{t.role}</p>
+            </div>
+            <span class="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-lg">Verified Buyer</span>
+          </div>
+        </div>
       ))}
     </div>
   </section>

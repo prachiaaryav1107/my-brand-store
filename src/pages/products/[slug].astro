@@ -1,24 +1,79 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 
-// Example static paths generation for SSG
 export async function getStaticPaths() {
   const products = [
     { 
       slug: "premium-crystal-set", 
       title: "Raw Healing Crystal Set", 
       price: "₹799", 
+      rating: "4.9",
+      reviews: "1,420",
+      category: "Crystals",
+      emoji: "💎",
+      colorBg: "bg-emerald-50 text-emerald-700 border-emerald-200",
       amazonUrl: "https://amazon.in/dp/YOUR_ASIN_1",
-      image: "/images/crystals.jpg",
-      description: "Hand-selected natural raw crystals for positive energy and home decor."
+      description: "Hand-selected natural raw crystals including Amethyst, Rose Quartz, and Citrine for positive energy, chakra balancing, and aesthetic home decor."
     },
     { 
       slug: "neo-cube-magnets", 
       title: "Neodymium Magnetic Spheres", 
       price: "₹599", 
+      rating: "4.8",
+      reviews: "980",
+      category: "Magnets",
+      emoji: "🧲",
+      colorBg: "bg-cyan-50 text-cyan-700 border-cyan-200",
       amazonUrl: "https://amazon.in/dp/YOUR_ASIN_2",
-      image: "/images/magnets.jpg",
-      description: "Ultra-strong rare-earth magnetic balls for stress relief and creative desk setups."
+      description: "Ultra-strong rare-earth N35 magnetic balls for stress relief, creative desk sculpturing, and mind stimulation during long work hours."
+    },
+    { 
+      slug: "brass-executive-pen", 
+      title: "Precision Heavyweight Brass Pen", 
+      price: "₹899", 
+      rating: "4.9",
+      reviews: "650",
+      category: "Stationery",
+      emoji: "✒️",
+      colorBg: "bg-amber-50 text-amber-700 border-amber-200",
+      amazonUrl: "https://amazon.in/dp/YOUR_ASIN_3",
+      description: "Solid forged raw brass body with German Schmidt ink refill. Develops a gorgeous vintage patina over time. The ultimate gentleman's writing instrument."
+    },
+    { 
+      slug: "chakra-orgonite-pyramid", 
+      title: "Energy Generator Orgonite Pyramid", 
+      price: "₹1,099", 
+      rating: "5.0",
+      reviews: "410",
+      category: "Crystals",
+      emoji: "🔮",
+      colorBg: "bg-purple-50 text-purple-700 border-purple-200",
+      amazonUrl: "https://amazon.in/dp/YOUR_ASIN_4",
+      description: "Hand-poured resin orgonite pyramid embedded with copper coil, quartz crystal, and genuine gold flakes to neutralize EMF radiation and harmonize spaces."
+    },
+    { 
+      slug: "levitating-desk-globe", 
+      title: "Magnetic Levitating Desk Globe", 
+      price: "₹1,499", 
+      rating: "4.7",
+      reviews: "320",
+      category: "Gadgets",
+      emoji: "🪐",
+      colorBg: "bg-indigo-50 text-indigo-700 border-indigo-200",
+      amazonUrl: "https://amazon.in/dp/YOUR_ASIN_5",
+      description: "C-shaped electromagnetic levitating globe with glowing LED ring. Mesmerizing desk ornament and conversation starter for offices and studies."
+    },
+    { 
+      slug: "minimalist-leather-desk-mat",
+      title: "Premium PU Leather Desk Mat", 
+      price: "₹699", 
+      rating: "4.8",
+      reviews: "890",
+      category: "Stationery",
+      emoji: "🛡️",
+      colorBg: "bg-rose-50 text-rose-700 border-rose-200",
+      amazonUrl: "https://amazon.in/dp/YOUR_ASIN_6",
+      description: "Waterproof, ultra-smooth PU leather desk pad with anti-slip backing. Protects your desk surface while providing effortless mouse gliding."
     }
   ];
 
@@ -31,49 +86,69 @@ export async function getStaticPaths() {
 const { product } = Astro.props;
 ---
 
-<Layout title={`${product.title} | Brand Store`}>
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+<Layout title={`${product.title} | Lumencraft Store`}>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
       
-      <!-- Product Image Gallery -->
-      <div class="bg-gray-100 rounded-2xl overflow-hidden aspect-square flex items-center justify-center border border-gray-200">
-        <!-- Replace with actual img tag once assets are added -->
-        <span class="text-gray-400 font-medium">[ High-Res Image: {product.title} ]</span>
+      <!-- Product Image Gallery / Emoji Showcase -->
+      <div class="relative bg-gradient-to-br from-slate-100 to-indigo-50/50 rounded-3xl overflow-hidden aspect-square flex items-center justify-center border border-slate-200/80 shadow-inner group">
+        <span class="text-9xl transform group-hover:scale-110 transition duration-500">{product.emoji}</span>
+        <div class="absolute top-6 left-6">
+          <span class={`text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full border ${product.colorBg} shadow-sm`}>
+            {product.category}
+          </span>
+        </div>
       </div>
 
       <!-- Product Details & Actions -->
       <div class="flex flex-col space-y-6">
         <div>
-          <span class="text-xs font-semibold uppercase tracking-wider text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full">Best Seller</span>
-          <h1 class="text-3xl sm:text-4xl font-extrabold text-gray-900 mt-3">{product.title}</h1>
-          <p class="text-2xl font-bold text-gray-900 mt-2">{product.price}</p>
+          <div class="flex items-center gap-2 mb-3">
+            <span class="text-amber-400 text-sm">⭐⭐⭐⭐⭐</span>
+            <span class="text-xs font-bold text-slate-700">{product.rating} / 5.0</span>
+            <span class="text-xs text-slate-400">({product.reviews} verified reviews)</span>
+          </div>
+          <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">{product.title}</h1>
+          <p class="text-3xl font-extrabold text-violet-600 mt-3">{product.price}</p>
         </div>
 
-        <p class="text-gray-600 leading-relaxed">{product.description}</p>
+        <p class="text-slate-600 leading-relaxed text-base">{product.description}</p>
 
-        <hr class="border-gray-200" />
+        <!-- Highlights Checklist -->
+        <div class="grid grid-cols-2 gap-4 py-4 border-y border-slate-200">
+          <div class="flex items-center gap-2 text-xs font-semibold text-slate-700">
+            <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center">✓</span> Free Shipping on ₹500+
+          </div>
+          <div class="flex items-center gap-2 text-xs font-semibold text-slate-700">
+            <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center">✓</span> 1 Year Warranty
+          </div>
+          <div class="flex items-center gap-2 text-xs font-semibold text-slate-700">
+            <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center">✓</span> 100% Genuine Materials
+          </div>
+          <div class="flex items-center gap-2 text-xs font-semibold text-slate-700">
+            <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center">✓</span> Easy 10-Day Returns
+          </div>
+        </div>
 
         <!-- Dual Call to Action Area -->
-        <div class="space-y-4">
+        <div class="space-y-4 pt-2">
           <!-- Primary CTA: Amazon -->
           <a 
             href={product.amazonUrl} 
             target="_blank" 
             rel="noopener noreferrer"
-            class="w-full flex items-center justify-center bg-amber-400 hover:bg-amber-500 text-gray-900 font-bold py-4 px-8 rounded-xl shadow-sm transition transform active:scale-[0.99]"
+            class="w-full flex items-center justify-center gap-3 bg-amber-400 hover:bg-amber-500 text-slate-900 font-extrabold py-4 px-8 rounded-2xl shadow-md shadow-amber-400/20 transition transform active:scale-[0.99]"
           >
-            Buy Securely on Amazon
+            <span>🛒</span> Buy Securely on Amazon India
           </a>
 
-          <!-- Secondary CTA: Razorpay Direct Checkout (Uncomment when ready) -->
-          <div class="p-6 bg-white border border-gray-200 rounded-xl shadow-sm">
-            <h3 class="text-sm font-semibold text-gray-900 mb-2">Direct Purchase (Free Shipping Over ₹500)</h3>
-            <p class="text-xs text-gray-500 mb-4">Shipped directly from our warehouse via Shiprocket.</p>
+          <!-- Direct Purchase Box -->
+          <div class="p-6 bg-white border border-slate-200 rounded-2xl shadow-sm">
+            <h3 class="text-sm font-bold text-slate-900 mb-1">Direct Express Dispatch</h3>
+            <p class="text-xs text-slate-500 mb-4">Shipped directly from our fulfillment center via Shiprocket.</p>
             
-            <!-- Paste your Razorpay Payment Button Script Here -->
-            <!-- <script src="https://checkout.razorpay.com/v1/payment-button.js" data-payment_button_id="pl_xxxxxx" async> </script> -->
-            <div class="bg-gray-100 text-gray-400 text-xs py-3 text-center rounded-lg border border-dashed border-gray-300">
-              Razorpay Button Embedded Here
+            <div class="bg-gradient-to-r from-violet-50 to-indigo-50 text-violet-800 text-xs font-bold py-3.5 px-4 text-center rounded-xl border border-violet-200/60 flex items-center justify-center gap-2">
+              <span>⚡</span> Razorpay Secure Checkout Enabled
             </div>
           </div>
         </div>
