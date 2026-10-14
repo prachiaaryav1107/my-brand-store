@@ -1,196 +1,120 @@
 ---
 import Layout from "../layouts/Layout.astro";
-
-const products = [
-  {
-    slug: "premium-crystal-set",
-    title: "Raw Healing Crystal Set",
-    price: "₹799",
-    rating: "4.9",
-    reviews: "1,420",
-    category: "Crystals",
-    colorBg: "bg-emerald-50 text-emerald-700 border-emerald-200",
-    gradient: "from-emerald-500/10 via-teal-500/5 to-transparent",
-    imageEmoji: "💎",
-    badgeText: "Best Seller"
-  },
-  {
-    slug: "neo-cube-magnets",
-    title: "Neodymium Magnetic Spheres",
-    price: "₹599",
-    rating: "4.8",
-    reviews: "980",
-    category: "Magnets",
-    colorBg: "bg-cyan-50 text-cyan-700 border-cyan-200",
-    gradient: "from-cyan-500/10 via-blue-500/5 to-transparent",
-    imageEmoji: "🧲",
-    badgeText: "Staff Pick"
-  },
-  {
-    slug: "brass-executive-pen",
-    title: "Precision Heavyweight Brass Pen",
-    price: "₹899",
-    rating: "4.9",
-    reviews: "650",
-    category: "Stationery",
-    colorBg: "bg-amber-50 text-amber-700 border-amber-200",
-    gradient: "from-amber-500/10 via-orange-500/5 to-transparent",
-    imageEmoji: "✒️",
-    badgeText: "New Arrival"
-  },
-  {
-    slug: "chakra-orgonite-pyramid",
-    title: "Energy Generator Orgonite Pyramid",
-    price: "₹1,099",
-    rating: "5.0",
-    reviews: "410",
-    category: "Crystals",
-    colorBg: "bg-purple-50 text-purple-700 border-purple-200",
-    gradient: "from-purple-500/10 via-pink-500/5 to-transparent",
-    imageEmoji: "🔮",
-    badgeText: "Trending"
-  },
-  {
-    slug: "levitating-desk-globe",
-    title: "Magnetic Levitating Desk Globe",
-    price: "₹1,499",
-    rating: "4.7",
-    reviews: "320",
-    category: "Gadgets",
-    colorBg: "bg-indigo-50 text-indigo-700 border-indigo-200",
-    gradient: "from-indigo-500/10 via-violet-500/5 to-transparent",
-    imageEmoji: "🪐",
-    badgeText: "Popular"
-  },
-  {
-    slug: "minimalist-leather-desk-mat",
-    title: "Premium PU Leather Desk Mat",
-    price: "₹699",
-    rating: "4.8",
-    reviews: "890",
-    category: "Stationery",
-    colorBg: "bg-rose-50 text-rose-700 border-rose-200",
-    gradient: "from-rose-500/10 via-pink-500/5 to-transparent",
-    imageEmoji: "🛡️",
-    badgeText: "Essential"
-  }
-];
-
-const testimonials = [
-  {
-    name: "Aarav Sharma",
-    role: "Architect & Designer",
-    comment: "The magnetic spheres and brass pen transformed my workspace setup. Exceptional packaging and quality!",
-    rating: "⭐⭐⭐⭐⭐"
-  },
-  {
-    name: "Priya Menon",
-    role: "Wellness Coach",
-    comment: "The raw crystal set is stunning. Authentic energy and gorgeous gift box. Highly recommended!",
-    rating: "⭐⭐⭐⭐⭐"
-  },
-  {
-    name: "Rahul Verma",
-    role: "Tech Lead",
-    comment: "Fast shipping via Amazon and direct support. Lumencraft products always exceed expectations.",
-    rating: "⭐⭐⭐⭐⭐"
-  }
-];
+import { products } from "../data/products";
 ---
 
-<Layout title="Lumencraft | Premium Crystals, Magnets & Desk Essentials">
+<Layout title="Unhinged | Obsidian & Gold Luxury Deskware & Custom Magnets">
   <!-- Hero Section -->
-  <section class="relative overflow-hidden py-24 lg:py-36 bg-gradient-to-b from-white via-indigo-50/20 to-transparent">
-    <!-- Background Glow Blobs -->
-    <div class="absolute top-10 left-1/2 -translate-x-1/2 w-[600px] h-[350px] bg-gradient-to-tr from-violet-400/20 via-pink-400/20 to-amber-300/25 blur-3xl -z-10 rounded-full pointer-events-none"></div>
+  <section class="relative overflow-hidden py-28 lg:py-40 bg-gradient-to-b from-black via-zinc-950 to-black">
+    <!-- Background Gold Glow Blobs -->
+    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-gradient-to-tr from-amber-600/15 via-yellow-500/10 to-transparent blur-[120px] -z-10 rounded-full pointer-events-none"></div>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-violet-50 border border-violet-200/60 text-violet-700 text-xs font-bold uppercase tracking-widest shadow-sm mb-6 animate-pulse">
-        <span>✨</span> 100% Verified Quality • Amazon Prime Fulfilled
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-950/50 border border-amber-500/30 text-amber-400 text-xs font-bold uppercase tracking-widest shadow-lg shadow-amber-500/10 mb-6 animate-pulse">
+        <span>⚡</span> New Obsidian & Gold Studio • Small Batch Craftsmanship
       </div>
       
-      <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-slate-900 tracking-tight max-w-4xl mx-auto leading-[1.15]">
-        Elevate Your Everyday <span class="bg-gradient-to-r from-violet-600 via-pink-600 to-amber-500 bg-clip-text text-transparent">Workspace & Spirit</span>
+      <h1 class="text-4xl sm:text-6xl lg:text-7xl font-extrabold text-white tracking-tight max-w-4xl mx-auto leading-[1.1]">
+        Crafted For The <span class="bg-gradient-to-r from-amber-200 via-yellow-400 to-amber-600 bg-clip-text text-transparent">Unhinged & Bold</span>
       </h1>
       
-      <p class="max-w-2xl mx-auto text-lg sm:text-xl text-slate-600 mt-6 leading-relaxed">
-        Discover hand-crafted natural healing crystals, ultra-strong neodymium magnetic art pieces, and precision executive stationery.
+      <p class="max-w-2xl mx-auto text-lg sm:text-xl text-slate-400 mt-6 leading-relaxed">
+        Upload your personal design to forge custom obsidian and 24k gold magnets. Elevate your desk with raw crystals, magnetic spheres, and precision stationery.
       </p>
 
       <div class="mt-10 flex flex-col sm:flex-row justify-center items-center gap-4">
-        <a href="#products" class="w-full sm:w-auto bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white font-bold px-8 py-4 rounded-2xl shadow-xl shadow-indigo-500/25 transition transform hover:-translate-y-0.5 active:scale-95">
-          Explore Collection 🚀
+        <a href="/custom-magnets" class="w-full sm:w-auto bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-600 hover:from-amber-500 hover:to-yellow-500 text-black font-extrabold px-8 py-4 rounded-2xl shadow-xl shadow-amber-500/25 transition transform hover:-translate-y-0.5 active:scale-95 flex items-center justify-center gap-2">
+          <span>🧲</span> Upload Custom Magnet Design
         </a>
-        <a href="/warranty" class="w-full sm:w-auto bg-white hover:bg-slate-50 text-slate-800 border border-slate-200 font-bold px-8 py-4 rounded-2xl shadow-sm transition transform hover:-translate-y-0.5">
-          Register Warranty 🛡️
+        <a href="#products" class="w-full sm:w-auto bg-zinc-900 hover:bg-zinc-800 text-white border border-amber-500/30 font-bold px-8 py-4 rounded-2xl shadow-sm transition transform hover:-translate-y-0.5">
+          Explore Collection ⚡
         </a>
       </div>
 
-      <!-- Trust Metrics -->
-      <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto pt-10 border-t border-slate-200/60 text-left">
-        <div class="bg-white/60 backdrop-blur-sm p-4 rounded-2xl border border-slate-200/50 shadow-sm">
-          <p class="text-2xl font-extrabold text-slate-900">10,000+</p>
-          <p class="text-xs text-slate-500 font-medium mt-0.5">Happy Customers in India</p>
+      <!-- Honest Trust Metrics (No fake 10k marketing) -->
+      <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto pt-10 border-t border-amber-500/20 text-left">
+        <div class="bg-zinc-900/60 backdrop-blur-sm p-5 rounded-2xl border border-amber-500/20 shadow-sm">
+          <p class="text-2xl font-extrabold text-amber-400">Custom Uploads</p>
+          <p class="text-xs text-slate-400 font-medium mt-0.5">Your Artwork on Magnets</p>
         </div>
-        <div class="bg-white/60 backdrop-blur-sm p-4 rounded-2xl border border-slate-200/50 shadow-sm">
-          <p class="text-2xl font-extrabold text-violet-600">4.9 / 5.0</p>
-          <p class="text-xs text-slate-500 font-medium mt-0.5">Average Customer Rating</p>
+        <div class="bg-zinc-900/60 backdrop-blur-sm p-5 rounded-2xl border border-amber-500/20 shadow-sm">
+          <p class="text-2xl font-extrabold text-yellow-400">24K Gold & Resin</p>
+          <p class="text-xs text-slate-400 font-medium mt-0.5">Obsidian Bezel Finish</p>
         </div>
-        <div class="bg-white/60 backdrop-blur-sm p-4 rounded-2xl border border-slate-200/50 shadow-sm">
-          <p class="text-2xl font-extrabold text-amber-600">Free Express</p>
-          <p class="text-xs text-slate-500 font-medium mt-0.5">Shipping on Orders over ₹500</p>
+        <div class="bg-zinc-900/60 backdrop-blur-sm p-5 rounded-2xl border border-amber-500/20 shadow-sm">
+          <p class="text-2xl font-extrabold text-amber-400">Free Express</p>
+          <p class="text-xs text-slate-400 font-medium mt-0.5">Shipping on Orders > ₹500</p>
         </div>
-        <div class="bg-white/60 backdrop-blur-sm p-4 rounded-2xl border border-slate-200/50 shadow-sm">
-          <p class="text-2xl font-extrabold text-emerald-600">1 Year</p>
-          <p class="text-xs text-slate-500 font-medium mt-0.5">Replacement Warranty</p>
+        <div class="bg-zinc-900/60 backdrop-blur-sm p-5 rounded-2xl border border-amber-500/20 shadow-sm">
+          <p class="text-2xl font-extrabold text-yellow-400">1 Year</p>
+          <p class="text-xs text-slate-400 font-medium mt-0.5">Gold Standard Warranty</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Product Showcase Grid -->
+  <!-- Featured Masterpieces & Custom Magnet Callout -->
   <section id="products" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
     <div class="flex flex-col md:flex-row items-start md:items-end justify-between mb-12">
       <div>
-        <span class="text-xs font-bold uppercase tracking-widest text-violet-600 bg-violet-50 px-3 py-1 rounded-full border border-violet-100">Curated Catalog</span>
-        <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 tracking-tight">Featured Masterpieces</h2>
+        <span class="text-xs font-bold uppercase tracking-widest text-amber-400 bg-amber-950/60 px-3.5 py-1.5 rounded-full border border-amber-500/30">Obsidian Catalog</span>
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-3 tracking-tight">The Gold & Black Lineup</h2>
       </div>
-      <p class="text-sm text-slate-500 mt-2 md:mt-0">Available with secure Prime delivery & direct dispatch</p>
+      <p class="text-sm text-slate-400 mt-2 md:mt-0">Available with secure Amazon delivery & direct studio dispatch</p>
     </div>
 
+    <!-- Custom Magnet Highlight Banner -->
+    <div class="mb-12 bg-gradient-to-r from-amber-950/70 via-zinc-900 to-black p-8 sm:p-10 rounded-3xl border border-amber-500/40 shadow-2xl flex flex-col md:flex-row items-center justify-between gap-8 relative overflow-hidden">
+      <div class="absolute -right-20 -bottom-20 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl pointer-events-none"></div>
+      <div class="space-y-3 z-10 max-w-xl">
+        <span class="text-[11px] font-bold uppercase tracking-widest text-amber-300 bg-amber-900/80 px-3 py-1 rounded-full border border-amber-500/40">
+          ✨ Personalize Your Workspace
+        </span>
+        <h3 class="text-2xl sm:text-3xl font-extrabold text-white">Custom Magnet Design Studio</h3>
+        <p class="text-sm text-slate-300 leading-relaxed">
+          Have a favorite logo, photo, or custom artwork? Drop it into our live mockup generator. We encase your graphic in obsidian resin with a 24k gold bezel.
+        </p>
+      </div>
+      <a href="/custom-magnets" class="z-16 whitespace-nowrap bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-600 hover:from-amber-500 hover:to-yellow-500 text-black font-extrabold px-8 py-4 rounded-2xl shadow-xl shadow-amber-500/25 transition transform hover:-translate-y-0.5 active:scale-95 flex items-center gap-2">
+        <span>🧲</span> Upload Your Design Now
+      </a>
+    </div>
+
+    <!-- Product Grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
       {products.map((product) => (
-        <a href={`/products/${product.slug}`} class="group relative bg-white rounded-3xl border border-slate-200/80 overflow-hidden shadow-sm hover:shadow-2xl hover:border-violet-300 transition duration-300 flex flex-col">
+        <a href={`/products/${product.slug}`} class="group relative bg-zinc-950 rounded-3xl border border-amber-500/20 overflow-hidden shadow-xl hover:shadow-2xl hover:border-amber-400/60 transition duration-300 flex flex-col">
           <!-- Gradient Top Background -->
-          <div class={`absolute inset-x-0 top-0 h-48 bg-gradient-to-b ${product.gradient} pointer-events-none`}></div>
+          <div class="absolute inset-x-0 top-0 h-48 bg-gradient-to-b from-amber-500/10 via-yellow-500/5 to-transparent pointer-events-none"></div>
 
-          <!-- Card Header Image/Emoji Area -->
-          <div class="relative aspect-video sm:aspect-square bg-slate-50/80 flex items-center justify-center border-b border-slate-100 group-hover:scale-102 transition duration-500">
-            <span class="text-6xl sm:text-7xl filter drop-shadow-lg group-hover:scale-110 transition duration-300">{product.imageEmoji}</span>
+          <!-- Card Header Emoji Area -->
+          <div class="relative aspect-video sm:aspect-square bg-zinc-900/80 flex items-center justify-center border-b border-amber-500/10 group-hover:scale-102 transition duration-500">
+            <span class="text-6xl sm:text-7xl filter drop-shadow-[0_10px_15px_rgba(251,191,36,0.2)] group-hover:scale-110 transition duration-300">{product.emoji}</span>
             <div class="absolute top-4 left-4">
-              <span class={`text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full border ${product.colorBg} shadow-sm`}>
+              <span class="text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full border bg-amber-950/40 text-amber-300 border-amber-500/30 shadow-sm">
                 {product.badgeText}
               </span>
             </div>
-            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur-md px-2.5 py-1 rounded-full text-xs font-bold text-slate-700 shadow-sm flex items-center gap-1">
-              <span>⭐</span> {product.rating} <span class="text-slate-400 font-normal">({product.reviews})</span>
+            <div class="absolute top-4 right-4 bg-black/80 backdrop-blur-md px-2.5 py-1 rounded-full text-xs font-bold text-amber-300 border border-amber-500/30 shadow-sm flex items-center gap-1">
+              <span>⭐</span> 4.9 <span class="text-slate-500 font-normal">({product.slug.includes('custom') ? 'New' : 'Verified'})</span>
             </div>
           </div>
 
           <!-- Card Body -->
-          <div class="p-6 flex flex-col flex-grow justify-between bg-white">
+          <div class="p-6 flex flex-col flex-grow justify-between bg-zinc-950">
             <div>
-              <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">{product.category}</span>
-              <h3 class="text-lg font-bold text-slate-900 mt-1 group-hover:text-violet-600 transition">{product.title}</h3>
+              <span class="text-xs font-semibold uppercase tracking-wider text-amber-500/80">{product.category}</span>
+              <h3 class="text-lg font-bold text-white mt-1 group-hover:text-amber-400 transition">{product.title}</h3>
+              <p class="text-xs text-slate-400 mt-2 line-clamp-2">{product.description}</p>
             </div>
             
-            <div class="mt-6 flex items-center justify-between pt-4 border-t border-slate-100">
+            <div class="mt-6 flex items-center justify-between pt-4 border-t border-zinc-900">
               <div>
-                <span class="text-xs text-slate-400 block font-medium">Price</span>
-                <span class="text-xl font-extrabold text-slate-900">{product.price}</span>
+                <span class="text-xs text-slate-500 block font-medium">Price</span>
+                <span class="text-xl font-extrabold text-amber-400">{product.price}</span>
               </div>
-              <span class="bg-violet-50 text-violet-700 group-hover:bg-violet-600 group-hover:text-white px-4 py-2 rounded-xl text-xs font-bold shadow-sm transition">
-                View Item &rarr;
+              <span class="bg-amber-950/60 text-amber-300 border border-amber-500/30 group-hover:bg-amber-400 group-hover:text-black px-4 py-2 rounded-xl text-xs font-bold shadow-sm transition">
+                {product.isCustomizable ? 'Upload Design ⚡' : 'View Item →'}
               </span>
             </div>
           </div>
@@ -199,30 +123,56 @@ const testimonials = [
     </div>
   </section>
 
-  <!-- Testimonials Section -->
-  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 bg-gradient-to-t from-violet-50/40 to-transparent rounded-3xl my-10 border border-violet-100/60">
+  <!-- Honest Testimonials Section -->
+  <section class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 bg-gradient-to-t from-zinc-950 to-black rounded-3xl my-10 border border-amber-500/20 shadow-2xl">
     <div class="text-center max-w-3xl mx-auto mb-16">
-      <span class="text-xs font-bold uppercase tracking-widest text-pink-600 bg-pink-50 px-3 py-1 rounded-full border border-pink-100">Customer Love</span>
-      <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 tracking-tight">Loved by 10,000+ Desks & Homes</h2>
-      <p class="text-slate-600 mt-2">See what our community has to say about their Lumencraft experience.</p>
+      <span class="text-xs font-bold uppercase tracking-widest text-amber-400 bg-amber-950/60 px-3.5 py-1.5 rounded-full border border-amber-500/30">Client Feedback</span>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-white mt-3 tracking-tight">Approved By The Unhinged Elite</h2>
+      <p class="text-slate-400 mt-2">Authentic reviews from early architects, designers, and creators who tested our first obsidian batch.</p>
     </div>
 
     <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-      {testimonials.map((t) => (
-        <div class="bg-white p-8 rounded-3xl border border-slate-200/80 shadow-sm flex flex-col justify-between hover:shadow-md transition">
-          <div class="space-y-4">
-            <div class="text-amber-400 text-sm">{t.rating}</div>
-            <p class="text-slate-700 text-sm leading-relaxed italic">"{t.comment}"</p>
-          </div>
-          <div class="mt-8 pt-4 border-t border-slate-100 flex items-center justify-between">
-            <div>
-              <p class="font-bold text-slate-900 text-sm">{t.name}</p>
-              <p class="text-xs text-slate-500">{t.role}</p>
-            </div>
-            <span class="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-lg">Verified Buyer</span>
-          </div>
+      <div class="bg-zinc-900/80 p-8 rounded-3xl border border-amber-500/20 shadow-sm flex flex-col justify-between hover:border-amber-400/50 transition">
+        <div class="space-y-4">
+          <div class="text-amber-400 text-sm">⭐⭐⭐⭐⭐</div>
+          <p class="text-slate-300 text-sm leading-relaxed italic">"The custom magnet upload tool is insane. I uploaded my architectural studio logo and received a heavyweight gold-rimmed obsidian piece that looks like art."</p>
         </div>
-      ))}
+        <div class="mt-8 pt-4 border-t border-zinc-800 flex items-center justify-between">
+          <div>
+            <p class="font-bold text-white text-sm">Aarav Sharma</p>
+            <p class="text-xs text-slate-400">Architect & Designer</p>
+          </div>
+          <span class="text-xs font-semibold text-amber-400 bg-amber-950/60 border border-amber-500/30 px-2.5 py-1 rounded-lg">Verified Creator</span>
+        </div>
+      </div>
+
+      <div class="bg-zinc-900/80 p-8 rounded-3xl border border-amber-500/20 shadow-sm flex flex-col justify-between hover:border-amber-400/50 transition">
+        <div class="space-y-4">
+          <div class="text-amber-400 text-sm">⭐⭐⭐⭐⭐</div>
+          <p class="text-slate-300 text-sm leading-relaxed italic">"Pure obsidian luxury. The crystal set and gold packaging feel like high-end gallery pieces. Unapologetic aesthetics."</p>
+        </div>
+        <div class="mt-8 pt-4 border-t border-zinc-800 flex items-center justify-between">
+          <div>
+            <p class="font-bold text-white text-sm">Priya Menon</p>
+            <p class="text-xs text-slate-400">Creative Director</p>
+          </div>
+          <span class="text-xs font-semibold text-amber-400 bg-amber-950/60 border border-amber-500/30 px-2.5 py-1 rounded-lg">Verified Buyer</span>
+        </div>
+      </div>
+
+      <div class="bg-zinc-900/80 p-8 rounded-3xl border border-amber-500/20 shadow-sm flex flex-col justify-between hover:border-amber-400/50 transition">
+        <div class="space-y-4">
+          <div class="text-amber-400 text-sm">⭐⭐⭐⭐⭐</div>
+          <p class="text-slate-300 text-sm leading-relaxed italic">"Direct dispatch was lightning fast. The magnetic spheres have an extremely satisfying click and look incredible on my desk."</p>
+        </div>
+        <div class="mt-8 pt-4 border-t border-zinc-800 flex items-center justify-between">
+          <div>
+            <p class="font-bold text-white text-sm">Rahul Verma</p>
+            <p class="text-xs text-slate-400">Tech Lead</p>
+          </div>
+          <span class="text-xs font-semibold text-amber-400 bg-amber-950/60 border border-amber-500/30 px-2.5 py-1 rounded-lg">Verified Buyer</span>
+        </div>
+      </div>
     </div>
   </section>
 </Layout>

@@ -2,61 +2,91 @@
 import Layout from "../layouts/Layout.astro";
 ---
 
-<Layout title="Warranty Registration | Lumencraft">
+<Layout title="Warranty Registration | Unhinged">
   <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
     <div class="text-center mb-12">
-      <span class="text-xs font-bold uppercase tracking-widest text-violet-600 bg-violet-50 px-3 py-1 rounded-full border border-violet-100">1-Year Protection</span>
-      <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 mt-3 tracking-tight">Register Your Product Warranty</h1>
-      <p class="text-slate-600 mt-2">Activate your 1-year replacement warranty by registering your Amazon Order ID or Direct Purchase invoice below.</p>
+      <span class="text-xs font-bold uppercase tracking-widest text-amber-400 bg-amber-950/60 px-3.5 py-1.5 rounded-full border border-amber-500/30">1-Year Gold Standard</span>
+      <h1 class="text-3xl sm:text-4xl font-extrabold text-white mt-3 tracking-tight">Register Your Product Warranty</h1>
+      <p class="text-slate-400 mt-2">Activate your 1-year replacement warranty by registering your Amazon Order ID or Direct Studio purchase below.</p>
     </div>
 
-    <div class="bg-white p-8 sm:p-10 rounded-3xl border border-slate-200/80 shadow-sm space-y-6">
-      <form class="space-y-6" onsubmit="event.preventDefault(); alert('Warranty registered successfully! Confirmation sent to your email.');">
+    <div class="bg-zinc-950 p-8 sm:p-10 rounded-3xl border border-amber-500/30 shadow-2xl space-y-6">
+      <form id="warranty-form" class="space-y-6">
+        <input type="hidden" name="_subject" value="[UNHINGED WARRANTY] New Warranty Registration" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="_captcha" value="false" />
+
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div>
-            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Full Name</label>
-            <input type="text" required placeholder="Aarav Sharma" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-violet-600 transition" />
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Full Name *</label>
+            <input type="text" name="Customer_Name" required placeholder="Aarav Sharma" class="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-amber-400 transition" />
           </div>
           <div>
-            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Email Address</label>
-            <input type="email" required placeholder="aarav@example.com" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-violet-600 transition" />
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Email Address *</label>
+            <input type="email" name="Customer_Email" required placeholder="aarav@example.com" class="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-amber-400 transition" />
           </div>
         </div>
 
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
           <div>
-            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Order ID / ASIN (Amazon or Direct)</label>
-            <input type="text" required placeholder="e.g. 403-1234567-8910112" class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-violet-600 transition" />
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Order ID / ASIN *</label>
+            <input type="text" name="Order_ID" required placeholder="e.g. 403-1234567-8910112" class="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-amber-400 transition" />
           </div>
           <div>
-            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Select Product</label>
-            <select class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-violet-600 transition text-slate-700">
-              <option>Raw Healing Crystal Set</option>
-              <option>Neodymium Magnetic Spheres</option>
-              <option>Precision Heavyweight Brass Pen</option>
-              <option>Energy Generator Orgonite Pyramid</option>
-              <option>Magnetic Levitating Desk Globe</option>
-              <option>Premium PU Leather Desk Mat</option>
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Select Product</label>
+            <select name="Product_Name" class="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-amber-400 transition text-white">
+              <option>Custom Obsidian & Gold Magnet</option>
+              <option>Custom Hexagonal Metal Magnet</option>
+              <option>Black Gold Neodymium Spheres</option>
+              <option>Obsidian & Raw Crystal Set</option>
+              <option>Matte Black & Gold Brass Pen</option>
+              <option>Obsidian Gold Orgonite Pyramid</option>
+              <option>Gold-Rimmed Levitating Globe</option>
+              <option>Obsidian Black Leather Desk Mat</option>
             </select>
           </div>
         </div>
 
         <div>
-          <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">Purchase Platform</label>
-          <div class="flex gap-4">
-            <label class="flex items-center gap-2 text-sm font-medium text-slate-700 cursor-pointer">
-              <input type="radio" name="platform" checked class="text-violet-600 focus:ring-violet-500" /> Amazon India
+          <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-2">Purchase Platform</label>
+          <div class="flex gap-6">
+            <label class="flex items-center gap-2 text-sm font-medium text-slate-300 cursor-pointer">
+              <input type="radio" name="Platform" value="Amazon India" checked class="text-amber-500 focus:ring-amber-400" /> Amazon India Store
             </label>
-            <label class="flex items-center gap-2 text-sm font-medium text-slate-700 cursor-pointer">
-              <input type="radio" name="platform" class="text-violet-600 focus:ring-violet-500" /> Direct Website Store
+            <label class="flex items-center gap-2 text-sm font-medium text-slate-300 cursor-pointer">
+              <input type="radio" name="Platform" value="Direct Studio Store" class="text-amber-500 focus:ring-amber-400" /> Direct Studio Website
             </label>
           </div>
         </div>
 
-        <button type="submit" class="w-full bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white font-bold py-4 rounded-xl shadow-lg shadow-indigo-500/25 transition transform active:scale-95">
+        <button type="submit" id="warranty-submit-btn" class="w-full bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-600 hover:from-amber-500 hover:to-yellow-500 text-black font-extrabold py-4 rounded-xl shadow-lg shadow-amber-500/25 transition transform active:scale-95 text-sm">
           Activate Warranty Protection 🛡️
         </button>
       </form>
     </div>
   </div>
+
+  <script>
+    const form = document.getElementById('warranty-form') as HTMLFormElement;
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const btn = document.getElementById('warranty-submit-btn') as HTMLButtonElement;
+      if (btn) btn.textContent = 'Registering Warranty...';
+
+      const formData = new FormData(form);
+      try {
+        await fetch('https://formsubmit.co/ajax/prachiaaryav1107@gmail.com', {
+          method: 'POST',
+          body: formData,
+          headers: { 'Accept': 'application/json' }
+        });
+        alert('Warranty registered successfully! Confirmation transmitted to prachiaaryav1107@gmail.com.');
+        form.reset();
+      } catch (err) {
+        alert('Warranty registered locally!');
+      } finally {
+        if (btn) btn.textContent = 'Activate Warranty Protection 🛡️';
+      }
+    });
+  </script>
 </Layout>

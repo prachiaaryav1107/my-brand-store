@@ -1,0 +1,83 @@
+---
+// Payment Notice Modal Component
+---
+<div id="payment-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md hidden transition-opacity duration-300">
+  <div class="relative bg-zinc-950 border border-amber-500/30 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl text-center">
+    <!-- Close X -->
+    <button id="close-payment-modal-btn" class="absolute top-5 right-5 w-8 h-8 rounded-xl border border-zinc-800 text-slate-400 hover:text-white hover:border-amber-500/40 flex items-center justify-center transition">
+      ✕
+    </button>
+
+    <div class="w-16 h-16 rounded-2xl bg-amber-950/60 border border-amber-500/30 text-amber-400 text-3xl flex items-center justify-center mx-auto mb-4 shadow-lg shadow-amber-500/10">
+      💳
+    </div>
+
+    <span class="text-[11px] font-bold uppercase tracking-widest text-amber-400 bg-amber-950/80 px-3 py-1 rounded-full border border-amber-500/30">
+      Launch Notice
+    </span>
+
+    <h3 class="text-xl font-extrabold text-white mt-3">Payment Gateway Notice</h3>
+    
+    <p class="text-xs text-slate-300 leading-relaxed mt-2.5">
+      The automated Razorpay/Stripe checkout is currently in test mode for launch. We do not charge cards online during this preview.
+    </p>
+
+    <div class="bg-zinc-900/80 border border-amber-500/20 rounded-2xl p-4 my-5 text-left space-y-2">
+      <div class="flex items-start gap-2.5 text-xs text-slate-300">
+        <span class="text-amber-400 font-bold">✓</span>
+        <span><strong>Direct Studio Dispatch:</strong> We build your custom magnet and dispatch via Shiprocket.</span>
+      </div>
+      <div class="flex items-start gap-2.5 text-xs text-slate-300">
+        <span class="text-amber-400 font-bold">✓</span>
+        <span><strong>Pay on Delivery / UPI:</strong> Inspect your handcrafted pieces first before paying.</span>
+      </div>
+      <div class="flex items-start gap-2.5 text-xs text-slate-300">
+        <span class="text-amber-400 font-bold">✓</span>
+        <span><strong>Order Confirmation:</strong> Order specs and uploaded designs are directly transmitted to studio admin.</span>
+      </div>
+    </div>
+
+    <div class="flex flex-col gap-2.5">
+      <a href="/custom-magnets#order" id="proceed-direct-order-btn" class="w-full bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-600 hover:from-amber-500 hover:to-yellow-500 text-black font-extrabold py-3.5 px-4 rounded-xl shadow-lg shadow-amber-500/20 transition transform active:scale-95 text-xs flex items-center justify-center gap-2">
+        <span>⚡</span> Order via Direct Dispatch Instead
+      </a>
+      <button id="dismiss-payment-modal-btn" class="w-full bg-zinc-900 hover:bg-zinc-800 text-slate-400 hover:text-white font-semibold py-2.5 px-4 rounded-xl text-xs transition">
+        Back to Shopping
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+  function setupPaymentModal() {
+    const modal = document.getElementById('payment-modal');
+    const closeBtn = document.getElementById('close-payment-modal-btn');
+    const dismissBtn = document.getElementById('dismiss-payment-modal-btn');
+    const proceedBtn = document.getElementById('proceed-direct-order-btn');
+
+    const closeModal = () => {
+      if (modal) modal.classList.add('hidden');
+    };
+
+    closeBtn?.addEventListener('click', closeModal);
+    dismissBtn?.addEventListener('click', closeModal);
+    proceedBtn?.addEventListener('click', () => {
+      closeModal();
+    });
+
+    // Also close on background click
+    modal?.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
+    });
+
+    // Listen to open payment modal buttons
+    document.querySelectorAll('.open-payment-modal-btn').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        modal?.classList.remove('hidden');
+      });
+    });
+  }
+
+  document.addEventListener('DOMContentLoaded', setupPaymentModal);
+</script>

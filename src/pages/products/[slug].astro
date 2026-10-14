@@ -1,82 +1,8 @@
 ---
 import Layout from "../../layouts/Layout.astro";
+import { products } from "../../data/products";
 
 export async function getStaticPaths() {
-  const products = [
-    { 
-      slug: "premium-crystal-set", 
-      title: "Raw Healing Crystal Set", 
-      price: "₹799", 
-      rating: "4.9",
-      reviews: "1,420",
-      category: "Crystals",
-      emoji: "💎",
-      colorBg: "bg-emerald-50 text-emerald-700 border-emerald-200",
-      amazonUrl: "https://amazon.in/dp/YOUR_ASIN_1",
-      description: "Hand-selected natural raw crystals including Amethyst, Rose Quartz, and Citrine for positive energy, chakra balancing, and aesthetic home decor."
-    },
-    { 
-      slug: "neo-cube-magnets", 
-      title: "Neodymium Magnetic Spheres", 
-      price: "₹599", 
-      rating: "4.8",
-      reviews: "980",
-      category: "Magnets",
-      emoji: "🧲",
-      colorBg: "bg-cyan-50 text-cyan-700 border-cyan-200",
-      amazonUrl: "https://amazon.in/dp/YOUR_ASIN_2",
-      description: "Ultra-strong rare-earth N35 magnetic balls for stress relief, creative desk sculpturing, and mind stimulation during long work hours."
-    },
-    { 
-      slug: "brass-executive-pen", 
-      title: "Precision Heavyweight Brass Pen", 
-      price: "₹899", 
-      rating: "4.9",
-      reviews: "650",
-      category: "Stationery",
-      emoji: "✒️",
-      colorBg: "bg-amber-50 text-amber-700 border-amber-200",
-      amazonUrl: "https://amazon.in/dp/YOUR_ASIN_3",
-      description: "Solid forged raw brass body with German Schmidt ink refill. Develops a gorgeous vintage patina over time. The ultimate gentleman's writing instrument."
-    },
-    { 
-      slug: "chakra-orgonite-pyramid", 
-      title: "Energy Generator Orgonite Pyramid", 
-      price: "₹1,099", 
-      rating: "5.0",
-      reviews: "410",
-      category: "Crystals",
-      emoji: "🔮",
-      colorBg: "bg-purple-50 text-purple-700 border-purple-200",
-      amazonUrl: "https://amazon.in/dp/YOUR_ASIN_4",
-      description: "Hand-poured resin orgonite pyramid embedded with copper coil, quartz crystal, and genuine gold flakes to neutralize EMF radiation and harmonize spaces."
-    },
-    { 
-      slug: "levitating-desk-globe", 
-      title: "Magnetic Levitating Desk Globe", 
-      price: "₹1,499", 
-      rating: "4.7",
-      reviews: "320",
-      category: "Gadgets",
-      emoji: "🪐",
-      colorBg: "bg-indigo-50 text-indigo-700 border-indigo-200",
-      amazonUrl: "https://amazon.in/dp/YOUR_ASIN_5",
-      description: "C-shaped electromagnetic levitating globe with glowing LED ring. Mesmerizing desk ornament and conversation starter for offices and studies."
-    },
-    { 
-      slug: "minimalist-leather-desk-mat",
-      title: "Premium PU Leather Desk Mat", 
-      price: "₹699", 
-      rating: "4.8",
-      reviews: "890",
-      category: "Stationery",
-      emoji: "🛡️",
-      colorBg: "bg-rose-50 text-rose-700 border-rose-200",
-      amazonUrl: "https://amazon.in/dp/YOUR_ASIN_6",
-      description: "Waterproof, ultra-smooth PU leather desk pad with anti-slip backing. Protects your desk surface while providing effortless mouse gliding."
-    }
-  ];
-
   return products.map(product => ({
     params: { slug: product.slug },
     props: { product },
@@ -86,15 +12,15 @@ export async function getStaticPaths() {
 const { product } = Astro.props;
 ---
 
-<Layout title={`${product.title} | Lumencraft Store`}>
+<Layout title={`${product.title} | Unhinged Store`}>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
       
       <!-- Product Image Gallery / Emoji Showcase -->
-      <div class="relative bg-gradient-to-br from-slate-100 to-indigo-50/50 rounded-3xl overflow-hidden aspect-square flex items-center justify-center border border-slate-200/80 shadow-inner group">
-        <span class="text-9xl transform group-hover:scale-110 transition duration-500">{product.emoji}</span>
+      <div class="relative bg-gradient-to-br from-zinc-900 to-black rounded-3xl overflow-hidden aspect-square flex items-center justify-center border border-amber-500/30 shadow-2xl group">
+        <span class="text-9xl transform group-hover:scale-110 transition duration-500 filter drop-shadow-[0_15px_25px_rgba(251,191,36,0.3)]">{product.emoji}</span>
         <div class="absolute top-6 left-6">
-          <span class={`text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full border ${product.colorBg} shadow-sm`}>
+          <span class="text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 rounded-full border bg-amber-950/40 text-amber-300 border-amber-500/30 shadow-sm">
             {product.category}
           </span>
         </div>
@@ -105,50 +31,83 @@ const { product } = Astro.props;
         <div>
           <div class="flex items-center gap-2 mb-3">
             <span class="text-amber-400 text-sm">⭐⭐⭐⭐⭐</span>
-            <span class="text-xs font-bold text-slate-700">{product.rating} / 5.0</span>
-            <span class="text-xs text-slate-400">({product.reviews} verified reviews)</span>
+            <span class="text-xs font-bold text-white">4.9 / 5.0</span>
+            <span class="text-xs text-slate-500">(Verified Studio Batch)</span>
           </div>
-          <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight">{product.title}</h1>
-          <p class="text-3xl font-extrabold text-violet-600 mt-3">{product.price}</p>
+          <h1 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">{product.title}</h1>
+          <p class="text-3xl font-extrabold text-amber-400 mt-3">{product.price}</p>
         </div>
 
-        <p class="text-slate-600 leading-relaxed text-base">{product.description}</p>
+        <p class="text-slate-300 leading-relaxed text-base">{product.description}</p>
+
+        <!-- Specs List -->
+        <div class="bg-zinc-950 border border-amber-500/20 rounded-2xl p-5 space-y-2.5">
+          <h4 class="text-xs font-bold uppercase tracking-widest text-amber-400 mb-2">Craftsmanship Specs</h4>
+          {product.specs.map(spec => (
+            <div class="flex items-center gap-2.5 text-xs text-slate-300">
+              <span class="w-4 h-4 rounded-full bg-amber-950 text-amber-400 border border-amber-500/30 flex items-center justify-center text-[10px]">✓</span>
+              <span>{spec}</span>
+            </div>
+          ))}
+        </div>
 
         <!-- Highlights Checklist -->
-        <div class="grid grid-cols-2 gap-4 py-4 border-y border-slate-200">
-          <div class="flex items-center gap-2 text-xs font-semibold text-slate-700">
-            <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center">✓</span> Free Shipping on ₹500+
+        <div class="grid grid-cols-2 gap-4 py-4 border-y border-amber-500/20">
+          <div class="flex items-center gap-2 text-xs font-semibold text-slate-300">
+            <span class="w-5 h-5 rounded-full bg-amber-950 text-amber-400 border border-amber-500/30 flex items-center justify-center">✓</span> Free Shipping on ₹500+
           </div>
-          <div class="flex items-center gap-2 text-xs font-semibold text-slate-700">
-            <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center">✓</span> 1 Year Warranty
+          <div class="flex items-center gap-2 text-xs font-semibold text-slate-300">
+            <span class="w-5 h-5 rounded-full bg-amber-950 text-amber-400 border border-amber-500/30 flex items-center justify-center">✓</span> 1 Year Gold Warranty
           </div>
-          <div class="flex items-center gap-2 text-xs font-semibold text-slate-700">
-            <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center">✓</span> 100% Genuine Materials
+          <div class="flex items-center gap-2 text-xs font-semibold text-slate-300">
+            <span class="w-5 h-5 rounded-full bg-amber-950 text-amber-400 border border-amber-500/30 flex items-center justify-center">✓</span> Obsidian Black Build
           </div>
-          <div class="flex items-center gap-2 text-xs font-semibold text-slate-700">
-            <span class="w-5 h-5 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center">✓</span> Easy 10-Day Returns
+          <div class="flex items-center gap-2 text-xs font-semibold text-slate-300">
+            <span class="w-5 h-5 rounded-full bg-amber-950 text-amber-400 border border-amber-500/30 flex items-center justify-center">✓</span> Easy 10-Day Returns
           </div>
         </div>
 
         <!-- Dual Call to Action Area -->
         <div class="space-y-4 pt-2">
-          <!-- Primary CTA: Amazon -->
-          <a 
-            href={product.amazonUrl} 
-            target="_blank" 
-            rel="noopener noreferrer"
-            class="w-full flex items-center justify-center gap-3 bg-amber-400 hover:bg-amber-500 text-slate-900 font-extrabold py-4 px-8 rounded-2xl shadow-md shadow-amber-400/20 transition transform active:scale-[0.99]"
-          >
-            <span>🛒</span> Buy Securely on Amazon India
-          </a>
+          {product.isCustomizable ? (
+            <a 
+              href="/custom-magnets"
+              class="w-full flex items-center justify-center gap-3 bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-600 hover:from-amber-500 hover:to-yellow-500 text-black font-extrabold py-4 px-8 rounded-2xl shadow-lg shadow-amber-500/20 transition transform active:scale-[0.99]"
+            >
+              <span>🧲</span> Upload Your Design in Studio
+            </a>
+          ) : (
+            <a 
+              href={product.amazonUrl} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              class="w-full flex items-center justify-center gap-3 bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-600 hover:from-amber-500 hover:to-yellow-500 text-black font-extrabold py-4 px-8 rounded-2xl shadow-lg shadow-amber-500/20 transition transform active:scale-[0.99]"
+            >
+              <span>🛒</span> Buy Securely on Amazon India
+            </a>
+          )}
 
-          <!-- Direct Purchase Box -->
-          <div class="p-6 bg-white border border-slate-200 rounded-2xl shadow-sm">
-            <h3 class="text-sm font-bold text-slate-900 mb-1">Direct Express Dispatch</h3>
-            <p class="text-xs text-slate-500 mb-4">Shipped directly from our fulfillment center via Shiprocket.</p>
+          <!-- Direct Purchase / Cart Trigger Box -->
+          <div class="p-6 bg-zinc-950 border border-amber-500/20 rounded-2xl shadow-sm space-y-4">
+            <div>
+              <h3 class="text-sm font-bold text-white mb-1">Direct Express Dispatch</h3>
+              <p class="text-xs text-slate-400">Shipped directly from our obsidian vault via Shiprocket.</p>
+            </div>
             
-            <div class="bg-gradient-to-r from-violet-50 to-indigo-50 text-violet-800 text-xs font-bold py-3.5 px-4 text-center rounded-xl border border-violet-200/60 flex items-center justify-center gap-2">
-              <span>⚡</span> Razorpay Secure Checkout Enabled
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <button 
+                type="button"
+                id="add-to-bag-detail-btn"
+                class="w-full bg-amber-950/60 hover:bg-amber-900/60 text-amber-300 border border-amber-500/30 text-xs font-bold py-3 px-4 rounded-xl transition flex items-center justify-center gap-2"
+              >
+                <span>🛒</span> Add to Obsidian Bag
+              </button>
+              <button 
+                type="button"
+                class="open-payment-modal-btn w-full bg-zinc-900 hover:bg-zinc-800 text-slate-300 border border-zinc-800 text-xs font-bold py-3 px-4 rounded-xl transition flex items-center justify-center gap-2"
+              >
+                <span>⚡</span> Pay via UPI / Cards / COD
+              </button>
             </div>
           </div>
         </div>
@@ -156,4 +115,22 @@ const { product } = Astro.props;
       </div>
     </div>
   </div>
+
+  <script define:vars={{ product }}>
+    document.addEventListener('DOMContentLoaded', () => {
+      const addBtn = document.getElementById('add-to-bag-detail-btn');
+      addBtn?.addEventListener('click', () => {
+        const item = {
+          id: product.slug + '-' + Date.now(),
+          slug: product.slug,
+          title: product.title,
+          price: product.priceNumber,
+          quantity: 1,
+          emoji: product.emoji,
+          options: product.category
+        };
+        window.dispatchEvent(new CustomEvent('unhinged-add-to-cart', { detail: item }));
+      });
+    });
+  </script>
 </Layout>

@@ -4,12 +4,14 @@ interface Props {
   description?: string;
 }
 
-const { title, description = "Premium crystals, magnetic marvels, and aesthetic desk essentials." } = Astro.props;
+const { title, description = "Unhinged — Obsidian & Gold custom magnets, crystals, and dark luxury desk essentials." } = Astro.props;
 import "../styles/global.css";
+import CartDrawer from "../components/CartDrawer.astro";
+import PaymentModal from "../components/PaymentModal.astro";
 ---
 
 <!doctype html>
-<html lang="en" class="scroll-smooth">
+<html lang="en" class="scroll-smooth dark">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -25,22 +27,32 @@ import "../styles/global.css";
       }
     </style>
   </head>
-  <body class="bg-gradient-to-br from-slate-50 via-indigo-50/30 to-rose-50/30 text-slate-800 antialiased selection:bg-indigo-600 selection:text-white flex flex-col min-h-screen">
+  <body class="bg-black text-slate-100 antialiased selection:bg-amber-500 selection:text-black flex flex-col min-h-screen">
     <!-- Navbar -->
-    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-xl border-b border-slate-200/60 shadow-sm">
+    <header class="sticky top-0 z-40 bg-black/90 backdrop-blur-xl border-b border-amber-500/20 shadow-lg shadow-black/50">
       <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-        <a href="/" class="group flex items-center gap-2 text-xl font-extrabold tracking-tight text-slate-900">
-          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-violet-600 via-pink-600 to-amber-500 flex items-center justify-center text-white shadow-md shadow-pink-500/20 group-hover:scale-105 transition">
-            ✨
+        <a href="/" class="group flex items-center gap-3 text-2xl font-extrabold tracking-widest text-white">
+          <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-600 via-yellow-400 to-amber-200 flex items-center justify-center text-black shadow-lg shadow-amber-500/20 group-hover:scale-105 transition font-black">
+            ⚡
           </div>
-          <span>LUMEN<span class="bg-gradient-to-r from-violet-600 to-pink-600 bg-clip-text text-transparent">CRAFT</span></span>
+          <span>UN<span class="bg-gradient-to-r from-amber-200 via-yellow-400 to-amber-600 bg-clip-text text-transparent">HINGED</span></span>
         </a>
-        <div class="flex items-center space-x-8 text-sm font-semibold">
-          <a href="/#products" class="text-slate-600 hover:text-violet-600 transition">Catalog</a>
-          <a href="/warranty" class="text-slate-600 hover:text-violet-600 transition">Warranty</a>
-          <a href="/b2b" class="text-slate-600 hover:text-violet-600 transition">Wholesale</a>
-          <a href="/#products" class="bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700 text-white px-5 py-2.5 rounded-xl shadow-md shadow-indigo-500/25 transition transform active:scale-95">
-            Shop Now
+        <div class="hidden md:flex items-center space-x-6 text-sm font-semibold">
+          <a href="/custom-magnets" class="text-amber-400 hover:text-amber-300 transition flex items-center gap-1.5 bg-amber-950/60 px-3.5 py-1.5 rounded-full border border-amber-500/30">
+            <span>🧲</span> Custom Magnet Studio
+          </a>
+          <a href="/#products" class="text-slate-300 hover:text-amber-400 transition">Catalog</a>
+          <a href="/warranty" class="text-slate-300 hover:text-amber-400 transition">Warranty</a>
+          <a href="/b2b" class="text-slate-300 hover:text-amber-400 transition">Wholesale</a>
+        </div>
+        <div class="flex items-center gap-3">
+          <!-- Cart Button -->
+          <button class="open-cart-btn relative w-11 h-11 rounded-xl bg-zinc-900 border border-amber-500/30 hover:border-amber-400 text-amber-400 flex items-center justify-center transition shadow-md">
+            <span>🛒</span>
+            <span class="cart-count-badge absolute -top-1.5 -right-1.5 w-5 h-5 rounded-full bg-amber-400 text-black text-[10px] font-black flex items-center justify-center shadow-md hidden">0</span>
+          </button>
+          <a href="/custom-magnets" class="hidden sm:inline-block bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-600 hover:from-amber-500 hover:to-yellow-500 text-black px-5 py-2.5 rounded-xl shadow-lg shadow-amber-500/20 font-extrabold text-xs transition transform active:scale-95">
+            Upload Design ⚡
           </a>
         </div>
       </nav>
@@ -51,47 +63,50 @@ import "../styles/global.css";
       <slot />
     </main>
 
+    <!-- Cart Drawer & Payment Modal Components -->
+    <CartDrawer />
+    <PaymentModal />
+
     <!-- Footer -->
-    <footer class="bg-slate-900 text-slate-300 border-t border-slate-800 mt-24">
+    <footer class="bg-zinc-950 text-slate-400 border-t border-amber-500/20 mt-24">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
           <div class="space-y-4">
-            <div class="flex items-center gap-2 text-xl font-extrabold text-white">
-              <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-violet-600 to-pink-600 flex items-center justify-center text-sm shadow-md">✨</div>
-              <span>LUMENCRAFT</span>
+            <div class="flex items-center gap-2 text-xl font-extrabold text-white tracking-widest">
+              <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-amber-400 to-amber-600 flex items-center justify-center text-sm text-black font-bold shadow-md">⚡</div>
+              <span>UNHINGED</span>
             </div>
             <p class="text-sm text-slate-400 leading-relaxed">
-              Curating exceptional natural crystals, high-performance magnets, and precision deskware for modern living.
+              Obsidian & gold craftsmanship for the unapologetic. Custom magnets with your personal designs, crystals, and elite deskware.
             </p>
           </div>
           <div>
-            <h4 class="text-xs font-bold uppercase tracking-widest text-white mb-4">Quick Links</h4>
+            <h4 class="text-xs font-bold uppercase tracking-widest text-amber-400 mb-4">Studio Forge</h4>
             <ul class="space-y-2.5 text-sm text-slate-400">
-              <li><a href="/#products" class="hover:text-white transition">Featured Collection</a></li>
-              <li><a href="/warranty" class="hover:text-white transition">Warranty Registration</a></li>
-              <li><a href="/b2b" class="hover:text-white transition">Wholesale & B2B</a></li>
+              <li><a href="/custom-magnets" class="hover:text-amber-400 transition font-semibold text-amber-300">Custom Magnet Studio</a></li>
+              <li><a href="/#products" class="hover:text-amber-400 transition">Featured Collection</a></li>
+              <li><a href="/warranty" class="hover:text-amber-400 transition">Warranty Registration</a></li>
             </ul>
           </div>
           <div>
-            <h4 class="text-xs font-bold uppercase tracking-widest text-white mb-4">Marketplaces</h4>
+            <h4 class="text-xs font-bold uppercase tracking-widest text-amber-400 mb-4">Marketplaces</h4>
             <ul class="space-y-2.5 text-sm text-slate-400">
-              <li><a href="https://amazon.in" target="_blank" rel="noopener noreferrer" class="hover:text-white transition">Amazon India Store</a></li>
-              <li><a href="#" class="hover:text-white transition">Direct Dispatch Portal</a></li>
-              <li><a href="#" class="hover:text-white transition">Shiprocket Tracking</a></li>
+              <li><a href="https://amazon.in" target="_blank" rel="noopener noreferrer" class="hover:text-amber-400 transition">Amazon India Store</a></li>
+              <li><a href="/custom-magnets#order" class="hover:text-amber-400 transition">Direct Studio Dispatch</a></li>
+              <li><a href="#" class="open-payment-modal-btn hover:text-amber-400 transition cursor-pointer">Razorpay / COD Support</a></li>
             </ul>
           </div>
           <div>
-            <h4 class="text-xs font-bold uppercase tracking-widest text-white mb-4">Trust & Quality</h4>
-            <p class="text-sm text-slate-400 mb-4">100% genuine crystals and lab-tested neodymium magnetic alloys.</p>
-            <div class="flex items-center gap-2 text-amber-400 text-sm font-bold">
-              <span>⭐⭐⭐⭐⭐</span>
-              <span class="text-white text-xs">4.9/5 from 10k+ buyers</span>
-            </div>
+            <h4 class="text-xs font-bold uppercase tracking-widest text-amber-400 mb-4">Direct Mailbox Notice</h4>
+            <p class="text-xs text-slate-400 mb-2">Order confirmations & custom uploaded design files transmit directly to:</p>
+            <p class="text-xs font-mono text-amber-300 bg-zinc-900 p-2.5 rounded-xl border border-amber-500/20">
+              prachiaaryav1107@gmail.com
+            </p>
           </div>
         </div>
-        <div class="border-t border-slate-800 mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500">
-          <p>&copy; {new Date().getFullYear()} Lumencraft Brands. All rights reserved.</p>
-          <p class="mt-2 sm:mt-0">Fulfilled securely via Amazon & Direct Express Dispatch.</p>
+        <div class="border-t border-zinc-900 mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500">
+          <p>&copy; {new Date().getFullYear()} Unhinged Brands. Handcrafted in small batches.</p>
+          <p class="mt-2 sm:mt-0">All buttons functional • Direct Amazon & Studio fulfillment.</p>
         </div>
       </div>
     </footer>
