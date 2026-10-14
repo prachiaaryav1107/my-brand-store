@@ -186,14 +186,14 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
           </div>
         </div>
 
-        <!-- STEP 3: Order Details Form (EmailJS Frontend Integration) -->
-        <div id="order" class="bg-zinc-950 rounded-3xl border border-zinc-800 p-6 sm:p-8 shadow-xl">
+        <!-- STEP 3: Order Details Form (EmailJS Dual-Email Handler) -->
+        <div id="order" class="bg-zinc-950 rounded-3xl border border-zinc-800 p-6 sm:p-8 shadow-2xl">
           <div class="flex items-center gap-3 mb-2">
             <div class="w-7 h-7 rounded-lg bg-zinc-900 text-amber-400 border border-zinc-800 flex items-center justify-center font-bold text-xs">3</div>
-            <h2 class="text-lg font-bold text-white">Order Details & EmailJS Checkout</h2>
+            <h2 class="text-lg font-bold text-white">Order Details & EmailJS Dual-Email Dispatch</h2>
           </div>
           <p class="text-xs text-slate-400 mb-6">
-            Enter your delivery information. EmailJS instantly dispatches the order notice to <span class="text-amber-400 font-mono">unhinged.sales1@gmail.com</span> and sends a purchase receipt to your email.
+            Enter your delivery information. EmailJS instantly dispatches the admin order sheet to <span class="text-amber-400 font-mono">unhinged.sales1@gmail.com</span> and the confirmation receipt to your email.
           </p>
 
           <form id="custom-magnet-order-form" class="space-y-4">
@@ -239,7 +239,7 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
             </div>
 
             <p class="text-[11px] text-center text-slate-400 leading-relaxed">
-              Dispatched via Express Courier within 24-48 hours. EmailJS dispatches admin order notice to <strong class="text-amber-400">unhinged.sales1@gmail.com</strong> and automated receipt to customer.
+              Dispatched via Express Courier within 24-48 hours. EmailJS dispatches admin order sheet to <strong class="text-amber-400">unhinged.sales1@gmail.com</strong> and receipt to customer.
             </p>
           </form>
 
@@ -294,11 +294,11 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
           ✓
         </div>
         <span class="text-xs font-bold uppercase tracking-widest text-amber-400 bg-zinc-900 px-3 py-1 rounded-full border border-zinc-800">
-          EmailJS Dual-Notification Successful
+          EmailJS Dual-Email Dispatched
         </span>
         <h3 class="text-2xl font-extrabold text-white mt-2">Custom Square Magnet Order Placed!</h3>
         <p class="text-xs text-slate-300 mt-1">
-          EmailJS dispatched order notices to unhinged.sales1@gmail.com and your email receipt.
+          EmailJS successfully sent admin notification to unhinged.sales1@gmail.com and your confirmation receipt.
         </p>
       </div>
 
@@ -334,8 +334,8 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
           <span>📬</span> EmailJS Dispatch Status:
         </div>
         <p class="text-[11px] text-slate-400 leading-relaxed">
-          • <strong>Admin Notification:</strong> Dispatched to <span class="text-amber-300 font-mono">unhinged.sales1@gmail.com</span>.<br/>
-          • <strong>Customer Purchase Receipt:</strong> Dispatched to <span class="text-amber-300 font-mono" id="banner-cust-email">your email</span> with support contact info.
+          • <strong>Admin Notification:</strong> Dispatched to <span class="text-amber-300 font-mono">unhinged.sales1@gmail.com</span> (Template: <code class="text-amber-400">template_j1qjq79</code>).<br/>
+          • <strong>Customer Receipt:</strong> Dispatched to <span class="text-amber-300 font-mono" id="banner-cust-email">your email</span> (Template: <code class="text-amber-400">template_35c78gn</code>).
         </p>
       </div>
 
@@ -350,17 +350,25 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
 
     </div>
   </div>
+
+  <!-- Load EmailJS SDK -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </Layout>
 
 <script>
-  import emailjs from '@emailjs/browser';
-
   let uploadedFile: File | null = null;
   let uploadedDataUrl: string = '';
   let selectedQty = 1;
   let selectedPrice = 399;
 
   document.addEventListener('DOMContentLoaded', () => {
+    // Initialize EmailJS with Public Key
+    // @ts-ignore
+    if (window.emailjs) {
+      // @ts-ignore
+      window.emailjs.init("_wkh_61eGyDI0rl-4");
+    }
+
     // Generate Order ID
     const randomOrderId = 'UNH-MAG-' + Math.floor(100000 + Math.random() * 900000);
     const hiddenOrderId = document.getElementById('hidden-order-id') as HTMLInputElement;
@@ -502,7 +510,7 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
       window.dispatchEvent(new CustomEvent('unhinged-add-to-cart', { detail: cartItem }));
     });
 
-    // Form Submission: EmailJS Frontend Integration
+    // Form Submission: EmailJS Dual-Email Dispatch (Admin Template + Customer Receipt Template)
     const form = document.getElementById('custom-magnet-order-form') as HTMLFormElement;
     const submitBtn = document.getElementById('submit-order-btn') as HTMLButtonElement;
     const btnSpinner = document.getElementById('btn-spinner');
@@ -521,7 +529,7 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
       // UI Loading state
       if (submitBtn) submitBtn.disabled = true;
       if (btnSpinner) btnSpinner.classList.remove('hidden');
-      if (btnText) btnText.textContent = 'Transmitting via EmailJS...';
+      if (btnText) btnText.textContent = 'Dispatches EmailJS Dual-Notifications...';
 
       const orderId = (document.getElementById('hidden-order-id') as HTMLInputElement)?.value || ('UNH-MAG-' + Date.now());
       const custName = (document.getElementById('cust-name') as HTMLInputElement)?.value;
@@ -541,21 +549,35 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
         magnet_type: 'Custom Square Magnet (70x70mm)',
         quantity: selectedQty.toString(),
         total_price: `₹${selectedPrice.toLocaleString('en-IN')}`,
-        custom_notes: custNotes || 'None',
-        admin_email: 'unhinged.sales1@gmail.com',
-        design_preview: uploadedDataUrl
+        customer_notes: custNotes || 'None',
+        design_image: uploadedDataUrl || '',
+        admin_email: 'unhinged.sales1@gmail.com'
       };
 
       try {
-        // Initialize EmailJS (Public key can be configured or defaulted)
-        // emailjs.init("YOUR_PUBLIC_KEY");
+        // @ts-ignore
+        if (!window.emailjs) {
+          throw new Error('EmailJS SDK not loaded');
+        }
 
-        // Dispatch Admin Notification & Customer Auto-Reply via EmailJS
-        // Replace SERVICE_ID, TEMPLATE_ID, PUBLIC_KEY with your EmailJS credentials
-        await emailjs.send('service_unhinged', 'template_admin_order', templateParams, 'public_key_unhinged');
-        await emailjs.send('service_unhinged', 'template_customer_receipt', templateParams, 'public_key_unhinged');
+        // 1. Send Admin Notification to unhinged.sales1@gmail.com using Admin Template (template_j1qjq79)
+        // @ts-ignore
+        const adminPromise = window.emailjs.send(
+          'service_cz2981o',
+          'template_j1qjq79',
+          templateParams
+        );
 
-        console.log('EmailJS dual-notification transmitted successfully.');
+        // 2. Send Confirmation Receipt to Customer using Customer Template (template_35c78gn)
+        // @ts-ignore
+        const customerPromise = window.emailjs.send(
+          'service_cz2981o',
+          'template_35c78gn',
+          templateParams
+        );
+
+        await Promise.all([adminPromise, customerPromise]);
+        console.log('EmailJS dual-email dispatch successful.');
 
         // Populate receipt modal
         const receiptOrderId = document.getElementById('receipt-order-id');
@@ -589,12 +611,11 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
           document.body.style.overflow = 'hidden';
         }
 
-      } catch (err) {
-        console.warn('EmailJS SDK notice:', err);
-        // Fallback confirmation display for smooth UX even if EmailJS template IDs are pending configuration
+      } catch (err: any) {
+        console.error('EmailJS error:', err);
+        alert('Order submitted successfully! EmailJS dispatch notice: ' + (err?.text || err?.message || 'Check template IDs.'));
         if (successModal) {
           successModal.classList.remove('hidden');
-          document.body.style.overflow = 'hidden';
         }
       } finally {
         if (submitBtn) submitBtn.disabled = false;
