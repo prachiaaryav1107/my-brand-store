@@ -5,62 +5,58 @@ import { products } from "../data/products";
 const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p.category === 'Desk Magnets');
 ---
 
-<Layout title="Custom Magnet Studio | Unhinged" description="Upload your own design for custom obsidian and 24k gold neodymium magnets. Handcrafted in small batches with zero compromises.">
+<Layout title="Custom Square Magnet Studio | Unhinged" description="Upload your own photo or logo for custom square magnets. Handcrafted with high durability and strong magnetic backing.">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
     
     <!-- Header Banner -->
     <div class="text-center max-w-3xl mx-auto mb-16">
-      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-950/60 border border-amber-500/30 text-amber-400 text-xs font-bold uppercase tracking-widest shadow-lg shadow-amber-500/10 mb-4">
-        <span>⚡</span> Custom Studio Forge • Batch #001
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 text-amber-400 text-xs font-bold uppercase tracking-widest shadow-sm mb-4">
+        <span>🧲</span> Custom Square Magnet Studio
       </div>
       <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight">
         Upload Your Design. <br/>
-        <span class="bg-gradient-to-r from-amber-200 via-yellow-400 to-amber-600 bg-clip-text text-transparent">We Forge The Magnet.</span>
+        <span class="bg-gradient-to-r from-amber-300 via-yellow-400 to-amber-500 bg-clip-text text-transparent">Get Custom Square Magnets.</span>
       </h1>
       <p class="mt-4 text-slate-400 text-base sm:text-lg leading-relaxed">
-        Turn your artwork, logo, monogram, or meme into a heavyweight obsidian & 24k gold finished magnet powered by ultra-strong N52 neodymium cores.
+        Turn your favorite photo, logo, artwork, or meme into a high-durability square magnet with clean rounded corners and strong full-surface magnetic grip.
       </p>
     </div>
 
     <!-- Main Customizer Grid -->
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
       
-      <!-- Left Column: Interactive Magnet Mockup Preview (Sticky on desktop) -->
+      <!-- Left Column: Interactive Square Magnet Mockup Preview (Sticky on desktop) -->
       <div class="lg:col-span-5 lg:sticky lg:top-28 space-y-6">
-        <div class="bg-zinc-950 rounded-3xl border border-amber-500/30 p-8 shadow-2xl relative overflow-hidden flex flex-col items-center">
+        <div class="bg-zinc-950 rounded-3xl border border-zinc-800 p-8 shadow-2xl relative overflow-hidden flex flex-col items-center">
           
-          <!-- Ambient Gold Glow -->
-          <div class="absolute -top-24 -left-24 w-64 h-64 bg-amber-500/15 rounded-full blur-3xl pointer-events-none"></div>
-          <div class="absolute -bottom-24 -right-24 w-64 h-64 bg-yellow-500/10 rounded-full blur-3xl pointer-events-none"></div>
-
           <!-- Top Status Pill -->
           <div class="w-full flex items-center justify-between text-xs mb-8 z-10">
-            <span class="text-amber-400 font-bold uppercase tracking-wider flex items-center gap-1.5 bg-amber-950/80 px-3 py-1 rounded-full border border-amber-500/30">
-              <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span> Live Studio Mockup
+            <span class="text-amber-400 font-bold uppercase tracking-wider flex items-center gap-1.5 bg-zinc-900 px-3 py-1 rounded-full border border-zinc-800">
+              <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span> Live Square Preview
             </span>
-            <span id="preview-shape-badge" class="text-slate-400 bg-zinc-900 px-3 py-1 rounded-full border border-zinc-800">
-              Round (65mm)
+            <span class="text-slate-400 bg-zinc-900 px-3 py-1 rounded-full border border-zinc-800">
+              Square (70x70mm)
             </span>
           </div>
 
-          <!-- THE MAGNET MOCKUP CONTAINER -->
+          <!-- THE SQUARE MAGNET MOCKUP CONTAINER -->
           <div class="w-64 h-64 sm:w-72 sm:h-72 my-4 relative flex items-center justify-center transition-all duration-300 group">
             
-            <!-- Outer Gold Bezel / Rim -->
-            <div id="mockup-frame" class="w-full h-full rounded-full p-2.5 bg-gradient-to-tr from-amber-600 via-yellow-400 to-amber-700 shadow-[0_20px_50px_rgba(245,158,11,0.25)] flex items-center justify-center transition-all duration-300">
+            <!-- Square Frame -->
+            <div id="mockup-frame" class="w-full h-full rounded-2xl p-2 bg-zinc-900 border border-zinc-700 shadow-2xl flex items-center justify-center transition-all duration-300">
               
-              <!-- Inner Obsidian Plate -->
-              <div id="mockup-inner" class="w-full h-full rounded-full bg-zinc-950 border-2 border-black/80 flex items-center justify-center overflow-hidden relative shadow-inner">
+              <!-- Inner Plate -->
+              <div id="mockup-inner" class="w-full h-full rounded-xl bg-black border border-zinc-800 flex items-center justify-center overflow-hidden relative shadow-inner">
                 
                 <!-- Shiny Specular Glare Effect -->
-                <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/10 to-transparent pointer-events-none z-10"></div>
+                <div class="absolute inset-0 bg-gradient-to-tr from-transparent via-white/5 to-transparent pointer-events-none z-10"></div>
                 
                 <!-- Uploaded Image Display -->
-                <img id="mockup-img" src="" alt="Custom Magnet Design" class="w-full h-full object-cover hidden transition-transform duration-200" />
+                <img id="mockup-img" src="" alt="Custom Square Magnet Design" class="w-full h-full object-cover hidden transition-transform duration-200" />
                 
                 <!-- Placeholder when no image is uploaded -->
                 <div id="mockup-placeholder" class="text-center p-6 flex flex-col items-center justify-center space-y-2 z-0">
-                  <div class="w-14 h-14 rounded-2xl bg-zinc-900 border border-amber-500/30 text-amber-400 flex items-center justify-center text-2xl mb-1 shadow-md">
+                  <div class="w-14 h-14 rounded-2xl bg-zinc-900 border border-zinc-800 text-amber-400 flex items-center justify-center text-2xl mb-1 shadow-md">
                     🧲
                   </div>
                   <p class="text-white font-bold text-sm">Drop Your Design</p>
@@ -70,14 +66,14 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
               </div>
             </div>
 
-            <!-- Neodymium Core Indicator Pill -->
-            <div class="absolute -bottom-3 bg-black/90 border border-amber-500/40 text-[10px] font-bold text-amber-300 px-3 py-1 rounded-full shadow-lg flex items-center gap-1.5 z-20">
-              <span>⚡</span> Dual N52 Neodymium Core
+            <!-- Core Indicator Pill -->
+            <div class="absolute -bottom-3 bg-black/90 border border-zinc-800 text-[10px] font-bold text-slate-300 px-3 py-1 rounded-full shadow-lg flex items-center gap-1.5 z-20">
+              <span>⚡</span> Full-Surface Magnetic Backing
             </div>
           </div>
 
-          <!-- Mockup Controls (Zoom / Rotate / Reset) -->
-          <div id="mockup-controls" class="w-full pt-6 mt-4 border-t border-zinc-800/80 flex items-center justify-between gap-3 hidden z-10">
+          <!-- Mockup Controls (Zoom / Reset) -->
+          <div id="mockup-controls" class="w-full pt-6 mt-4 border-t border-zinc-900 flex items-center justify-between gap-3 hidden z-10">
             <div class="flex items-center gap-2 flex-1">
               <span class="text-xs text-slate-400">Scale:</span>
               <input type="range" id="zoom-slider" min="50" max="200" value="100" class="w-full accent-amber-500 cursor-pointer" />
@@ -90,10 +86,10 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
           <!-- Feature Highlights under mockup -->
           <div class="w-full grid grid-cols-2 gap-2 mt-6 text-[11px] text-slate-400">
             <div class="bg-zinc-900/60 p-2.5 rounded-xl border border-zinc-800 flex items-center gap-2">
-              <span class="text-amber-400">✓</span> 24K Gold Rim
+              <span class="text-amber-400">✓</span> Rounded Corners
             </div>
             <div class="bg-zinc-900/60 p-2.5 rounded-xl border border-zinc-800 flex items-center gap-2">
-              <span class="text-amber-400">✓</span> Scratchproof Resin
+              <span class="text-amber-400">✓</span> Glossy Finish
             </div>
             <div class="bg-zinc-900/60 p-2.5 rounded-xl border border-zinc-800 flex items-center gap-2">
               <span class="text-amber-400">✓</span> High-Res UV Print
@@ -110,30 +106,30 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
       <div class="lg:col-span-7 space-y-8">
         
         <!-- STEP 1: Upload Your Design File -->
-        <div class="bg-zinc-950 rounded-3xl border border-amber-500/20 p-6 sm:p-8 shadow-xl">
+        <div class="bg-zinc-950 rounded-3xl border border-zinc-800 p-6 sm:p-8 shadow-xl">
           <div class="flex items-center gap-3 mb-4">
-            <div class="w-7 h-7 rounded-lg bg-amber-950 text-amber-400 border border-amber-500/30 flex items-center justify-center font-bold text-xs">1</div>
-            <h2 class="text-lg font-bold text-white">Upload Your Artwork / Design</h2>
+            <div class="w-7 h-7 rounded-lg bg-zinc-900 text-amber-400 border border-zinc-800 flex items-center justify-center font-bold text-xs">1</div>
+            <h2 class="text-lg font-bold text-white">Upload Your Photo or Logo</h2>
           </div>
           <p class="text-xs text-slate-400 mb-5">
-            Upload your logo, photo, vector graphic, or artwork. High-resolution PNG, JPG, or SVG recommended.
+            Upload your photo, logo, vector graphic, or artwork. High-resolution PNG, JPG, or SVG recommended.
           </p>
 
           <!-- Dropzone -->
-          <div id="dropzone" class="border-2 border-dashed border-amber-500/30 hover:border-amber-400 bg-zinc-900/50 hover:bg-zinc-900 rounded-2xl p-8 text-center cursor-pointer transition flex flex-col items-center justify-center group">
+          <div id="dropzone" class="border-2 border-dashed border-zinc-700 hover:border-amber-400 bg-zinc-900/50 hover:bg-zinc-900 rounded-2xl p-8 text-center cursor-pointer transition flex flex-col items-center justify-center group">
             <input type="file" id="design-file-input" accept="image/*" class="hidden" />
-            <div class="w-14 h-14 rounded-2xl bg-black border border-amber-500/30 flex items-center justify-center text-2xl group-hover:scale-110 transition shadow-lg text-amber-400 mb-3">
+            <div class="w-14 h-14 rounded-2xl bg-black border border-zinc-800 flex items-center justify-center text-2xl group-hover:scale-110 transition shadow-lg text-amber-400 mb-3">
               📂
             </div>
             <p class="text-sm font-bold text-white">Click or drag & drop design file here</p>
             <p class="text-xs text-slate-400 mt-1">PNG, JPG, SVG, WebP up to 25MB</p>
-            <button type="button" id="browse-btn" class="mt-4 bg-zinc-800 hover:bg-zinc-700 text-amber-300 border border-amber-500/30 text-xs font-bold px-4 py-2 rounded-xl transition">
+            <button type="button" id="browse-btn" class="mt-4 bg-zinc-800 hover:bg-zinc-700 text-amber-300 border border-zinc-700 text-xs font-bold px-4 py-2 rounded-xl transition">
               Browse Files
             </button>
           </div>
 
           <!-- File uploaded pill -->
-          <div id="file-info-pill" class="mt-4 p-3 bg-zinc-900 rounded-xl border border-amber-500/30 flex items-center justify-between text-xs hidden">
+          <div id="file-info-pill" class="mt-4 p-3 bg-zinc-900 rounded-xl border border-zinc-800 flex items-center justify-between text-xs hidden">
             <div class="flex items-center gap-2 overflow-hidden">
               <span class="text-amber-400">📁</span>
               <span id="file-name-text" class="text-white font-medium truncate max-w-[220px]">filename.png</span>
@@ -145,138 +141,69 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
           </div>
         </div>
 
-        <!-- STEP 2: Choose Magnet Shape & Profile -->
-        <div class="bg-zinc-950 rounded-3xl border border-amber-500/20 p-6 sm:p-8 shadow-xl">
+        <!-- STEP 2: Quantity & Tiered Pricing -->
+        <div class="bg-zinc-950 rounded-3xl border border-zinc-800 p-6 sm:p-8 shadow-xl">
           <div class="flex items-center gap-3 mb-4">
-            <div class="w-7 h-7 rounded-lg bg-amber-950 text-amber-400 border border-amber-500/30 flex items-center justify-center font-bold text-xs">2</div>
-            <h2 class="text-lg font-bold text-white">Select Shape & Finish</h2>
-          </div>
-
-          <!-- Shape Options -->
-          <div class="mb-6">
-            <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Magnet Shape</label>
-            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
-              <button type="button" class="shape-btn active p-3 rounded-2xl border-2 border-amber-400 bg-amber-950/40 text-center transition flex flex-col items-center gap-2" data-shape="round" data-label="Round (65mm)">
-                <div class="w-10 h-10 rounded-full border-2 border-amber-400 bg-zinc-900 flex items-center justify-center text-xs font-bold text-amber-400">⭕</div>
-                <span class="text-xs font-bold text-white">Round</span>
-                <span class="text-[10px] text-slate-400">65mm disc</span>
-              </button>
-              
-              <button type="button" class="shape-btn p-3 rounded-2xl border border-zinc-800 hover:border-amber-500/40 bg-zinc-900/60 text-center transition flex flex-col items-center gap-2" data-shape="hexagon" data-label="Hexagon (70mm)">
-                <div class="w-10 h-10 border-2 border-amber-500/40 bg-zinc-900 flex items-center justify-center text-xs font-bold text-amber-400 [clip-path:polygon(50%_0%,100%_25%,100%_75%,50%_100%,0%_75%,0%_25%)]">⬡</div>
-                <span class="text-xs font-bold text-white">Hexagon</span>
-                <span class="text-[10px] text-slate-400">70mm metal</span>
-              </button>
-
-              <button type="button" class="shape-btn p-3 rounded-2xl border border-zinc-800 hover:border-amber-500/40 bg-zinc-900/60 text-center transition flex flex-col items-center gap-2" data-shape="square" data-label="Square (60x60mm)">
-                <div class="w-9 h-9 rounded-lg border-2 border-amber-500/40 bg-zinc-900 flex items-center justify-center text-xs font-bold text-amber-400">■</div>
-                <span class="text-xs font-bold text-white">Square</span>
-                <span class="text-[10px] text-slate-400">60x60mm</span>
-              </button>
-
-              <button type="button" class="shape-btn p-3 rounded-2xl border border-zinc-800 hover:border-amber-500/40 bg-zinc-900/60 text-center transition flex flex-col items-center gap-2" data-shape="shield" data-label="Shield (75x50mm)">
-                <div class="w-9 h-10 rounded-t-lg rounded-b-3xl border-2 border-amber-500/40 bg-zinc-900 flex items-center justify-center text-xs font-bold text-amber-400">🛡️</div>
-                <span class="text-xs font-bold text-white">Shield</span>
-                <span class="text-[10px] text-slate-400">75x50mm</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Finish Options -->
-          <div>
-            <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-3">Metallic Bezel Finish</label>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3">
-              <button type="button" class="finish-btn active p-3 rounded-2xl border-2 border-amber-400 bg-amber-950/40 text-left transition flex items-center gap-3" data-finish="gold-rim" data-gradient="from-amber-600 via-yellow-400 to-amber-700">
-                <span class="w-6 h-6 rounded-full bg-gradient-to-tr from-amber-500 to-yellow-300 border border-yellow-200"></span>
-                <div>
-                  <div class="text-xs font-bold text-white">24K Gold Rim</div>
-                  <div class="text-[10px] text-slate-400">Obsidian Center</div>
-                </div>
-              </button>
-
-              <button type="button" class="finish-btn p-3 rounded-2xl border border-zinc-800 hover:border-amber-500/40 bg-zinc-900/60 text-left transition flex items-center gap-3" data-finish="black-gold" data-gradient="from-zinc-800 via-amber-500 to-zinc-900">
-                <span class="w-6 h-6 rounded-full bg-gradient-to-tr from-zinc-900 via-amber-600 to-zinc-950 border border-amber-500/30"></span>
-                <div>
-                  <div class="text-xs font-bold text-white">Matte Obsidian</div>
-                  <div class="text-[10px] text-slate-400">Subtle Gold Trim</div>
-                </div>
-              </button>
-
-              <button type="button" class="finish-btn p-3 rounded-2xl border border-zinc-800 hover:border-amber-500/40 bg-zinc-900/60 text-left transition flex items-center gap-3" data-finish="dual-gold" data-gradient="from-yellow-400 via-amber-500 to-yellow-600">
-                <span class="w-6 h-6 rounded-full bg-gradient-to-tr from-yellow-300 via-amber-500 to-yellow-600 border border-yellow-400"></span>
-                <div>
-                  <div class="text-xs font-bold text-white">Brushed Gold</div>
-                  <div class="text-[10px] text-slate-400">High Reflective</div>
-                </div>
-              </button>
-            </div>
-          </div>
-        </div>
-
-        <!-- STEP 3: Quantity & Tiered Pricing -->
-        <div class="bg-zinc-950 rounded-3xl border border-amber-500/20 p-6 sm:p-8 shadow-xl">
-          <div class="flex items-center gap-3 mb-4">
-            <div class="w-7 h-7 rounded-lg bg-amber-950 text-amber-400 border border-amber-500/30 flex items-center justify-center font-bold text-xs">3</div>
-            <h2 class="text-lg font-bold text-white">Quantity & Studio Pricing</h2>
+            <div class="w-7 h-7 rounded-lg bg-zinc-900 text-amber-400 border border-zinc-800 flex items-center justify-center font-bold text-xs">2</div>
+            <h2 class="text-lg font-bold text-white">Quantity & Pricing</h2>
           </div>
 
           <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6">
-            <button type="button" class="qty-tier-btn active p-3 rounded-2xl border-2 border-amber-400 bg-amber-950/40 text-center transition" data-qty="1" data-price="499">
+            <button type="button" class="qty-tier-btn active p-3 rounded-2xl border-2 border-amber-400 bg-zinc-900 text-center transition" data-qty="1" data-price="399">
               <span class="text-sm font-bold text-white block">1 Piece</span>
-              <span class="text-xs font-extrabold text-amber-400 mt-1 block">₹499</span>
+              <span class="text-xs font-extrabold text-amber-400 mt-1 block">₹399</span>
               <span class="text-[10px] text-slate-400">Standard</span>
             </button>
-            <button type="button" class="qty-tier-btn p-3 rounded-2xl border border-zinc-800 hover:border-amber-500/40 bg-zinc-900/60 text-center transition" data-qty="3" data-price="1349">
+            <button type="button" class="qty-tier-btn p-3 rounded-2xl border border-zinc-800 hover:border-amber-500/40 bg-zinc-900/60 text-center transition" data-qty="3" data-price="1049">
               <span class="text-sm font-bold text-white block">Set of 3</span>
-              <span class="text-xs font-extrabold text-amber-400 mt-1 block">₹1,349</span>
-              <span class="text-[10px] text-emerald-400">Save 10%</span>
+              <span class="text-xs font-extrabold text-amber-400 mt-1 block">₹1,049</span>
+              <span class="text-[10px] text-emerald-400">Save 12%</span>
             </button>
-            <button type="button" class="qty-tier-btn p-3 rounded-2xl border border-zinc-800 hover:border-amber-500/40 bg-zinc-900/60 text-center transition" data-qty="5" data-price="2149">
+            <button type="button" class="qty-tier-btn p-3 rounded-2xl border border-zinc-800 hover:border-amber-500/40 bg-zinc-900/60 text-center transition" data-qty="5" data-price="1699">
               <span class="text-sm font-bold text-white block">Set of 5</span>
-              <span class="text-xs font-extrabold text-amber-400 mt-1 block">₹2,149</span>
+              <span class="text-xs font-extrabold text-amber-400 mt-1 block">₹1,699</span>
               <span class="text-[10px] text-emerald-400">Save 15%</span>
             </button>
-            <button type="button" class="qty-tier-btn p-3 rounded-2xl border border-zinc-800 hover:border-amber-500/40 bg-zinc-900/60 text-center transition" data-qty="10" data-price="3999">
+            <button type="button" class="qty-tier-btn p-3 rounded-2xl border border-zinc-800 hover:border-amber-500/40 bg-zinc-900/60 text-center transition" data-qty="10" data-price="2999">
               <span class="text-sm font-bold text-white block">Set of 10</span>
-              <span class="text-xs font-extrabold text-amber-400 mt-1 block">₹3,999</span>
-              <span class="text-[10px] text-emerald-400">Save 20%</span>
+              <span class="text-xs font-extrabold text-amber-400 mt-1 block">₹2,999</span>
+              <span class="text-[10px] text-emerald-400">Save 25%</span>
             </button>
           </div>
 
           <!-- Total Calculation Bar -->
-          <div class="p-4 rounded-2xl bg-zinc-900/80 border border-amber-500/30 flex items-center justify-between">
+          <div class="p-4 rounded-2xl bg-zinc-900 border border-zinc-800 flex items-center justify-between">
             <div>
-              <span class="text-xs text-slate-400">Total Price for <span id="summary-qty-text" class="text-white font-bold">1</span> magnet:</span>
+              <span class="text-xs text-slate-400">Total Price for <span id="summary-qty-text" class="text-white font-bold">1</span> square magnet:</span>
               <div class="flex items-center gap-2 mt-0.5">
-                <span id="summary-price-text" class="text-2xl font-extrabold text-amber-400">₹499</span>
-                <span class="text-[11px] text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded-full border border-emerald-500/30 font-bold">Free Express Shipping</span>
+                <span id="summary-price-text" class="text-2xl font-extrabold text-amber-400">₹399</span>
+                <span class="text-[11px] text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded-full border border-emerald-500/30 font-bold">Free Shipping > ₹500</span>
               </div>
             </div>
-            <button type="button" id="add-custom-to-cart-btn" class="bg-zinc-800 hover:bg-zinc-700 text-amber-300 border border-amber-500/40 font-bold text-xs px-4 py-2.5 rounded-xl transition shadow-md">
+            <button type="button" id="add-custom-to-cart-btn" class="bg-zinc-800 hover:bg-zinc-700 text-amber-300 border border-zinc-700 font-bold text-xs px-4 py-2.5 rounded-xl transition shadow-md">
               + Add to Bag
             </button>
           </div>
         </div>
 
-        <!-- STEP 4: Order Details Form (Submits to prachiaaryav1107@gmail.com) -->
-        <div id="order" class="bg-zinc-950 rounded-3xl border border-amber-500/30 p-6 sm:p-8 shadow-2xl">
+        <!-- STEP 3: Order Details Form (Submits to prachiaaryav1107@gmail.com) -->
+        <div id="order" class="bg-zinc-950 rounded-3xl border border-zinc-800 p-6 sm:p-8 shadow-2xl">
           <div class="flex items-center gap-3 mb-2">
-            <div class="w-7 h-7 rounded-lg bg-amber-950 text-amber-400 border border-amber-500/30 flex items-center justify-center font-bold text-xs">4</div>
+            <div class="w-7 h-7 rounded-lg bg-zinc-900 text-amber-400 border border-zinc-800 flex items-center justify-center font-bold text-xs">3</div>
             <h2 class="text-lg font-bold text-white">Order Details & Direct Dispatch</h2>
           </div>
           <p class="text-xs text-slate-400 mb-6">
-            Enter your delivery information. Your design image and order specifications will be submitted directly to our studio mailbox (<span class="text-amber-400 font-mono">prachiaaryav1107@gmail.com</span>).
+            Enter your delivery information. Your design image and order specifications will be submitted directly to <span class="text-amber-400 font-mono">prachiaaryav1107@gmail.com</span>.
           </p>
 
           <form id="custom-magnet-order-form" class="space-y-4">
             <!-- Hidden Fields for FormSubmit -->
-            <input type="hidden" name="_subject" id="form-subject" value="[UNHINGED] New Custom Magnet Order & Design Upload" />
+            <input type="hidden" name="_subject" id="form-subject" value="[UNHINGED] New Custom Square Magnet Order & Design Upload" />
             <input type="hidden" name="_template" value="table" />
             <input type="hidden" name="_captcha" value="false" />
-            <input type="hidden" name="Selected_Shape" id="hidden-shape" value="Round (65mm)" />
-            <input type="hidden" name="Selected_Finish" id="hidden-finish" value="24K Gold Rim & Obsidian Center" />
+            <input type="hidden" name="Magnet_Type" value="Custom Square Magnet (70x70mm)" />
             <input type="hidden" name="Order_Quantity" id="hidden-qty" value="1" />
-            <input type="hidden" name="Total_Price" id="hidden-price" value="₹499" />
+            <input type="hidden" name="Total_Price" id="hidden-price" value="₹399" />
             <input type="hidden" name="Order_ID" id="hidden-order-id" value="" />
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -308,18 +235,18 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
 
             <div>
               <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">Custom Instructions / Text (Optional)</label>
-              <textarea id="cust-notes" name="Custom_Notes" rows="2" placeholder="Any specific placement instructions, custom engraving text, or color preferences..." class="w-full bg-zinc-900 border border-zinc-800 rounded-xl p-3 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-amber-400 transition"></textarea>
+              <textarea id="cust-notes" name="Custom_Notes" rows="2" placeholder="Any specific placement instructions or crop preferences..." class="w-full bg-zinc-900 border border-zinc-800 rounded-xl p-3 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-amber-400 transition"></textarea>
             </div>
 
             <div class="pt-2">
               <button type="submit" id="submit-order-btn" class="w-full bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-600 hover:from-amber-500 hover:to-yellow-500 text-black font-extrabold py-4 px-6 rounded-2xl shadow-xl shadow-amber-500/25 transition transform active:scale-95 text-base flex items-center justify-center gap-3">
                 <span id="btn-spinner" class="hidden animate-spin">⚡</span>
-                <span id="btn-text">Submit Custom Magnet Order ⚡</span>
+                <span id="btn-text">Submit Custom Square Magnet Order ⚡</span>
               </button>
             </div>
 
             <p class="text-[11px] text-center text-slate-400 leading-relaxed">
-              Dispatches via Express Courier within 24-48 hours. Design image file will be directly delivered to <strong class="text-amber-400">prachiaaryav1107@gmail.com</strong> for studio production.
+              Dispatched via Express Courier within 24-48 hours. Design image file will be directly delivered to <strong class="text-amber-400">prachiaaryav1107@gmail.com</strong> for printing.
             </p>
           </form>
 
@@ -329,23 +256,23 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
 
     </div>
 
-    <!-- Related Magnet Catalog Collection -->
-    <div class="mt-28 border-t border-amber-500/20 pt-16">
+    <!-- Related Catalog Collection -->
+    <div class="mt-28 border-t border-zinc-900 pt-16">
       <div class="flex flex-col sm:flex-row items-start sm:items-end justify-between mb-10">
         <div>
-          <span class="text-xs font-bold uppercase tracking-widest text-amber-400 bg-amber-950/60 px-3 py-1 rounded-full border border-amber-500/30">Studio Magnets</span>
-          <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-2">More Magnetic Craftsmanship</h2>
+          <span class="text-xs font-bold uppercase tracking-widest text-amber-400 bg-zinc-900 px-3 py-1 rounded-full border border-zinc-800">Explore Catalog</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-2">More Unhinged Masterpieces</h2>
         </div>
         <a href="/#products" class="text-xs font-bold text-amber-400 hover:text-amber-300 mt-2 sm:mt-0 transition">
-          View Full Obsidian Lineup &rarr;
+          View All Items &rarr;
         </a>
       </div>
 
       <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {magnetProducts.map(product => (
-          <a href={`/products/${product.slug}`} class="group bg-zinc-950 border border-amber-500/20 hover:border-amber-400/60 rounded-3xl p-6 transition flex flex-col justify-between shadow-lg">
+          <a href={`/products/${product.slug}`} class="group bg-zinc-950 border border-zinc-800 hover:border-amber-500/40 rounded-3xl p-6 transition flex flex-col justify-between shadow-lg">
             <div>
-              <div class="h-40 rounded-2xl bg-zinc-900 border border-amber-500/10 flex items-center justify-center text-6xl group-hover:scale-105 transition duration-300">
+              <div class="h-40 rounded-2xl bg-zinc-900 border border-zinc-800 flex items-center justify-center text-6xl group-hover:scale-105 transition duration-300">
                 {product.emoji}
               </div>
               <span class="text-[11px] font-bold text-amber-400 uppercase tracking-wider block mt-4">{product.category}</span>
@@ -354,7 +281,7 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
             </div>
             <div class="mt-6 pt-4 border-t border-zinc-900 flex items-center justify-between">
               <span class="text-lg font-extrabold text-amber-400">{product.price}</span>
-              <span class="text-xs font-bold text-amber-300 bg-amber-950/60 border border-amber-500/30 px-3 py-1.5 rounded-xl group-hover:bg-amber-400 group-hover:text-black transition">
+              <span class="text-xs font-bold text-amber-300 bg-zinc-900 border border-zinc-800 px-3 py-1.5 rounded-xl group-hover:bg-amber-400 group-hover:text-black transition">
                 {product.isCustomizable ? 'Personalize' : 'Explore'} &rarr;
               </span>
             </div>
@@ -367,23 +294,23 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
 
   <!-- ORDER SUCCESS / CONFIRMATION MODAL -->
   <div id="order-success-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-md hidden transition-opacity duration-300">
-    <div class="relative bg-zinc-950 border border-amber-500/40 rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl text-left max-h-[90vh] overflow-y-auto">
+    <div class="relative bg-zinc-950 border border-zinc-800 rounded-3xl max-w-xl w-full p-6 sm:p-8 shadow-2xl text-left max-h-[90vh] overflow-y-auto">
       
       <div class="text-center mb-6">
-        <div class="w-16 h-16 rounded-2xl bg-gradient-to-tr from-amber-500 to-yellow-300 text-black text-3xl flex items-center justify-center mx-auto mb-3 shadow-lg shadow-amber-500/20 font-black">
+        <div class="w-16 h-16 rounded-2xl bg-amber-400 text-black text-3xl flex items-center justify-center mx-auto mb-3 shadow-lg shadow-amber-500/20 font-black">
           ✓
         </div>
-        <span class="text-xs font-bold uppercase tracking-widest text-amber-400 bg-amber-950/80 px-3 py-1 rounded-full border border-amber-500/30">
+        <span class="text-xs font-bold uppercase tracking-widest text-amber-400 bg-zinc-900 px-3 py-1 rounded-full border border-zinc-800">
           Order Transmitted
         </span>
-        <h3 class="text-2xl font-extrabold text-white mt-2">Custom Magnet Order Placed!</h3>
+        <h3 class="text-2xl font-extrabold text-white mt-2">Custom Square Magnet Order Placed!</h3>
         <p class="text-xs text-slate-300 mt-1">
           Your uploaded design & order specifications have been dispatched to our studio admin.
         </p>
       </div>
 
       <!-- Receipt Box -->
-      <div class="bg-zinc-900/90 rounded-2xl border border-amber-500/20 p-5 space-y-4 mb-6">
+      <div class="bg-zinc-900 rounded-2xl border border-zinc-800 p-5 space-y-4 mb-6">
         <div class="flex items-center justify-between border-b border-zinc-800 pb-3 text-xs">
           <span class="text-slate-400">Order ID:</span>
           <span id="receipt-order-id" class="text-amber-400 font-mono font-bold">UNH-MAG-000000</span>
@@ -391,14 +318,14 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
 
         <!-- Thumbnail + details -->
         <div class="flex gap-4 items-center">
-          <div class="w-20 h-20 rounded-xl bg-black border border-amber-500/30 overflow-hidden flex items-center justify-center flex-shrink-0">
+          <div class="w-20 h-20 rounded-xl bg-black border border-zinc-800 overflow-hidden flex items-center justify-center flex-shrink-0">
             <img id="receipt-design-img" src="" alt="Uploaded Design Proof" class="w-full h-full object-cover hidden" />
             <span id="receipt-design-fallback" class="text-3xl text-amber-400">🧲</span>
           </div>
           <div class="text-xs space-y-1">
-            <p id="receipt-product-title" class="font-bold text-white text-sm">Custom Obsidian Gold Magnet</p>
-            <p id="receipt-specs" class="text-slate-400 text-[11px]">Round (65mm) • 24K Gold Rim</p>
-            <p class="text-amber-400 font-bold"><span id="receipt-qty">1</span> units • <span id="receipt-price">₹499</span> (COD / Direct Dispatch)</p>
+            <p id="receipt-product-title" class="font-bold text-white text-sm">Custom Square Magnet (70x70mm)</p>
+            <p id="receipt-specs" class="text-slate-400 text-[11px]">High-Durability Square Photo Magnet</p>
+            <p class="text-amber-400 font-bold"><span id="receipt-qty">1</span> units • <span id="receipt-price">₹399</span> (Direct Studio Dispatch)</p>
           </div>
         </div>
 
@@ -409,20 +336,20 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
       </div>
 
       <!-- Inbox status banner -->
-      <div class="p-4 rounded-xl bg-amber-950/40 border border-amber-500/30 text-xs text-slate-300 space-y-2 mb-6">
+      <div class="p-4 rounded-xl bg-zinc-900 border border-zinc-800 text-xs text-slate-300 space-y-2 mb-6">
         <div class="flex items-center gap-2 text-amber-400 font-bold">
           <span>📬</span> Sent to Destination Mailbox:
         </div>
-        <p class="font-mono text-amber-300 text-xs bg-black/60 p-2 rounded-lg border border-zinc-800">
+        <p class="font-mono text-amber-300 text-xs bg-black p-2 rounded-lg border border-zinc-800">
           prachiaaryav1107@gmail.com
         </p>
         <p class="text-[11px] text-slate-400">
-          <strong>Notice for Admin:</strong> If this is your first submission via FormSubmit, look for an activation email with an "Activate Form" button from FormSubmit to verify your receiving mailbox. Once clicked, all future submissions arrive instantly with high-res images attached.
+          <strong>Notice for Admin:</strong> If this is your first submission via FormSubmit, click the "Activate Form" button in the email sent by FormSubmit to verify your receiving mailbox.
         </p>
       </div>
 
       <div class="flex flex-col sm:flex-row gap-3">
-        <button id="close-success-modal-btn" class="flex-1 bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-500 hover:to-amber-700 text-black font-extrabold py-3 px-4 rounded-xl transition text-xs text-center shadow-lg shadow-amber-500/20">
+        <button id="close-success-modal-btn" class="flex-1 bg-amber-400 hover:bg-amber-500 text-black font-extrabold py-3 px-4 rounded-xl transition text-xs text-center shadow-lg shadow-amber-500/20">
           Done & Return to Studio
         </button>
         <a href="/" class="flex-1 bg-zinc-900 hover:bg-zinc-800 text-white font-bold py-3 px-4 rounded-xl transition text-xs text-center border border-zinc-800">
@@ -437,13 +364,8 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
 <script>
   let uploadedFile: File | null = null;
   let uploadedDataUrl: string = '';
-  let selectedShape = 'round';
-  let selectedShapeLabel = 'Round (65mm)';
-  let selectedFinish = 'gold-rim';
-  let selectedFinishGradient = 'from-amber-600 via-yellow-400 to-amber-700';
-  let selectedFinishLabel = '24K Gold Rim & Obsidian Center';
   let selectedQty = 1;
-  let selectedPrice = 499;
+  let selectedPrice = 399;
 
   document.addEventListener('DOMContentLoaded', () => {
     // Generate Order ID
@@ -460,14 +382,11 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
     const fileNameText = document.getElementById('file-name-text');
     const fileSizeText = document.getElementById('file-size-text');
 
-    const mockupFrame = document.getElementById('mockup-frame');
-    const mockupInner = document.getElementById('mockup-inner');
     const mockupImg = document.getElementById('mockup-img') as HTMLImageElement;
     const mockupPlaceholder = document.getElementById('mockup-placeholder');
     const mockupControls = document.getElementById('mockup-controls');
     const zoomSlider = document.getElementById('zoom-slider') as HTMLInputElement;
     const resetImgBtn = document.getElementById('reset-img-btn');
-    const shapeBadge = document.getElementById('preview-shape-badge');
 
     // Handle File Loading
     function handleFile(file: File) {
@@ -551,78 +470,6 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
       if (zoomSlider) zoomSlider.value = '100';
     });
 
-    // Shape Switcher
-    const shapeBtns = document.querySelectorAll('.shape-btn');
-    shapeBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        shapeBtns.forEach(b => {
-          b.classList.remove('active', 'border-amber-400', 'bg-amber-950/40');
-          b.classList.add('border-zinc-800', 'bg-zinc-900/60');
-        });
-        btn.classList.add('active', 'border-amber-400', 'bg-amber-950/40');
-        btn.classList.remove('border-zinc-800', 'bg-zinc-900/60');
-
-        const shape = (btn as HTMLElement).dataset.shape || 'round';
-        const label = (btn as HTMLElement).dataset.label || 'Round (65mm)';
-        selectedShape = shape;
-        selectedShapeLabel = label;
-
-        if (shapeBadge) shapeBadge.textContent = label;
-        const hiddenShape = document.getElementById('hidden-shape') as HTMLInputElement;
-        if (hiddenShape) hiddenShape.value = label;
-
-        // Apply classes to mockup
-        if (mockupFrame && mockupInner) {
-          mockupFrame.className = 'w-full h-full p-2.5 shadow-[0_20px_50px_rgba(245,158,11,0.25)] flex items-center justify-center transition-all duration-300 bg-gradient-to-tr ' + selectedFinishGradient;
-          mockupInner.className = 'w-full h-full bg-zinc-950 border-2 border-black/80 flex items-center justify-center overflow-hidden relative shadow-inner';
-
-          if (shape === 'round') {
-            mockupFrame.classList.add('rounded-full');
-            mockupInner.classList.add('rounded-full');
-          } else if (shape === 'hexagon') {
-            mockupFrame.style.clipPath = 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)';
-            mockupInner.style.clipPath = 'polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)';
-          } else if (shape === 'square') {
-            mockupFrame.style.clipPath = '';
-            mockupInner.style.clipPath = '';
-            mockupFrame.classList.add('rounded-3xl');
-            mockupInner.classList.add('rounded-2xl');
-          } else if (shape === 'shield') {
-            mockupFrame.style.clipPath = '';
-            mockupInner.style.clipPath = '';
-            mockupFrame.classList.add('rounded-t-2xl', 'rounded-b-[4rem]');
-            mockupInner.classList.add('rounded-t-xl', 'rounded-b-[3.5rem]');
-          }
-        }
-      });
-    });
-
-    // Finish Switcher
-    const finishBtns = document.querySelectorAll('.finish-btn');
-    finishBtns.forEach(btn => {
-      btn.addEventListener('click', () => {
-        finishBtns.forEach(b => {
-          b.classList.remove('active', 'border-amber-400', 'bg-amber-950/40');
-          b.classList.add('border-zinc-800', 'bg-zinc-900/60');
-        });
-        btn.classList.add('active', 'border-amber-400', 'bg-amber-950/40');
-        btn.classList.remove('border-zinc-800', 'bg-zinc-900/60');
-
-        const finish = (btn as HTMLElement).dataset.finish || 'gold-rim';
-        const gradient = (btn as HTMLElement).dataset.gradient || 'from-amber-600 via-yellow-400 to-amber-700';
-        selectedFinish = finish;
-        selectedFinishGradient = gradient;
-        selectedFinishLabel = (btn as HTMLElement).querySelector('.text-white')?.textContent || '24K Gold Rim';
-
-        const hiddenFinish = document.getElementById('hidden-finish') as HTMLInputElement;
-        if (hiddenFinish) hiddenFinish.value = selectedFinishLabel;
-
-        if (mockupFrame) {
-          mockupFrame.className = mockupFrame.className.replace(/from-\S+ via-\S+ to-\S+/, gradient);
-        }
-      });
-    });
-
     // Quantity Tier Switcher
     const qtyBtns = document.querySelectorAll('.qty-tier-btn');
     const summaryQty = document.getElementById('summary-qty-text');
@@ -633,14 +480,14 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
     qtyBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         qtyBtns.forEach(b => {
-          b.classList.remove('active', 'border-amber-400', 'bg-amber-950/40');
+          b.classList.remove('active', 'border-amber-400', 'bg-zinc-900');
           b.classList.add('border-zinc-800', 'bg-zinc-900/60');
         });
-        btn.classList.add('active', 'border-amber-400', 'bg-amber-950/40');
+        btn.classList.add('active', 'border-amber-400', 'bg-zinc-900');
         btn.classList.remove('border-zinc-800', 'bg-zinc-900/60');
 
         selectedQty = parseInt((btn as HTMLElement).dataset.qty || '1', 10);
-        selectedPrice = parseInt((btn as HTMLElement).dataset.price || '499', 10);
+        selectedPrice = parseInt((btn as HTMLElement).dataset.price || '399', 10);
 
         if (summaryQty) summaryQty.textContent = selectedQty.toString();
         if (summaryPrice) summaryPrice.textContent = `₹${selectedPrice.toLocaleString('en-IN')}`;
@@ -649,18 +496,18 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
       });
     });
 
-    // Add Custom Magnet to Cart Button
+    // Add Custom Square Magnet to Cart Button
     const addCustomToCartBtn = document.getElementById('add-custom-to-cart-btn');
     addCustomToCartBtn?.addEventListener('click', () => {
       const cartItem = {
-        id: 'custom-mag-' + Date.now(),
-        slug: 'custom-obsidian-gold-magnet',
-        title: `Custom ${selectedShapeLabel} Magnet`,
+        id: 'custom-square-mag-' + Date.now(),
+        slug: 'custom-square-magnet',
+        title: `Custom Square Magnet (70x70mm)`,
         price: selectedPrice / selectedQty,
         quantity: selectedQty,
         emoji: '🧲',
         image: uploadedDataUrl || '',
-        options: `${selectedShapeLabel} • ${selectedFinishLabel}`
+        options: `Square Format • Glossy Finish`
       };
 
       window.dispatchEvent(new CustomEvent('unhinged-add-to-cart', { detail: cartItem }));
@@ -677,7 +524,7 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
       e.preventDefault();
 
       if (!uploadedFile && !uploadedDataUrl) {
-        alert('Please upload your artwork or design image before submitting your custom magnet order.');
+        alert('Please upload your photo or design image before submitting your custom square magnet order.');
         document.getElementById('dropzone')?.scrollIntoView({ behavior: 'smooth' });
         return;
       }
@@ -696,7 +543,7 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
       const custAddress = (document.getElementById('cust-address') as HTMLTextAreaElement)?.value;
       const custNotes = (document.getElementById('cust-notes') as HTMLTextAreaElement)?.value;
 
-      formData.append('_subject', `[UNHINGED ORDER] Custom Magnet Order - ${custName} (${orderId})`);
+      formData.append('_subject', `[UNHINGED ORDER] Custom Square Magnet Order - ${custName} (${orderId})`);
       formData.append('_template', 'table');
       formData.append('_captcha', 'false');
       formData.append('_replyto', custEmail);
@@ -706,8 +553,7 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
       formData.append('Customer_Phone', custPhone);
       formData.append('Shipping_City_Pincode', custCity);
       formData.append('Full_Shipping_Address', custAddress);
-      formData.append('Magnet_Shape', selectedShapeLabel);
-      formData.append('Bezel_Finish', selectedFinishLabel);
+      formData.append('Magnet_Type', 'Custom Square Magnet (70x70mm)');
       formData.append('Quantity', selectedQty.toString());
       formData.append('Total_Price', `₹${selectedPrice.toLocaleString('en-IN')}`);
       formData.append('Customer_Notes', custNotes || 'None');
@@ -718,7 +564,6 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
       }
 
       try {
-        // Send directly to prachiaaryav1107@gmail.com via FormSubmit endpoint
         const response = await fetch('https://formsubmit.co/ajax/prachiaaryav1107@gmail.com', {
           method: 'POST',
           body: formData,
@@ -729,29 +574,6 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
 
         const result = await response.json();
         console.log('FormSubmit transmission result:', result);
-
-        // Store order in local memory history
-        const orderRecord = {
-          orderId,
-          name: custName,
-          email: custEmail,
-          phone: custPhone,
-          address: `${custAddress}, ${custCity}`,
-          shape: selectedShapeLabel,
-          finish: selectedFinishLabel,
-          quantity: selectedQty,
-          total: selectedPrice,
-          image: uploadedDataUrl,
-          date: new Date().toISOString()
-        };
-
-        try {
-          const pastOrders = JSON.parse(localStorage.getItem('unhinged_orders') || '[]');
-          pastOrders.unshift(orderRecord);
-          localStorage.setItem('unhinged_orders', JSON.stringify(pastOrders));
-        } catch (err) {
-          console.warn('Storage quota note:', err);
-        }
 
         // Populate receipt modal
         const receiptOrderId = document.getElementById('receipt-order-id');
@@ -765,7 +587,7 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
         const receiptCustomerAddress = document.getElementById('receipt-customer-address');
 
         if (receiptOrderId) receiptOrderId.textContent = orderId;
-        if (receiptSpecs) receiptSpecs.textContent = `${selectedShapeLabel} • ${selectedFinishLabel}`;
+        if (receiptSpecs) receiptSpecs.textContent = `Custom Square Magnet (70x70mm)`;
         if (receiptQty) receiptQty.textContent = selectedQty.toString();
         if (receiptPrice) receiptPrice.textContent = `₹${selectedPrice.toLocaleString('en-IN')}`;
         if (receiptCustomerName) receiptCustomerName.textContent = custName;
@@ -778,7 +600,6 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
           if (receiptFallback) receiptFallback.classList.add('hidden');
         }
 
-        // Show confirmation modal
         if (successModal) {
           successModal.classList.remove('hidden');
           document.body.style.overflow = 'hidden';
@@ -786,19 +607,17 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
 
       } catch (err) {
         console.error('Submission error:', err);
-        // Fallback: If network issue occurs, still display confirmation and save order
-        alert('Order saved locally! If you are offline, our studio will reach out at ' + custPhone);
+        alert('Order saved! If offline, our studio will reach out at ' + custPhone);
         if (successModal) {
           successModal.classList.remove('hidden');
         }
       } finally {
         if (submitBtn) submitBtn.disabled = false;
         if (btnSpinner) btnSpinner.classList.add('hidden');
-        if (btnText) btnText.textContent = 'Submit Custom Magnet Order ⚡';
+        if (btnText) btnText.textContent = 'Submit Custom Square Magnet Order ⚡';
       }
     });
 
-    // Close success modal
     document.getElementById('close-success-modal-btn')?.addEventListener('click', () => {
       if (successModal) {
         successModal.classList.add('hidden');
