@@ -186,14 +186,14 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
           </div>
         </div>
 
-        <!-- STEP 3: Order Details Form (EmailJS Dual-Email Handler) -->
+        <!-- STEP 3: Order Details Form (EmailJS Safe Handler) -->
         <div id="order" class="bg-zinc-950 rounded-3xl border border-zinc-800 p-6 sm:p-8 shadow-2xl">
           <div class="flex items-center gap-3 mb-2">
             <div class="w-7 h-7 rounded-lg bg-zinc-900 text-amber-400 border border-zinc-800 flex items-center justify-center font-bold text-xs">3</div>
-            <h2 class="text-lg font-bold text-white">Order Details & EmailJS Dual-Email Dispatch</h2>
+            <h2 class="text-lg font-bold text-white">Order Details & EmailJS Dispatch</h2>
           </div>
           <p class="text-xs text-slate-400 mb-6">
-            Enter your delivery information. EmailJS instantly dispatches the admin order sheet to <span class="text-amber-400 font-mono">unhinged.sales1@gmail.com</span> and the confirmation receipt to your email.
+            Enter your delivery information. EmailJS instantly dispatches the order sheet to <span class="text-amber-400 font-mono">unhinged.sales1@gmail.com</span> and the confirmation receipt to your email.
           </p>
 
           <form id="custom-magnet-order-form" class="space-y-4">
@@ -298,7 +298,7 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
         </span>
         <h3 class="text-2xl font-extrabold text-white mt-2">Custom Square Magnet Order Placed!</h3>
         <p class="text-xs text-slate-300 mt-1">
-          EmailJS successfully sent admin notification to unhinged.sales1@gmail.com and your confirmation receipt.
+          EmailJS successfully verified and sent admin notification to unhinged.sales1@gmail.com and your confirmation receipt.
         </p>
       </div>
 
@@ -510,7 +510,7 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
       window.dispatchEvent(new CustomEvent('unhinged-add-to-cart', { detail: cartItem }));
     });
 
-    // Form Submission: EmailJS Dual-Email Dispatch (Admin Template + Customer Receipt Template)
+    // Form Submission: EmailJS Safe Dual-Email Dispatch (Excludes bulky base64 string to prevent 50Kb error)
     const form = document.getElementById('custom-magnet-order-form') as HTMLFormElement;
     const submitBtn = document.getElementById('submit-order-btn') as HTMLButtonElement;
     const btnSpinner = document.getElementById('btn-spinner');
@@ -529,7 +529,7 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
       // UI Loading state
       if (submitBtn) submitBtn.disabled = true;
       if (btnSpinner) btnSpinner.classList.remove('hidden');
-      if (btnText) btnText.textContent = 'Dispatches EmailJS Dual-Notifications...';
+      if (btnText) btnText.textContent = 'Sending EmailJS Dual-Notifications...';
 
       const orderId = (document.getElementById('hidden-order-id') as HTMLInputElement)?.value || ('UNH-MAG-' + Date.now());
       const custName = (document.getElementById('cust-name') as HTMLInputElement)?.value;
@@ -539,6 +539,7 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
       const custAddress = (document.getElementById('cust-address') as HTMLTextAreaElement)?.value;
       const custNotes = (document.getElementById('cust-notes') as HTMLTextAreaElement)?.value;
 
+      // Safe Template Parameters (excluding bulky base64 data URL to stay well below EmailJS 50Kb limit)
       const templateParams = {
         order_id: orderId,
         customer_name: custName,
@@ -550,7 +551,8 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
         quantity: selectedQty.toString(),
         total_price: `₹${selectedPrice.toLocaleString('en-IN')}`,
         customer_notes: custNotes || 'None',
-        design_image: uploadedDataUrl || '',
+        design_filename: uploadedFile ? uploadedFile.name : 'Custom_Design_File.png',
+        design_filesize: uploadedFile ? `${(uploadedFile.size / (1024 * 1024)).toFixed(2)} MB` : 'Attached in Studio',
         admin_email: 'unhinged.sales1@gmail.com'
       };
 
@@ -576,10 +578,16 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
           templateParams
         );
 
-        await Promise.all([adminPromise, customerPromise]);
-        console.log('EmailJS dual-email dispatch successful.');
+        const results = await Promise.all([adminPromise, customerPromise]);
+        console.log('EmailJS dual-email dispatch successful responses:', results);
 
-        // Populate receipt modal
+        // Verify true success response
+        const allSuccessful = results.every(res => res && (res.status === 200 || res.text === 'OK'));
+        if (!allSuccessful) {
+          throw new Error('EmailJS dispatch did not return success status.');
+        }
+
+        // Populate receipt modal only after verified success
         const receiptOrderId = document.getElementById('receipt-order-id');
         const receiptImg = document.getElementById('receipt-design-img') as HTMLImageElement;
         const receiptFallback = document.getElementById('receipt-design-fallback');
@@ -613,10 +621,7 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
 
       } catch (err: any) {
         console.error('EmailJS error:', err);
-        alert('Order submitted successfully! EmailJS dispatch notice: ' + (err?.text || err?.message || 'Check template IDs.'));
-        if (successModal) {
-          successModal.classList.remove('hidden');
-        }
+        alert('Order submission failed: ' + (err?.text || err?.message || 'Please check EmailJS template variables and public key.'));
       } finally {
         if (submitBtn) submitBtn.disabled = false;
         if (btnSpinner) btnSpinner.classList.add('hidden');
