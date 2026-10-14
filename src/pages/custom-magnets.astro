@@ -510,7 +510,7 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
       window.dispatchEvent(new CustomEvent('unhinged-add-to-cart', { detail: cartItem }));
     });
 
-    // Form Submission: EmailJS Safe Dual-Email Dispatch (Excludes bulky base64 string to prevent 50Kb error)
+    // Form Submission: EmailJS Safe Dual-Email Dispatch with explicit recipient email variables and console logging
     const form = document.getElementById('custom-magnet-order-form') as HTMLFormElement;
     const submitBtn = document.getElementById('submit-order-btn') as HTMLButtonElement;
     const btnSpinner = document.getElementById('btn-spinner');
@@ -539,8 +539,11 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
       const custAddress = (document.getElementById('cust-address') as HTMLTextAreaElement)?.value;
       const custNotes = (document.getElementById('cust-notes') as HTMLTextAreaElement)?.value;
 
-      // Safe Template Parameters (excluding bulky base64 data URL to stay well below EmailJS 50Kb limit)
+      // Complete Template Parameters including `email` for customer recipient and all order fields (safely below 50Kb)
       const templateParams = {
+        email: custEmail, // Ensures EmailJS populates {{email}} recipient for customer receipt
+        to_email: custEmail,
+        admin_email: 'unhinged.sales1@gmail.com',
         order_id: orderId,
         customer_name: custName,
         customer_email: custEmail,
@@ -552,9 +555,14 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
         total_price: `₹${selectedPrice.toLocaleString('en-IN')}`,
         customer_notes: custNotes || 'None',
         design_filename: uploadedFile ? uploadedFile.name : 'Custom_Design_File.png',
-        design_filesize: uploadedFile ? `${(uploadedFile.size / (1024 * 1024)).toFixed(2)} MB` : 'Attached in Studio',
-        admin_email: 'unhinged.sales1@gmail.com'
+        design_filesize: uploadedFile ? `${(uploadedFile.size / (1024 * 1024)).toFixed(2)} MB` : 'Attached in Studio'
       };
+
+      console.log('--- EmailJS Transmission Payload ---');
+      console.log('Service ID:', 'service_cz2981o');
+      console.log('Admin Template ID:', 'template_j1qjq79');
+      console.log('Customer Template ID:', 'template_35c78gn');
+      console.log('Template Parameters:', templateParams);
 
       try {
         // @ts-ignore
@@ -567,7 +575,7 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
         const adminPromise = window.emailjs.send(
           'service_cz2981o',
           'template_j1qjq79',
-          templateParams
+          { ...templateParams, email: 'unhinged.sales1@gmail.com', to_email: 'unhinged.sales1@gmail.com' }
         );
 
         // 2. Send Confirmation Receipt to Customer using Customer Template (template_35c78gn)
