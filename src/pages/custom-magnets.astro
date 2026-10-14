@@ -186,7 +186,7 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
           </div>
         </div>
 
-        <!-- STEP 3: Order Details Form (EmailJS Safe Handler) -->
+        <!-- STEP 3: Order Details Form (EmailJS Mapped Handler) -->
         <div id="order" class="bg-zinc-950 rounded-3xl border border-zinc-800 p-6 sm:p-8 shadow-2xl">
           <div class="flex items-center gap-3 mb-2">
             <div class="w-7 h-7 rounded-lg bg-zinc-900 text-amber-400 border border-zinc-800 flex items-center justify-center font-bold text-xs">3</div>
@@ -510,7 +510,7 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
       window.dispatchEvent(new CustomEvent('unhinged-add-to-cart', { detail: cartItem }));
     });
 
-    // Form Submission: EmailJS Safe Dual-Email Dispatch with explicit recipient email variables and console logging
+    // Form Submission: Extract exact DOM form values and map them to EmailJS template parameters (name, email, phone, address, magnet_type, quantity, total_price, notes, order_id)
     const form = document.getElementById('custom-magnet-order-form') as HTMLFormElement;
     const submitBtn = document.getElementById('submit-order-btn') as HTMLButtonElement;
     const btnSpinner = document.getElementById('btn-spinner');
@@ -531,29 +531,28 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
       if (btnSpinner) btnSpinner.classList.remove('hidden');
       if (btnText) btnText.textContent = 'Sending EmailJS Dual-Notifications...';
 
+      // Extract exact values from all DOM input fields
       const orderId = (document.getElementById('hidden-order-id') as HTMLInputElement)?.value || ('UNH-MAG-' + Date.now());
-      const custName = (document.getElementById('cust-name') as HTMLInputElement)?.value;
-      const custEmail = (document.getElementById('cust-email') as HTMLInputElement)?.value;
-      const custPhone = (document.getElementById('cust-phone') as HTMLInputElement)?.value;
-      const custCity = (document.getElementById('cust-city') as HTMLInputElement)?.value;
-      const custAddress = (document.getElementById('cust-address') as HTMLTextAreaElement)?.value;
-      const custNotes = (document.getElementById('cust-notes') as HTMLTextAreaElement)?.value;
+      const custName = (document.getElementById('cust-name') as HTMLInputElement)?.value || '';
+      const custEmail = (document.getElementById('cust-email') as HTMLInputElement)?.value || '';
+      const custPhone = (document.getElementById('cust-phone') as HTMLInputElement)?.value || '';
+      const custCity = (document.getElementById('cust-city') as HTMLInputElement)?.value || '';
+      const custAddressText = (document.getElementById('cust-address') as HTMLTextAreaElement)?.value || '';
+      const fullShippingAddress = `${custAddressText}, ${custCity}`.trim();
+      const custNotes = (document.getElementById('cust-notes') as HTMLTextAreaElement)?.value || 'None';
 
-      // Complete Template Parameters including `email` for customer recipient and all order fields (safely below 50Kb)
+      // Map to exact EmailJS template variables as requested: name, email, phone, address, magnet_type, quantity, total_price, notes, order_id
       const templateParams = {
-        email: custEmail, // Ensures EmailJS populates {{email}} recipient for customer receipt
+        name: custName,
+        email: custEmail,
         to_email: custEmail,
-        admin_email: 'unhinged.sales1@gmail.com',
-        order_id: orderId,
-        customer_name: custName,
-        customer_email: custEmail,
-        customer_phone: custPhone,
-        city_pincode: custCity,
-        shipping_address: custAddress,
+        phone: custPhone,
+        address: fullShippingAddress,
         magnet_type: 'Custom Square Magnet (70x70mm)',
         quantity: selectedQty.toString(),
         total_price: `₹${selectedPrice.toLocaleString('en-IN')}`,
-        customer_notes: custNotes || 'None',
+        notes: custNotes,
+        order_id: orderId,
         design_filename: uploadedFile ? uploadedFile.name : 'Custom_Design_File.png',
         design_filesize: uploadedFile ? `${(uploadedFile.size / (1024 * 1024)).toFixed(2)} MB` : 'Attached in Studio'
       };
@@ -613,7 +612,7 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
         if (receiptPrice) receiptPrice.textContent = `₹${selectedPrice.toLocaleString('en-IN')}`;
         if (receiptCustomerName) receiptCustomerName.textContent = custName;
         if (receiptCustomerEmail) receiptCustomerEmail.textContent = custEmail;
-        if (receiptCustomerAddress) receiptCustomerAddress.textContent = `${custCity} - ${custAddress}`;
+        if (receiptCustomerAddress) receiptCustomerAddress.textContent = fullShippingAddress;
         if (bannerCustEmail) bannerCustEmail.textContent = custEmail;
 
         if (uploadedDataUrl && receiptImg) {
