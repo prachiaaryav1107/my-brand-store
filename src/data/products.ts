@@ -4,7 +4,7 @@ export interface Product {
   price: string;
   priceNumber: number;
   badgeText: string;
-  category: 'Custom Magnets' | 'Desk Magnets' | 'Crystals' | 'Stationery' | 'Gadgets';
+  category: 'Photo Magnets' | 'Flexible Sheets' | 'Locker Magnets' | 'Promotional';
   emoji: string;
   description: string;
   isCustomizable?: boolean;
@@ -14,130 +14,115 @@ export interface Product {
 
 export const products: Product[] = [
   {
-    slug: "custom-square-magnet",
-    title: "Custom Square Photo & Logo Magnet",
+    slug: "custom-photo-fridge-magnet",
+    title: "Custom Photo Fridge Magnet",
+    price: "₹199",
+    priceNumber: 199,
+    badgeText: "Best Seller",
+    category: "Photo Magnets",
+    emoji: "🖼️",
+    isCustomizable: true,
+    amazonUrl: "https://amazon.in",
+    description: "Turn your favorite memories, family photos, or custom designs into high-gloss fridge magnets. Features a flexible magnetic backing that securely grips any refrigerator or metal surface.",
+    specs: [
+      "Upload Your Favorite Photo or Artwork",
+      "High-Gloss Protective UV Coating",
+      "Flexible Full-Surface Magnetic Backing",
+      "Standard 3x3 inch Square or Circle",
+      "Fade-Resistant Vibrant Printing"
+    ]
+  },
+  {
+    slug: "flexible-magnetic-sheet",
+    title: "Flexible Magnetic Sheet (A4 Cut-to-Size)",
+    price: "₹249",
+    priceNumber: 249,
+    badgeText: "Practical",
+    category: "Flexible Sheets",
+    emoji: "📄",
+    isCustomizable: true,
+    amazonUrl: "https://amazon.in",
+    description: "A4 size flexible magnetic rubber sheet with adhesive backing or printable matte surface. Easily cut with scissors to create custom signs, labels, or DIY crafts.",
+    specs: [
+      "Standard A4 Size (210 x 297 mm)",
+      "Cut Easily with Regular Scissors",
+      "Strong Flexible Rubber Magnet Core",
+      "Peel-and-Stick Adhesive Backing Option",
+      "Ideal for DIY Crafts, Signs & Notices"
+    ]
+  },
+  {
+    slug: "decorative-locker-magnet-pack",
+    title: "Decorative Aesthetic Locker Magnets (Pack of 4)",
+    price: "₹299",
+    priceNumber: 299,
+    badgeText: "Popular",
+    category: "Locker Magnets",
+    emoji: "🎒",
+    amazonUrl: "https://amazon.in",
+    description: "Set of 4 stylish decorative magnets designed for school lockers, office whiteboards, and magnetic bulletin boards. Vibrant art printed on durable metal shells.",
+    specs: [
+      "Pack of 4 Matching Aesthetic Designs",
+      "Durable Metal Shell Construction",
+      "Reliable Ceramic Magnet Core",
+      "Scratch-Resistant Smooth Finish",
+      "Great for Lockers, Cubicles & Whiteboards"
+    ]
+  },
+  {
+    slug: "custom-logo-promotional-magnet",
+    title: "Custom Logo Promotional Magnet",
+    price: "₹179",
+    priceNumber: 179,
+    badgeText: "Business Essential",
+    category: "Promotional",
+    emoji: "🏢",
+    isCustomizable: true,
+    amazonUrl: "https://amazon.in",
+    description: "Promote your local business, cafe, or event with custom logo magnets. Bulk pricing available for professional branding and customer giveaways.",
+    specs: [
+      "Upload Business Logo or Contact Info",
+      "Durable Vinyl Lamination",
+      "Secure Refrigerator Holding Power",
+      "Bulk Orders Available for Businesses",
+      "Clean Die-Cut Edges"
+    ]
+  },
+  {
+    slug: "minimalist-whiteboard-magnet",
+    title: "Minimalist Whiteboard & Office Magnets",
+    price: "₹219",
+    priceNumber: 219,
+    badgeText: "Office Utility",
+    category: "Locker Magnets",
+    emoji: "📌",
+    amazonUrl: "https://amazon.in",
+    description: "Sleek, low-profile magnets designed to hold notes, schedules, and memos firmly on office whiteboards and magnetic glass boards.",
+    specs: [
+      "Strong Neodymium Inner Core",
+      "Matte Black & Gold Accent Shell",
+      "Compact Grip Design",
+      "Leaves No Scratches on Glass Boards",
+      "Pack of 6 Heavy-Duty Push Magnets"
+    ]
+  },
+  {
+    slug: "custom-square-photo-magnet",
+    title: "Custom Square Photo Magnet",
     price: "₹399",
     priceNumber: 399,
-    badgeText: "Upload Your Design",
-    category: "Custom Magnets",
+    badgeText: "Studio Pick",
+    category: "Photo Magnets",
     emoji: "🧲",
     isCustomizable: true,
     amazonUrl: "https://amazon.in",
-    description: "Your custom photo, logo, or design printed on a high-durability square magnet with clean rounded corners and a strong full-surface magnetic backing.",
+    description: "High-end square photo magnet with rounded corners and thick magnetic padding. Premium tactile feel for gifting and home decor.",
     specs: [
-      "Custom High-Resolution Photo/Logo Upload",
-      "Standard Square 70x70mm Format",
-      "Full-Surface Magnetic Backing",
-      "Glossy Protective Scratch-Resistant Coating",
-      "Perfect for Fridges, Lockers & Metal Boards"
-    ]
-  },
-  {
-    slug: "neo-cube-magnets",
-    title: "Neodymium Magnetic Spheres",
-    price: "₹599",
-    priceNumber: 599,
-    badgeText: "Batch #001 Drop",
-    category: "Desk Magnets",
-    emoji: "🧲",
-    amazonUrl: "https://amazon.in",
-    description: "Ultra-strong rare-earth N35 magnetic balls designed for high tactile feedback, desk sculptures, and mind stimulation during long work hours.",
-    specs: [
-      "216 High-Power Magnetic Spheres (5mm)",
-      "Polished Chrome Finish",
-      "Includes Velvet Storage Pouch",
-      "Anti-Chipping Triple Electroplating",
-      "Precision Symmetrical Tolerances"
-    ]
-  },
-  {
-    slug: "premium-crystal-set",
-    title: "Raw Healing Crystal Set",
-    price: "₹799",
-    priceNumber: 799,
-    badgeText: "Hand-Selected Minerals",
-    category: "Crystals",
-    emoji: "💎",
-    amazonUrl: "https://amazon.in",
-    description: "Hand-selected unpolished raw minerals paired with a natural display base for mindful workspace grounding and home decor.",
-    specs: [
-      "Natural Display Base Included",
-      "Ethically Sourced Raw Minerals",
-      "Zero Plastic or Synthetic Dyes",
-      "Individually Inspected Batch",
-      "Gift-Ready Packaging"
-    ]
-  },
-  {
-    slug: "brass-executive-pen",
-    title: "Precision Heavyweight Brass Pen",
-    price: "₹899",
-    priceNumber: 899,
-    badgeText: "Solid Forged Brass",
-    category: "Stationery",
-    emoji: "✒️",
-    amazonUrl: "https://amazon.in",
-    description: "Solid forged heavyweight brass writing instrument with smooth rollerball ink refill. Develops a gorgeous natural patina over time.",
-    specs: [
-      "48g Heavyweight Forged Brass Body",
-      "Smooth German Schmidt 0.7mm Ink Refill",
-      "Knurled Grip Section for Ergonomics",
-      "Secure Threaded Cap",
-      "Timeless Minimalist Profile"
-    ]
-  },
-  {
-    slug: "chakra-orgonite-pyramid",
-    title: "Energy Generator Orgonite Pyramid",
-    price: "₹1,099",
-    priceNumber: 1099,
-    badgeText: "Artisan Craft",
-    category: "Crystals",
-    emoji: "🔮",
-    amazonUrl: "https://amazon.in",
-    description: "Hand-poured artisan resin pyramid embedded with a conductive copper coil and quartz crystal to harmonize workspace environments.",
-    specs: [
-      "Quartz Crystal & Copper Matrix",
-      "Hand-Polished Optical Grade Resin",
-      "Non-Scratch Velvet Base Padding",
-      "Neutralizes Electronic Workspace Stress",
-      "Compact Desk Footprint"
-    ]
-  },
-  {
-    slug: "levitating-desk-globe",
-    title: "Magnetic Levitating Desk Globe",
-    price: "₹1,499",
-    priceNumber: 1499,
-    badgeText: "Electromagnetic Tech",
-    category: "Gadgets",
-    emoji: "🪐",
-    amazonUrl: "https://amazon.in",
-    description: "Sleek globe suspended perpetually in mid-air via electromagnetic levitation inside a C-frame. Subtle ambient illumination.",
-    specs: [
-      "360° Zero-Friction Magnetic Suspension",
-      "Ambient Halo Lighting",
-      "Smart Auto-Catch Protection on Power Loss",
-      "Low-Power Energy Efficient Adapter",
-      "Conversation Starter Desk Ornament"
-    ]
-  },
-  {
-    slug: "minimalist-leather-desk-mat",
-    title: "Premium PU Leather Desk Mat",
-    price: "₹699",
-    priceNumber: 699,
-    badgeText: "Studio Deskware",
-    category: "Stationery",
-    emoji: "🛡️",
-    amazonUrl: "https://amazon.in",
-    description: "Heavyweight dual-sided vegan leather desk blotter with smooth low-friction glide for optical mouse sensors and water-resistant finish.",
-    specs: [
-      "80 x 40 cm Extended Workspace Area",
-      "Spill-Resistant & Easy Clean Surface",
-      "Non-Slip Suede Textured Backing",
-      "Rollable with Fastener",
-      "Protects Desk Surface"
+      "70 x 70 mm Square Format",
+      "Thick Magnetic Base Layer",
+      "Scratch-Resistant Glossy Finish",
+      "Upload High-Res Photo or Graphic",
+      "Comes in Protective Packaging"
     ]
   }
 ];
