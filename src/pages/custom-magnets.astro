@@ -180,9 +180,14 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
                 <span class="text-[11px] text-emerald-400 bg-emerald-950/60 px-2 py-0.5 rounded-full border border-emerald-500/30 font-bold">Free Shipping > ₹500</span>
               </div>
             </div>
-            <button type="button" id="add-custom-to-cart-btn" class="bg-zinc-800 hover:bg-zinc-700 text-amber-300 border border-zinc-700 font-bold text-xs px-4 py-2.5 rounded-xl transition shadow-md">
-              + Add to Bag
-            </button>
+            <div class="flex items-center gap-2">
+              <button type="button" id="save-design-btn" class="bg-zinc-900 hover:bg-zinc-800 text-amber-400 border border-amber-500/30 font-bold text-xs px-3.5 py-2.5 rounded-xl transition shadow-md" title="Save Design Progress">
+                💾 Save Progress
+              </button>
+              <button type="button" id="add-custom-to-cart-btn" class="bg-zinc-800 hover:bg-zinc-700 text-amber-300 border border-zinc-700 font-bold text-xs px-4 py-2.5 rounded-xl transition shadow-md">
+                + Add to Bag
+              </button>
+            </div>
           </div>
         </div>
 
@@ -519,6 +524,54 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
 
       window.dispatchEvent(new CustomEvent('unhinged-add-to-cart', { detail: cartItem }));
     });
+
+    // Save Design Progress Button (uses Clerk user ID or localStorage fallback)
+    const saveDesignBtn = document.getElementById('save-design-btn');
+    saveDesignBtn?.addEventListener('click', () => {
+      if (!uploadedDataUrl) {
+        alert('Please upload an image before saving your design progress.');
+        return;
+      }
+
+      // @ts-ignore
+      const activeUserId = window.Clerk?.user?.id || 'guest_user';
+      const key = `unhinged_saved_designs_${activeUserId}`;
+      let designs = [];
+      try {
+        const existing = localStorage.getItem(key);
+        designs = existing ? JSON.parse(existing) : [];
+      } catch(e) { designs = []; }
+
+      designs.unshift({
+        id: 'design-' + Date.now(),
+        title: 'Custom 50x50mm Magnet',
+        quantity: selectedQty,
+        price: `₹${selectedPrice.toLocaleString('en-IN')}`,
+        image: uploadedDataUrl,
+        date: new Date().toLocaleDateString()
+      });
+
+      localStorage.setItem(key, JSON.stringify(designs));
+      alert('Design progress saved! Access your designs anytime under "My Projects" in the header.');
+    });
+
+    // Restore design if resumed from My Projects
+    try {
+      const resumeJson = localStorage.getItem('unhinged_resume_design');
+      if (resumeJson) {
+        localStorage.removeItem('unhinged_resume_design');
+        const resumeItem = JSON.parse(resumeJson);
+        if (resumeItem && resumeItem.image) {
+          uploadedDataUrl = resumeItem.image;
+          if (mockupImg) {
+            mockupImg.src = uploadedDataUrl;
+            mockupImg.classList.remove('hidden');
+          }
+          if (mockupPlaceholder) mockupPlaceholder.classList.add('hidden');
+          if (mockupControls) mockupControls.classList.remove('hidden');
+        }
+      }
+    } catch(e) {}
 
     // Form Submission: Extract exact DOM form values and map them to EmailJS template parameters (name, email, phone, address, magnet_type, quantity, total_price, notes, order_id)
     const form = document.getElementById('custom-magnet-order-form') as HTMLFormElement;
