@@ -8,7 +8,9 @@ const { title, description = "Unhinged — Obsidian & Gold custom magnets, cryst
 import "../styles/global.css";
 import CartDrawer from "../components/CartDrawer.astro";
 import PaymentModal from "../components/PaymentModal.astro";
-import { Show, UserButton, SignInButton } from '@clerk/astro/components';
+import { UserButton, SignInButton } from '@clerk/astro/components';
+
+const userId = Astro.locals.auth?.()?.userId;
 ---
 
 <!doctype html>
@@ -44,24 +46,34 @@ import { Show, UserButton, SignInButton } from '@clerk/astro/components';
           </a>
           <a href="/#products" class="text-slate-300 hover:text-amber-400 transition">Catalog</a>
           <a href="/b2b" class="text-slate-300 hover:text-amber-400 transition">Wholesale</a>
-          <a href="#" id="nav-signin-btn" class="text-slate-300 hover:text-amber-400 transition">Sign In</a>
-          <a href="#" id="nav-projects-btn" class="text-slate-300 hover:text-amber-400 transition">My Projects</a>
+          <button id="nav-projects-btn" class="open-saved-designs-btn text-slate-300 hover:text-amber-400 transition cursor-pointer">
+            My Projects
+          </button>
+          {userId ? (
+            <UserButton afterSignOutUrl="/" />
+          ) : (
+            <SignInButton mode="modal">
+              <button id="nav-signin-btn" class="text-slate-300 hover:text-amber-400 transition cursor-pointer">
+                Sign In
+              </button>
+            </SignInButton>
+          )}
         </div>
         <div class="flex items-center gap-3">
-          <!-- Clerk Auth Show -->
-          <Show when={(locals) => !!locals.auth()?.userId}>
-            <button class="open-saved-designs-btn relative px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-amber-500/30 hover:border-amber-400 text-amber-400 text-xs font-bold flex items-center gap-1.5 transition shadow-md" title="My Saved Designs">
-              <span>📂</span> <span class="hidden sm:inline">My Projects</span>
-            </button>
-            <UserButton afterSignOutUrl="/" />
-            <Fragment slot="fallback">
-              <SignInButton mode="modal">
-                <button class="relative w-11 h-11 rounded-xl bg-zinc-900 border border-amber-500/30 hover:border-amber-400 text-amber-400 flex items-center justify-center transition shadow-md" title="Sign In">
-                  <span>👤</span>
-                </button>
-              </SignInButton>
-            </Fragment>
-          </Show>
+          {userId ? (
+            <>
+              <button class="open-saved-designs-btn relative px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-amber-500/30 hover:border-amber-400 text-amber-400 text-xs font-bold flex items-center gap-1.5 transition shadow-md" title="My Saved Designs">
+                <span>📂</span> <span class="hidden sm:inline">My Projects</span>
+              </button>
+              <UserButton afterSignOutUrl="/" />
+            </>
+          ) : (
+            <SignInButton mode="modal">
+              <button class="relative px-4 py-2 rounded-xl bg-zinc-900 border border-amber-500/30 hover:border-amber-400 text-amber-400 text-xs font-bold transition shadow-md">
+                Sign In ⚡
+              </button>
+            </SignInButton>
+          )}
           <!-- Cart Button -->
           <button class="open-cart-btn relative w-11 h-11 rounded-xl bg-zinc-900 border border-amber-500/30 hover:border-amber-400 text-amber-400 flex items-center justify-center transition shadow-md">
             <span>🛒</span>
@@ -82,58 +94,6 @@ import { Show, UserButton, SignInButton } from '@clerk/astro/components';
     <!-- Cart Drawer & Payment Modal Components -->
     <CartDrawer />
     <PaymentModal />
-
-    <!-- USER ACCOUNT / LOGIN MODAL -->
-    <div id="account-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-md hidden transition-opacity duration-300">
-      <div class="relative bg-zinc-950 border border-zinc-800 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl text-left">
-        <button id="close-account-modal-btn" class="absolute top-5 right-5 w-8 h-8 rounded-xl border border-zinc-800 text-slate-400 hover:text-white hover:border-amber-500/40 flex items-center justify-center transition">
-          ✕
-        </button>
-
-        <div id="auth-logged-out-view">
-          <div class="text-center mb-6">
-            <div class="w-14 h-14 rounded-2xl bg-amber-400 text-black text-2xl flex items-center justify-center mx-auto mb-3 shadow-lg shadow-amber-500/20 font-black">
-              👤
-            </div>
-            <h3 class="text-xl font-extrabold text-white">Studio Account Login</h3>
-            <p class="text-xs text-slate-400 mt-1">Sign in with your email to save and resume your custom magnet designs.</p>
-          </div>
-
-          <form id="login-form" class="space-y-4">
-            <div>
-              <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">Your Name *</label>
-              <input type="text" id="login-name" required placeholder="Aarav Sharma" class="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-amber-400 transition" />
-            </div>
-            <div>
-              <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">Email Address *</label>
-              <input type="email" id="login-email" required placeholder="aarav@example.com" class="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-amber-400 transition" />
-            </div>
-            <button type="submit" class="w-full bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-600 hover:from-amber-500 hover:to-yellow-500 text-black font-extrabold py-3.5 px-4 rounded-xl shadow-lg shadow-amber-500/20 transition text-xs">
-              Sign In / Register ⚡
-            </button>
-          </form>
-        </div>
-
-        <div id="auth-logged-in-view" class="hidden space-y-5">
-          <div class="text-center mb-4">
-            <div class="w-14 h-14 rounded-2xl bg-amber-400 text-black text-2xl flex items-center justify-center mx-auto mb-3 shadow-lg shadow-amber-500/20 font-black">
-              ✓
-            </div>
-            <h3 class="text-xl font-extrabold text-white">Welcome back, <span id="user-display-name" class="text-amber-400">User</span>!</h3>
-            <p id="user-display-email" class="text-xs text-slate-400 mt-1">user@example.com</p>
-          </div>
-
-          <div class="space-y-2.5">
-            <button id="open-saved-designs-btn" class="w-full bg-zinc-900 hover:bg-zinc-800 text-amber-300 border border-zinc-800 font-bold py-3 px-4 rounded-xl transition text-xs flex items-center justify-center gap-2">
-              <span>📂</span> View Saved Designs & Projects
-            </button>
-            <button id="logout-btn" class="w-full bg-red-950/40 hover:bg-red-950/70 text-red-400 border border-red-500/30 font-bold py-3 px-4 rounded-xl transition text-xs">
-              Sign Out
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <!-- SAVED DESIGNS / MY PROJECTS MODAL -->
     <div id="saved-designs-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-md hidden transition-opacity duration-300">
@@ -168,103 +128,26 @@ import { Show, UserButton, SignInButton } from '@clerk/astro/components';
 
     <script>
       function setupAccountModal() {
-        const accountModal = document.getElementById('account-modal');
-        const openBtn = document.getElementById('open-account-modal-btn');
-        const closeBtn = document.getElementById('close-account-modal-btn');
-        const loginForm = document.getElementById('login-form') as HTMLFormElement;
-        const loggedOutView = document.getElementById('auth-logged-out-view');
-        const loggedInView = document.getElementById('auth-logged-in-view');
-        const userDisplayName = document.getElementById('user-display-name');
-        const userDisplayEmail = document.getElementById('user-display-email');
-        const authIndicator = document.getElementById('auth-indicator');
-        const logoutBtn = document.getElementById('logout-btn');
-
         const savedDesignsModal = document.getElementById('saved-designs-modal');
         const openSavedDesignsBtns = document.querySelectorAll('.open-saved-designs-btn');
         const closeSavedDesignsBtn = document.getElementById('close-saved-designs-modal-btn');
         const closeSavedDesignsBottomBtn = document.getElementById('close-saved-designs-bottom-btn');
-        const navSigninBtn = document.getElementById('nav-signin-btn');
         const navProjectsBtn = document.getElementById('nav-projects-btn');
-
-        navSigninBtn?.addEventListener('click', (e) => {
-          e.preventDefault();
-          checkUserAuth();
-          if (accountModal) {
-            accountModal.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-          }
-        });
 
         navProjectsBtn?.addEventListener('click', (e) => {
           e.preventDefault();
-          if (accountModal) accountModal.classList.add('hidden');
           renderSavedDesigns();
           if (savedDesignsModal) savedDesignsModal.classList.remove('hidden');
           document.body.style.overflow = 'hidden';
         });
 
-        function checkUserAuth() {
-          const userJson = localStorage.getItem('unhinged_user');
-          if (userJson) {
-            try {
-              const user = JSON.parse(userJson);
-              if (user && user.email) {
-                if (loggedOutView) loggedOutView.classList.add('hidden');
-                if (loggedInView) loggedInView.classList.remove('hidden');
-                if (userDisplayName) userDisplayName.textContent = user.name || 'User';
-                if (userDisplayEmail) userDisplayEmail.textContent = user.email;
-                if (authIndicator) authIndicator.classList.remove('hidden');
-                return user;
-              }
-            } catch(e) {}
-          }
-          if (loggedOutView) loggedOutView.classList.remove('hidden');
-          if (loggedInView) loggedInView.classList.add('hidden');
-          if (authIndicator) authIndicator.classList.add('hidden');
-          return null;
-        }
-
-        openBtn?.addEventListener('click', () => {
-          checkUserAuth();
-          if (accountModal) {
-            accountModal.classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-          }
-        });
-
-        closeBtn?.addEventListener('click', () => {
-          if (accountModal) {
-            accountModal.classList.add('hidden');
-            document.body.style.overflow = '';
-          }
-        });
-
-        loginForm?.addEventListener('submit', (e) => {
-          e.preventDefault();
-          const nameInput = (document.getElementById('login-name') as HTMLInputElement)?.value.trim();
-          const emailInput = (document.getElementById('login-email') as HTMLInputElement)?.value.trim();
-          if (nameInput && emailInput) {
-            const user = { name: nameInput, email: emailInput };
-            localStorage.setItem('unhinged_user', JSON.stringify(user));
-            checkUserAuth();
-            alert('Successfully logged in as ' + nameInput + '!');
-          }
-        });
-
-        logoutBtn?.addEventListener('click', () => {
-          localStorage.removeItem('unhinged_user');
-          checkUserAuth();
-          alert('Signed out successfully.');
-          if (accountModal) accountModal.classList.add('hidden');
-          document.body.style.overflow = '';
-        });
-
         // Saved Designs Modal
         openSavedDesignsBtns.forEach(btn => {
-          btn.addEventListener('click', () => {
-            if (accountModal) accountModal.classList.add('hidden');
+          btn.addEventListener('click', (e) => {
+            e.preventDefault();
             renderSavedDesigns();
             if (savedDesignsModal) savedDesignsModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
           });
         });
 
@@ -277,22 +160,12 @@ import { Show, UserButton, SignInButton } from '@clerk/astro/components';
           if (savedDesignsModal) savedDesignsModal.classList.add('hidden');
           document.body.style.overflow = '';
         });
-
-        checkUserAuth();
       }
 
       function getActiveUserId() {
         // @ts-ignore
         const clerkUserId = window.Clerk?.user?.id;
         if (clerkUserId) return clerkUserId;
-        try {
-          const userJson = localStorage.getItem('unhinged_user');
-          if (userJson) {
-            const user = JSON.parse(userJson);
-            if (user?.id) return user.id;
-            if (user?.email) return user.email;
-          }
-        } catch(e) {}
         return 'guest_user';
       }
 
