@@ -44,21 +44,8 @@ import { Show, UserButton, SignInButton } from '@clerk/astro/components';
           </a>
           <a href="/#products" class="text-slate-300 hover:text-amber-400 transition">Catalog</a>
           <a href="/b2b" class="text-slate-300 hover:text-amber-400 transition">Wholesale</a>
-          <button class="open-saved-designs-btn text-slate-300 hover:text-amber-400 transition flex items-center gap-1.5 cursor-pointer">
-            <span>📂</span> My Projects
-          </button>
-          <Show when={(locals) => !!locals.auth()?.userId}>
-            <button onclick="window.Clerk?.openUserProfile()" class="text-slate-300 hover:text-amber-400 transition flex items-center gap-1.5 cursor-pointer">
-              <span>👤</span> Account
-            </button>
-            <Fragment slot="fallback">
-              <SignInButton mode="modal">
-                <button class="text-slate-300 hover:text-amber-400 transition flex items-center gap-1.5 cursor-pointer">
-                  <span>👤</span> Sign In / Account
-                </button>
-              </SignInButton>
-            </Fragment>
-          </Show>
+          <a href="#" id="nav-signin-btn" class="text-slate-300 hover:text-amber-400 transition">Sign In</a>
+          <a href="#" id="nav-projects-btn" class="text-slate-300 hover:text-amber-400 transition">My Projects</a>
         </div>
         <div class="flex items-center gap-3">
           <!-- Clerk Auth Show -->
@@ -196,6 +183,25 @@ import { Show, UserButton, SignInButton } from '@clerk/astro/components';
         const openSavedDesignsBtns = document.querySelectorAll('.open-saved-designs-btn');
         const closeSavedDesignsBtn = document.getElementById('close-saved-designs-modal-btn');
         const closeSavedDesignsBottomBtn = document.getElementById('close-saved-designs-bottom-btn');
+        const navSigninBtn = document.getElementById('nav-signin-btn');
+        const navProjectsBtn = document.getElementById('nav-projects-btn');
+
+        navSigninBtn?.addEventListener('click', (e) => {
+          e.preventDefault();
+          checkUserAuth();
+          if (accountModal) {
+            accountModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+          }
+        });
+
+        navProjectsBtn?.addEventListener('click', (e) => {
+          e.preventDefault();
+          if (accountModal) accountModal.classList.add('hidden');
+          renderSavedDesigns();
+          if (savedDesignsModal) savedDesignsModal.classList.remove('hidden');
+          document.body.style.overflow = 'hidden';
+        });
 
         function checkUserAuth() {
           const userJson = localStorage.getItem('unhinged_user');
