@@ -8,7 +8,7 @@ const { title, description = "Unhinged — Obsidian & Gold custom magnets, cryst
 import "../styles/global.css";
 import CartDrawer from "../components/CartDrawer.astro";
 import PaymentModal from "../components/PaymentModal.astro";
-import { UserButton, SignInButton } from '@clerk/astro/components';
+import { UserButton } from '@clerk/astro/components';
 
 const userId = Astro.locals.auth?.()?.userId;
 ---
@@ -46,17 +46,12 @@ const userId = Astro.locals.auth?.()?.userId;
           </a>
           <a href="/#products" class="text-slate-300 hover:text-amber-400 transition">Catalog</a>
           <a href="/b2b" class="text-slate-300 hover:text-amber-400 transition">Wholesale</a>
+          <button id="nav-signin-btn" class="text-slate-300 hover:text-amber-400 transition font-medium">Sign In</button>
           <button id="nav-projects-btn" class="open-saved-designs-btn text-slate-300 hover:text-amber-400 transition cursor-pointer">
             My Projects
           </button>
-          {userId ? (
+          {userId && (
             <UserButton afterSignOutUrl="/" />
-          ) : (
-            <SignInButton mode="modal">
-              <button id="nav-signin-btn" class="text-slate-300 hover:text-amber-400 transition cursor-pointer">
-                Sign In
-              </button>
-            </SignInButton>
           )}
         </div>
         <div class="flex items-center gap-3">
@@ -68,11 +63,9 @@ const userId = Astro.locals.auth?.()?.userId;
               <UserButton afterSignOutUrl="/" />
             </>
           ) : (
-            <SignInButton mode="modal">
-              <button class="relative px-4 py-2 rounded-xl bg-zinc-900 border border-amber-500/30 hover:border-amber-400 text-amber-400 text-xs font-bold transition shadow-md">
-                Sign In ⚡
-              </button>
-            </SignInButton>
+            <button class="nav-signin-btn relative px-4 py-2 rounded-xl bg-zinc-900 border border-amber-500/30 hover:border-amber-400 text-amber-400 text-xs font-bold transition shadow-md">
+              Sign In ⚡
+            </button>
           )}
           <!-- Cart Button -->
           <button class="open-cart-btn relative w-11 h-11 rounded-xl bg-zinc-900 border border-amber-500/30 hover:border-amber-400 text-amber-400 flex items-center justify-center transition shadow-md">
@@ -127,6 +120,30 @@ const userId = Astro.locals.auth?.()?.userId;
     </div>
 
     <script>
+      document.getElementById('nav-signin-btn')?.addEventListener('click', (e) => {
+        e.preventDefault();
+        // @ts-ignore
+        if (window.Clerk) {
+          // @ts-ignore
+          window.Clerk.openSignIn();
+        } else {
+          console.error("Clerk client not loaded yet");
+        }
+      });
+
+      document.querySelectorAll('.nav-signin-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          // @ts-ignore
+          if (window.Clerk) {
+            // @ts-ignore
+            window.Clerk.openSignIn();
+          } else {
+            console.error("Clerk client not loaded yet");
+          }
+        });
+      });
+
       function setupAccountModal() {
         const savedDesignsModal = document.getElementById('saved-designs-modal');
         const openSavedDesignsBtns = document.querySelectorAll('.open-saved-designs-btn');
