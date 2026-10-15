@@ -35,7 +35,7 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
               <span class="w-2 h-2 rounded-full bg-amber-400 animate-ping"></span> Live Square Preview
             </span>
             <span class="text-slate-400 bg-zinc-900 px-3 py-1 rounded-full border border-zinc-800">
-              Square (70x70mm)
+              Square (50x50mm)
             </span>
           </div>
 
@@ -117,7 +117,7 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
 
           <!-- Dropzone -->
           <div id="dropzone" class="border-2 border-dashed border-zinc-700 hover:border-amber-400 bg-zinc-900/50 hover:bg-zinc-900 rounded-2xl p-8 text-center cursor-pointer transition flex flex-col items-center justify-center group">
-            <input type="file" id="design-file-input" accept="image/*" class="hidden" />
+            <input type="file" id="design-file-input" name="file" accept="image/*" class="hidden" />
             <div class="w-14 h-14 rounded-2xl bg-black border border-zinc-800 flex items-center justify-center text-2xl group-hover:scale-110 transition shadow-lg text-amber-400 mb-3">
               📂
             </div>
@@ -197,26 +197,27 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
           </p>
 
           <form id="custom-magnet-order-form" class="space-y-4">
-            <input type="hidden" id="hidden-order-id" value="" />
-            <input type="hidden" id="hidden-magnet-type" value="Custom Square Magnet (70x70mm)" />
-            <input type="hidden" id="hidden-quantity" value="1" />
-            <input type="hidden" id="hidden-total-price" value="₹399" />
+            <input type="hidden" id="hidden-order-id" name="order_id" value="" />
+            <input type="hidden" id="hidden-magnet-type" name="magnet_type" value="Custom Square Magnet (50x50mm)" />
+            <input type="hidden" id="hidden-quantity" name="quantity" value="1" />
+            <input type="hidden" id="hidden-total-price" name="total_price" value="₹399" />
+            <input type="hidden" id="hidden-to-email" name="to_email" value="unhinged.sales1@gmail.com" />
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">Full Name *</label>
-                <input type="text" id="cust-name" required placeholder="e.g. Aarav Sharma" class="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-amber-400 transition" />
+                <input type="text" id="cust-name" name="name" required placeholder="e.g. Aarav Sharma" class="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-amber-400 transition" />
               </div>
               <div>
                 <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">Customer Email Address *</label>
-                <input type="email" id="cust-email" required placeholder="your.email@example.com" class="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-amber-400 transition" />
+                <input type="email" id="cust-email" name="email" required placeholder="your.email@example.com" class="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-amber-400 transition" />
               </div>
             </div>
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">Phone / WhatsApp Number *</label>
-                <input type="tel" id="cust-phone" required placeholder="e.g. +91 98765 43210" class="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-amber-400 transition" />
+                <input type="tel" id="cust-phone" name="phone" required placeholder="e.g. +91 98765 43210" class="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-amber-400 transition" />
               </div>
               <div>
                 <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">Pincode & City *</label>
@@ -227,11 +228,12 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
             <div>
               <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">Complete Delivery Address *</label>
               <textarea id="cust-address" rows="2" required placeholder="House / Flat / Street address..." class="w-full bg-zinc-900 border border-zinc-800 rounded-xl p-3 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-amber-400 transition"></textarea>
+              <input type="hidden" id="hidden-full-address" name="address" value="" />
             </div>
 
             <div>
               <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">Custom Instructions / Text (Optional)</label>
-              <textarea id="cust-notes" rows="2" placeholder="Any specific placement instructions or crop preferences..." class="w-full bg-zinc-900 border border-zinc-800 rounded-xl p-3 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-amber-400 transition"></textarea>
+              <textarea id="cust-notes" name="notes" rows="2" placeholder="Any specific placement instructions or crop preferences..." class="w-full bg-zinc-900 border border-zinc-800 rounded-xl p-3 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-amber-400 transition"></textarea>
             </div>
 
             <div class="pt-2">
@@ -319,7 +321,7 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
             <span id="receipt-design-fallback" class="text-3xl text-amber-400">🧲</span>
           </div>
           <div class="text-xs space-y-1">
-            <p id="receipt-product-title" class="font-bold text-white text-sm">Custom Square Magnet (70x70mm)</p>
+            <p id="receipt-product-title" class="font-bold text-white text-sm">Custom Square Magnet (50x50mm)</p>
             <p id="receipt-specs" class="text-slate-400 text-[11px]">High-Durability Square Photo Magnet</p>
             <p class="text-amber-400 font-bold"><span id="receipt-qty">1</span> units • <span id="receipt-price">₹399</span> (Direct Studio Dispatch)</p>
           </div>
@@ -507,7 +509,7 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
       const cartItem = {
         id: 'custom-square-mag-' + Date.now(),
         slug: 'custom-square-magnet',
-        title: `Custom Square Magnet (70x70mm)`,
+        title: `Custom Square Magnet (50x50mm)`,
         price: selectedPrice / selectedQty,
         quantity: selectedQty,
         emoji: '🧲',
@@ -547,15 +549,28 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
       const custCity = (document.getElementById('cust-city') as HTMLInputElement)?.value || '';
       const custAddressText = (document.getElementById('cust-address') as HTMLTextAreaElement)?.value || '';
       const fullShippingAddress = `${custAddressText}, ${custCity}`.trim();
-      const magnetTypeVal = (document.getElementById('hidden-magnet-type') as HTMLInputElement)?.value || 'Custom Square Magnet (70x70mm)';
+      const magnetTypeVal = (document.getElementById('hidden-magnet-type') as HTMLInputElement)?.value || 'Custom Square Magnet (50x50mm)';
       const quantityVal = (document.getElementById('hidden-quantity') as HTMLInputElement)?.value || selectedQty.toString();
       const totalPriceVal = (document.getElementById('hidden-total-price') as HTMLInputElement)?.value || `₹${selectedPrice.toLocaleString('en-IN')}`;
       const custNotes = (document.getElementById('cust-notes') as HTMLTextAreaElement)?.value || 'None';
 
-      // 2. Correctly map to exact EmailJS template variables object: name, email, phone, address, magnet_type, quantity, total_price, notes, order_id
-      const templateParams = {
+      // Update hidden full address before sendForm
+      const fullAddrInput = document.getElementById('hidden-full-address') as HTMLInputElement;
+      if (fullAddrInput) fullAddrInput.value = fullShippingAddress;
+
+      // Ensure file input has uploadedFile attached via DataTransfer for sendForm attachment
+      const fileInputElem = document.getElementById('design-file-input') as HTMLInputElement;
+      if (uploadedFile && fileInputElem) {
+        const dataTransfer = new DataTransfer();
+        dataTransfer.items.add(uploadedFile);
+        fileInputElem.files = dataTransfer.files;
+      }
+
+      // 2. Correctly map clean text parameters for customer receipt
+      const customerParams = {
         name: custName,
         email: custEmail,
+        to_email: custEmail,
         phone: custPhone,
         address: fullShippingAddress,
         magnet_type: magnetTypeVal,
@@ -571,7 +586,7 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
       console.log('Service ID:', 'service_cz2981o');
       console.log('Admin Template ID:', 'template_j1qjq79');
       console.log('Customer Template ID:', 'template_35c78gn');
-      console.log('Template Parameters:', templateParams);
+      console.log('Customer Template Parameters:', customerParams);
 
       try {
         // @ts-ignore
@@ -579,29 +594,19 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
           throw new Error('EmailJS SDK not loaded');
         }
 
-        // 3. Trigger both the admin notification to unhinged.sales1@gmail.com and the customer confirmation receipt using the customer's typed email address.
-        // Admin Notification to unhinged.sales1@gmail.com (template_j1qjq79)
+        // 3. Trigger both the admin notification to unhinged.sales1@gmail.com (using sendForm with file attachment) and customer receipt (using send)
         // @ts-ignore
-        const adminPromise = window.emailjs.send(
+        const adminPromise = window.emailjs.sendForm(
           'service_cz2981o',
           'template_j1qjq79',
-          {
-            ...templateParams,
-            to_email: 'unhinged.sales1@gmail.com',
-            email: custEmail
-          }
+          form
         );
 
-        // Customer Confirmation Receipt using customer typed email address (template_35c78gn)
         // @ts-ignore
         const customerPromise = window.emailjs.send(
           'service_cz2981o',
           'template_35c78gn',
-          {
-            ...templateParams,
-            to_email: custEmail,
-            email: custEmail
-          }
+          customerParams
         );
 
         const results = await Promise.all([adminPromise, customerPromise]);
@@ -626,7 +631,7 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
         const bannerCustEmail = document.getElementById('banner-cust-email');
 
         if (receiptOrderId) receiptOrderId.textContent = orderId;
-        if (receiptSpecs) receiptSpecs.textContent = `Custom Square Magnet (70x70mm)`;
+        if (receiptSpecs) receiptSpecs.textContent = `Custom Square Magnet (50x50mm)`;
         if (receiptQty) receiptQty.textContent = selectedQty.toString();
         if (receiptPrice) receiptPrice.textContent = `₹${selectedPrice.toLocaleString('en-IN')}`;
         if (receiptCustomerName) receiptCustomerName.textContent = custName;
