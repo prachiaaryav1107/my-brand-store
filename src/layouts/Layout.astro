@@ -44,11 +44,26 @@ import { Show, UserButton, SignInButton } from '@clerk/astro/components';
           </a>
           <a href="/#products" class="text-slate-300 hover:text-amber-400 transition">Catalog</a>
           <a href="/b2b" class="text-slate-300 hover:text-amber-400 transition">Wholesale</a>
+          <button class="open-saved-designs-btn text-slate-300 hover:text-amber-400 transition flex items-center gap-1.5 cursor-pointer">
+            <span>📂</span> My Projects
+          </button>
+          <Show when={(locals) => !!locals.auth()?.userId}>
+            <button onclick="window.Clerk?.openUserProfile()" class="text-slate-300 hover:text-amber-400 transition flex items-center gap-1.5 cursor-pointer">
+              <span>👤</span> Account
+            </button>
+            <Fragment slot="fallback">
+              <SignInButton mode="modal">
+                <button class="text-slate-300 hover:text-amber-400 transition flex items-center gap-1.5 cursor-pointer">
+                  <span>👤</span> Sign In / Account
+                </button>
+              </SignInButton>
+            </Fragment>
+          </Show>
         </div>
         <div class="flex items-center gap-3">
           <!-- Clerk Auth Show -->
           <Show when={(locals) => !!locals.auth()?.userId}>
-            <button id="open-saved-designs-btn" class="relative px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-amber-500/30 hover:border-amber-400 text-amber-400 text-xs font-bold flex items-center gap-1.5 transition shadow-md" title="My Saved Designs">
+            <button class="open-saved-designs-btn relative px-3.5 py-2.5 rounded-xl bg-zinc-900 border border-amber-500/30 hover:border-amber-400 text-amber-400 text-xs font-bold flex items-center gap-1.5 transition shadow-md" title="My Saved Designs">
               <span>📂</span> <span class="hidden sm:inline">My Projects</span>
             </button>
             <UserButton afterSignOutUrl="/" />
@@ -178,7 +193,7 @@ import { Show, UserButton, SignInButton } from '@clerk/astro/components';
         const logoutBtn = document.getElementById('logout-btn');
 
         const savedDesignsModal = document.getElementById('saved-designs-modal');
-        const openSavedDesignsBtn = document.getElementById('open-saved-designs-btn');
+        const openSavedDesignsBtns = document.querySelectorAll('.open-saved-designs-btn');
         const closeSavedDesignsBtn = document.getElementById('close-saved-designs-modal-btn');
         const closeSavedDesignsBottomBtn = document.getElementById('close-saved-designs-bottom-btn');
 
@@ -239,10 +254,12 @@ import { Show, UserButton, SignInButton } from '@clerk/astro/components';
         });
 
         // Saved Designs Modal
-        openSavedDesignsBtn?.addEventListener('click', () => {
-          if (accountModal) accountModal.classList.add('hidden');
-          renderSavedDesigns();
-          if (savedDesignsModal) savedDesignsModal.classList.remove('hidden');
+        openSavedDesignsBtns.forEach(btn => {
+          btn.addEventListener('click', () => {
+            if (accountModal) accountModal.classList.add('hidden');
+            renderSavedDesigns();
+            if (savedDesignsModal) savedDesignsModal.classList.remove('hidden');
+          });
         });
 
         closeSavedDesignsBtn?.addEventListener('click', () => {
