@@ -552,7 +552,8 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
       const totalPriceVal = (document.getElementById('hidden-total-price') as HTMLInputElement)?.value || `₹${selectedPrice.toLocaleString('en-IN')}`;
       const custNotes = (document.getElementById('cust-notes') as HTMLTextAreaElement)?.value || 'None';
 
-      // 2. Correctly map to exact EmailJS template variables object: name, email, phone, address, magnet_type, quantity, total_price, notes, order_id
+      // 2. Correctly map to exact EmailJS template variables object: name, email, phone, address, magnet_type, quantity, total_price, notes, order_id, design_url, design_file
+      const designUrlValue = uploadedDataUrl || '';
       const templateParams = {
         name: custName,
         email: custEmail,
@@ -563,6 +564,9 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
         total_price: totalPriceVal,
         notes: custNotes,
         order_id: orderId,
+        design_url: designUrlValue,
+        design_file: designUrlValue,
+        design_image: designUrlValue,
         design_filename: uploadedFile ? uploadedFile.name : 'Custom_Design_File.png',
         design_filesize: uploadedFile ? `${(uploadedFile.size / (1024 * 1024)).toFixed(2)} MB` : 'Attached in Studio'
       };
