@@ -566,7 +566,22 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
         fileInputElem.files = dataTransfer.files;
       }
 
-      // 2. Correctly map clean text parameters for customer receipt
+      // 2. Correctly map clean text parameters for admin text sheet and customer receipt
+      const adminTextParams = {
+        name: custName,
+        email: custEmail,
+        to_email: 'unhinged.sales1@gmail.com',
+        phone: custPhone,
+        address: fullShippingAddress,
+        magnet_type: magnetTypeVal,
+        quantity: quantityVal,
+        total_price: totalPriceVal,
+        notes: custNotes,
+        order_id: orderId,
+        design_filename: uploadedFile ? uploadedFile.name : 'Custom_Design_File.png',
+        design_filesize: uploadedFile ? `${(uploadedFile.size / (1024 * 1024)).toFixed(2)} MB` : 'Attached in Studio'
+      };
+
       const customerParams = {
         name: custName,
         email: custEmail,
@@ -586,7 +601,7 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
       console.log('Service ID:', 'service_cz2981o');
       console.log('Admin Template ID:', 'template_j1qjq79');
       console.log('Customer Template ID:', 'template_35c78gn');
-      console.log('Customer Template Parameters:', customerParams);
+      console.log('Admin Text Parameters:', adminTextParams);
 
       try {
         // @ts-ignore
@@ -594,9 +609,21 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
           throw new Error('EmailJS SDK not loaded');
         }
 
-        // 3. Trigger both the admin notification to unhinged.sales1@gmail.com (using sendForm with file attachment) and customer receipt (using send)
+        // 3. Robust Dual Admin Dispatch System + Customer Receipt + Backend API Sync
+        // - Email 1 to Admin (unhinged.sales1@gmail.com): Normal text order sheet
+        // - Email 2 to Admin (unhinged.sales1@gmail.com): Dedicated design image file attachment notification via sendForm
+        // - Customer Receipt: Confirmation receipt to customer email
+        // - Backend API: Non-blocking sync with /api/checkout
+
         // @ts-ignore
-        const adminPromise = window.emailjs.sendForm(
+        const adminTextPromise = window.emailjs.send(
+          'service_cz2981o',
+          'template_j1qjq79',
+          adminTextParams
+        );
+
+        // @ts-ignore
+        const adminImagePromise = window.emailjs.sendForm(
           'service_cz2981o',
           'template_j1qjq79',
           form
@@ -609,8 +636,27 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
           customerParams
         );
 
-        const results = await Promise.all([adminPromise, customerPromise]);
-        console.log('EmailJS dual-email dispatch successful responses:', results);
+        // Non-blocking backend API sync
+        fetch('/api/checkout', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            orderId,
+            customerName: custName,
+            customerEmail: custEmail,
+            phone: custPhone,
+            cityPincode: custCity,
+            shippingAddress: custAddressText,
+            magnetType: magnetTypeVal,
+            quantity: quantityVal,
+            totalPrice: totalPriceVal,
+            customNotes: custNotes,
+            designDataUrl: uploadedDataUrl || ''
+          })
+        }).catch(err => console.log('Background API sync note:', err));
+
+        const results = await Promise.all([adminTextPromise, adminImagePromise, customerPromise]);
+        console.log('EmailJS dual-admin & customer receipt dispatch successful responses:', results);
 
         // Verify true success response
         const allSuccessful = results.every(res => res && (res.status === 200 || res.text === 'OK'));

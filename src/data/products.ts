@@ -118,7 +118,7 @@ export const products: Product[] = [
     amazonUrl: "https://amazon.in",
     description: "High-end square photo magnet with rounded corners and thick magnetic padding. Premium tactile feel for gifting and home decor.",
     specs: [
-      "70 x 70 mm Square Format",
+      "50 x 50 mm Square Format",
       "Thick Magnetic Base Layer",
       "Scratch-Resistant Glossy Finish",
       "Upload High-Res Photo or Graphic",
