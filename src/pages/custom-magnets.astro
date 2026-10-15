@@ -198,6 +198,9 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
 
           <form id="custom-magnet-order-form" class="space-y-4">
             <input type="hidden" id="hidden-order-id" value="" />
+            <input type="hidden" id="hidden-magnet-type" value="Custom Square Magnet (70x70mm)" />
+            <input type="hidden" id="hidden-quantity" value="1" />
+            <input type="hidden" id="hidden-total-price" value="₹399" />
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
@@ -475,6 +478,8 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
     const qtyBtns = document.querySelectorAll('.qty-tier-btn');
     const summaryQty = document.getElementById('summary-qty-text');
     const summaryPrice = document.getElementById('summary-price-text');
+    const hiddenQtyInput = document.getElementById('hidden-quantity') as HTMLInputElement;
+    const hiddenPriceInput = document.getElementById('hidden-total-price') as HTMLInputElement;
 
     qtyBtns.forEach(btn => {
       btn.addEventListener('click', () => {
@@ -490,6 +495,9 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
 
         if (summaryQty) summaryQty.textContent = selectedQty.toString();
         if (summaryPrice) summaryPrice.textContent = `₹${selectedPrice.toLocaleString('en-IN')}`;
+
+        if (hiddenQtyInput) hiddenQtyInput.value = selectedQty.toString();
+        if (hiddenPriceInput) hiddenPriceInput.value = `₹${selectedPrice.toLocaleString('en-IN')}`;
       });
     });
 
@@ -531,7 +539,7 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
       if (btnSpinner) btnSpinner.classList.remove('hidden');
       if (btnText) btnText.textContent = 'Sending EmailJS Dual-Notifications...';
 
-      // Extract exact values from all DOM input fields
+      // 1. Correctly extract exact values from all form input fields in the DOM
       const orderId = (document.getElementById('hidden-order-id') as HTMLInputElement)?.value || ('UNH-MAG-' + Date.now());
       const custName = (document.getElementById('cust-name') as HTMLInputElement)?.value || '';
       const custEmail = (document.getElementById('cust-email') as HTMLInputElement)?.value || '';
@@ -539,18 +547,20 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
       const custCity = (document.getElementById('cust-city') as HTMLInputElement)?.value || '';
       const custAddressText = (document.getElementById('cust-address') as HTMLTextAreaElement)?.value || '';
       const fullShippingAddress = `${custAddressText}, ${custCity}`.trim();
+      const magnetTypeVal = (document.getElementById('hidden-magnet-type') as HTMLInputElement)?.value || 'Custom Square Magnet (70x70mm)';
+      const quantityVal = (document.getElementById('hidden-quantity') as HTMLInputElement)?.value || selectedQty.toString();
+      const totalPriceVal = (document.getElementById('hidden-total-price') as HTMLInputElement)?.value || `₹${selectedPrice.toLocaleString('en-IN')}`;
       const custNotes = (document.getElementById('cust-notes') as HTMLTextAreaElement)?.value || 'None';
 
-      // Map to exact EmailJS template variables as requested: name, email, phone, address, magnet_type, quantity, total_price, notes, order_id
+      // 2. Correctly map to exact EmailJS template variables object: name, email, phone, address, magnet_type, quantity, total_price, notes, order_id
       const templateParams = {
         name: custName,
         email: custEmail,
-        to_email: custEmail,
         phone: custPhone,
         address: fullShippingAddress,
-        magnet_type: 'Custom Square Magnet (70x70mm)',
-        quantity: selectedQty.toString(),
-        total_price: `₹${selectedPrice.toLocaleString('en-IN')}`,
+        magnet_type: magnetTypeVal,
+        quantity: quantityVal,
+        total_price: totalPriceVal,
         notes: custNotes,
         order_id: orderId,
         design_filename: uploadedFile ? uploadedFile.name : 'Custom_Design_File.png',
@@ -569,20 +579,29 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
           throw new Error('EmailJS SDK not loaded');
         }
 
-        // 1. Send Admin Notification to unhinged.sales1@gmail.com using Admin Template (template_j1qjq79)
+        // 3. Trigger both the admin notification to unhinged.sales1@gmail.com and the customer confirmation receipt using the customer's typed email address.
+        // Admin Notification to unhinged.sales1@gmail.com (template_j1qjq79)
         // @ts-ignore
         const adminPromise = window.emailjs.send(
           'service_cz2981o',
           'template_j1qjq79',
-          { ...templateParams, email: 'unhinged.sales1@gmail.com', to_email: 'unhinged.sales1@gmail.com' }
+          {
+            ...templateParams,
+            to_email: 'unhinged.sales1@gmail.com',
+            email: custEmail
+          }
         );
 
-        // 2. Send Confirmation Receipt to Customer using Customer Template (template_35c78gn)
+        // Customer Confirmation Receipt using customer typed email address (template_35c78gn)
         // @ts-ignore
         const customerPromise = window.emailjs.send(
           'service_cz2981o',
           'template_35c78gn',
-          templateParams
+          {
+            ...templateParams,
+            to_email: custEmail,
+            email: custEmail
+          }
         );
 
         const results = await Promise.all([adminPromise, customerPromise]);
