@@ -45,6 +45,11 @@ import PaymentModal from "../components/PaymentModal.astro";
           <a href="/b2b" class="text-slate-300 hover:text-amber-400 transition">Wholesale</a>
         </div>
         <div class="flex items-center gap-3">
+          <!-- Account Button -->
+          <button id="open-account-modal-btn" class="relative w-11 h-11 rounded-xl bg-zinc-900 border border-amber-500/30 hover:border-amber-400 text-amber-400 flex items-center justify-center transition shadow-md" title="User Account">
+            <span>👤</span>
+            <span id="auth-indicator" class="absolute -top-1 -right-1 w-3 h-3 rounded-full bg-emerald-500 border border-black hidden"></span>
+          </button>
           <!-- Cart Button -->
           <button class="open-cart-btn relative w-11 h-11 rounded-xl bg-zinc-900 border border-amber-500/30 hover:border-amber-400 text-amber-400 flex items-center justify-center transition shadow-md">
             <span>🛒</span>
@@ -66,8 +71,256 @@ import PaymentModal from "../components/PaymentModal.astro";
     <CartDrawer />
     <PaymentModal />
 
-    <!-- Footer -->
-    <footer class="bg-zinc-950 text-slate-400 border-t border-amber-500/20 mt-24">
+    <!-- USER ACCOUNT / LOGIN MODAL -->
+    <div id="account-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-md hidden transition-opacity duration-300">
+      <div class="relative bg-zinc-950 border border-zinc-800 rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl text-left">
+        <button id="close-account-modal-btn" class="absolute top-5 right-5 w-8 h-8 rounded-xl border border-zinc-800 text-slate-400 hover:text-white hover:border-amber-500/40 flex items-center justify-center transition">
+          ✕
+        </button>
+
+        <div id="auth-logged-out-view">
+          <div class="text-center mb-6">
+            <div class="w-14 h-14 rounded-2xl bg-amber-400 text-black text-2xl flex items-center justify-center mx-auto mb-3 shadow-lg shadow-amber-500/20 font-black">
+              👤
+            </div>
+            <h3 class="text-xl font-extrabold text-white">Studio Account Login</h3>
+            <p class="text-xs text-slate-400 mt-1">Sign in with your email to save and resume your custom magnet designs.</p>
+          </div>
+
+          <form id="login-form" class="space-y-4">
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">Your Name *</label>
+              <input type="text" id="login-name" required placeholder="Aarav Sharma" class="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-amber-400 transition" />
+            </div>
+            <div>
+              <label class="block text-xs font-bold uppercase tracking-wider text-slate-300 mb-1.5">Email Address *</label>
+              <input type="email" id="login-email" required placeholder="aarav@example.com" class="w-full bg-zinc-900 border border-zinc-800 rounded-xl px-4 py-3 text-sm text-white placeholder-zinc-600 focus:outline-none focus:border-amber-400 transition" />
+            </div>
+            <button type="submit" class="w-full bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-600 hover:from-amber-500 hover:to-yellow-500 text-black font-extrabold py-3.5 px-4 rounded-xl shadow-lg shadow-amber-500/20 transition text-xs">
+              Sign In / Register ⚡
+            </button>
+          </form>
+        </div>
+
+        <div id="auth-logged-in-view" class="hidden space-y-5">
+          <div class="text-center mb-4">
+            <div class="w-14 h-14 rounded-2xl bg-amber-400 text-black text-2xl flex items-center justify-center mx-auto mb-3 shadow-lg shadow-amber-500/20 font-black">
+              ✓
+            </div>
+            <h3 class="text-xl font-extrabold text-white">Welcome back, <span id="user-display-name" class="text-amber-400">User</span>!</h3>
+            <p id="user-display-email" class="text-xs text-slate-400 mt-1">user@example.com</p>
+          </div>
+
+          <div class="space-y-2.5">
+            <button id="open-saved-designs-btn" class="w-full bg-zinc-900 hover:bg-zinc-800 text-amber-300 border border-zinc-800 font-bold py-3 px-4 rounded-xl transition text-xs flex items-center justify-center gap-2">
+              <span>📂</span> View Saved Designs & Projects
+            </button>
+            <button id="logout-btn" class="w-full bg-red-950/40 hover:bg-red-950/70 text-red-400 border border-red-500/30 font-bold py-3 px-4 rounded-xl transition text-xs">
+              Sign Out
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SAVED DESIGNS / MY PROJECTS MODAL -->
+    <div id="saved-designs-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90 backdrop-blur-md hidden transition-opacity duration-300">
+      <div class="relative bg-zinc-950 border border-zinc-800 rounded-3xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl text-left max-h-[85vh] overflow-y-auto">
+        <button id="close-saved-designs-modal-btn" class="absolute top-5 right-5 w-8 h-8 rounded-xl border border-zinc-800 text-slate-400 hover:text-white hover:border-amber-500/40 flex items-center justify-center transition">
+          ✕
+        </button>
+
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-10 h-10 rounded-xl bg-amber-400 text-black font-extrabold flex items-center justify-center text-lg shadow-lg">
+            📂
+          </div>
+          <div>
+            <h3 class="text-xl font-extrabold text-white">My Saved Magnet Designs</h3>
+            <p class="text-xs text-slate-400">Resume or reload any of your previously saved 50x50mm studio projects.</p>
+          </div>
+        </div>
+
+        <div id="saved-designs-list" class="space-y-3 mb-6">
+          <!-- Populated via JS -->
+        </div>
+
+        <div id="saved-designs-empty" class="text-center py-12 text-slate-500 text-xs hidden">
+          No saved designs found. Go to the Custom Magnet Studio, upload your design, and click "Save Design Progress".
+        </div>
+
+        <button id="close-saved-designs-bottom-btn" class="w-full bg-zinc-900 hover:bg-zinc-800 text-white border border-zinc-800 font-bold py-3 px-4 rounded-xl transition text-xs text-center">
+          Close
+        </button>
+      </div>
+    </div>
+
+    <script>
+      function setupAccountModal() {
+        const accountModal = document.getElementById('account-modal');
+        const openBtn = document.getElementById('open-account-modal-btn');
+        const closeBtn = document.getElementById('close-account-modal-btn');
+        const loginForm = document.getElementById('login-form') as HTMLFormElement;
+        const loggedOutView = document.getElementById('auth-logged-out-view');
+        const loggedInView = document.getElementById('auth-logged-in-view');
+        const userDisplayName = document.getElementById('user-display-name');
+        const userDisplayEmail = document.getElementById('user-display-email');
+        const authIndicator = document.getElementById('auth-indicator');
+        const logoutBtn = document.getElementById('logout-btn');
+
+        const savedDesignsModal = document.getElementById('saved-designs-modal');
+        const openSavedDesignsBtn = document.getElementById('open-saved-designs-btn');
+        const closeSavedDesignsBtn = document.getElementById('close-saved-designs-modal-btn');
+        const closeSavedDesignsBottomBtn = document.getElementById('close-saved-designs-bottom-btn');
+
+        function checkUserAuth() {
+          const userJson = localStorage.getItem('unhinged_user');
+          if (userJson) {
+            try {
+              const user = JSON.parse(userJson);
+              if (user && user.email) {
+                if (loggedOutView) loggedOutView.classList.add('hidden');
+                if (loggedInView) loggedInView.classList.remove('hidden');
+                if (userDisplayName) userDisplayName.textContent = user.name || 'User';
+                if (userDisplayEmail) userDisplayEmail.textContent = user.email;
+                if (authIndicator) authIndicator.classList.remove('hidden');
+                return user;
+              }
+            } catch(e) {}
+          }
+          if (loggedOutView) loggedOutView.classList.remove('hidden');
+          if (loggedInView) loggedInView.classList.add('hidden');
+          if (authIndicator) authIndicator.classList.add('hidden');
+          return null;
+        }
+
+        openBtn?.addEventListener('click', () => {
+          checkUserAuth();
+          if (accountModal) {
+            accountModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+          }
+        });
+
+        closeBtn?.addEventListener('click', () => {
+          if (accountModal) {
+            accountModal.classList.add('hidden');
+            document.body.style.overflow = '';
+          }
+        });
+
+        loginForm?.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const nameInput = (document.getElementById('login-name') as HTMLInputElement)?.value.trim();
+          const emailInput = (document.getElementById('login-email') as HTMLInputElement)?.value.trim();
+          if (nameInput && emailInput) {
+            const user = { name: nameInput, email: emailInput };
+            localStorage.setItem('unhinged_user', JSON.stringify(user));
+            checkUserAuth();
+            alert('Successfully logged in as ' + nameInput + '!');
+          }
+        });
+
+        logoutBtn?.addEventListener('click', () => {
+          localStorage.removeItem('unhinged_user');
+          checkUserAuth();
+          alert('Signed out successfully.');
+          if (accountModal) accountModal.classList.add('hidden');
+          document.body.style.overflow = '';
+        });
+
+        // Saved Designs Modal
+        openSavedDesignsBtn?.addEventListener('click', () => {
+          if (accountModal) accountModal.classList.add('hidden');
+          renderSavedDesigns();
+          if (savedDesignsModal) savedDesignsModal.classList.remove('hidden');
+        });
+
+        closeSavedDesignsBtn?.addEventListener('click', () => {
+          if (savedDesignsModal) savedDesignsModal.classList.add('hidden');
+          document.body.style.overflow = '';
+        });
+
+        closeSavedDesignsBottomBtn?.addEventListener('click', () => {
+          if (savedDesignsModal) savedDesignsModal.classList.add('hidden');
+          document.body.style.overflow = '';
+        });
+
+        checkUserAuth();
+      }
+
+      function renderSavedDesigns() {
+        const listContainer = document.getElementById('saved-designs-list');
+        const emptyContainer = document.getElementById('saved-designs-empty');
+        if (!listContainer || !emptyContainer) return;
+
+        const designsJson = localStorage.getItem('unhinged_saved_designs');
+        let designs = [];
+        try {
+          designs = designsJson ? JSON.parse(designsJson) : [];
+        } catch(e) { designs = []; }
+
+        if (designs.length === 0) {
+          listContainer.innerHTML = '';
+          emptyContainer.classList.remove('hidden');
+          return;
+        }
+
+        emptyContainer.classList.add('hidden');
+        listContainer.innerHTML = designs.map((d: any, idx: number) => `
+          <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-4 flex items-center justify-between gap-4">
+            <div class="flex items-center gap-3 overflow-hidden">
+              <div class="w-14 h-14 rounded-xl bg-black border border-zinc-800 overflow-hidden flex items-center justify-center flex-shrink-0">
+                ${d.image ? `<img src="${d.image}" class="w-full h-full object-cover" />` : '<span class="text-xl">🧲</span>'}
+              </div>
+              <div class="text-xs overflow-hidden">
+                <h4 class="font-bold text-white truncate">${d.title || 'Custom 50x50mm Magnet'}</h4>
+                <p class="text-slate-400 text-[11px]">Qty: ${d.quantity} • ${d.price} • Saved: ${d.date}</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2 flex-shrink-0">
+              <button onclick="window.resumeSavedDesign(${idx})" class="bg-amber-400 hover:bg-amber-500 text-black font-extrabold px-3 py-2 rounded-xl text-xs transition">
+                Resume ⚡
+              </button>
+              <button onclick="window.deleteSavedDesign(${idx})" class="bg-zinc-800 hover:bg-red-950/60 text-red-400 hover:text-red-300 px-3 py-2 rounded-xl text-xs transition border border-zinc-700">
+                Delete
+              </button>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // Global window helpers for saved designs
+      declare global {
+        interface Window {
+          resumeSavedDesign: (idx: number) => void;
+          deleteSavedDesign: (idx: number) => void;
+        }
+      }
+
+      window.resumeSavedDesign = (idx: number) => {
+        try {
+          const designsJson = localStorage.getItem('unhinged_saved_designs');
+          const designs = designsJson ? JSON.parse(designsJson) : [];
+          if (designs[idx]) {
+            localStorage.setItem('unhinged_resume_design', JSON.stringify(designs[idx]));
+            window.location.href = '/custom-magnets#studio';
+          }
+        } catch(e) {}
+      };
+
+      window.deleteSavedDesign = (idx: number) => {
+        try {
+          const designsJson = localStorage.getItem('unhinged_saved_designs');
+          let designs = designsJson ? JSON.parse(designsJson) : [];
+          designs.splice(idx, 1);
+          localStorage.setItem('unhinged_saved_designs', JSON.stringify(designs));
+          renderSavedDesigns();
+        } catch(e) {}
+      };
+
+      document.addEventListener('DOMContentLoaded', setupAccountModal);
+    </script>
+
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-10">
           <div class="space-y-4">
