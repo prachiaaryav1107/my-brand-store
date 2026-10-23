@@ -5,7 +5,7 @@ import clerk from '@clerk/astro';
 
 // https://astro.build/config
 export default defineConfig({
-  integrations: [clerk()],
+  integrations: [clerk({ injectMiddleware: false })],
   vite: {
     plugins: [tailwindcss()]
   }
