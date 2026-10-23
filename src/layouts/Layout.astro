@@ -8,7 +8,7 @@ const { title, description = "Unhinged — Obsidian & Gold custom magnets, cryst
 import "../styles/global.css";
 import CartDrawer from "../components/CartDrawer.astro";
 import PaymentModal from "../components/PaymentModal.astro";
-import { UserButton } from '@clerk/astro/components';
+import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/astro/components';
 
 const userId = Astro.locals.auth?.()?.userId;
 ---
@@ -45,19 +45,24 @@ const userId = Astro.locals.auth?.()?.userId;
             <span>🧲</span> Custom Magnet Studio
           </a>
           <a href="/#products" class="text-slate-300 hover:text-amber-400 transition">Catalog</a>
-          <a href="/b2b" class="text-slate-300 hover:text-amber-400 transition">Wholesale</a>
-          <button id="nav-signin-btn" class="text-slate-300 hover:text-amber-400 transition font-medium cursor-pointer">Sign In</button>
-          <button id="nav-projects-btn" class="open-saved-designs-btn text-slate-300 hover:text-amber-400 transition cursor-pointer">
-            My Projects
-          </button>
-          {userId && (
-            <UserButton afterSignOutUrl="/" />
-          )}
+          <SignedIn>
+            <button id="nav-projects-btn" class="open-saved-designs-btn text-slate-300 hover:text-amber-400 transition cursor-pointer">
+              My Projects
+            </button>
+          </SignedIn>
+          <SignedOut>
+            <SignInButton mode="modal" class="text-slate-300 hover:text-amber-400 transition font-medium cursor-pointer">
+              Sign In
+            </SignInButton>
+          </SignedOut>
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
         </div>
         <div class="flex items-center gap-3">
-          {userId && (
-            <UserButton afterSignOutUrl="/" />
-          )}
+          <SignedIn>
+            <UserButton />
+          </SignedIn>
           <!-- Cart Button -->
           <button class="open-cart-btn relative w-11 h-11 rounded-xl bg-zinc-900 border border-amber-500/30 hover:border-amber-400 text-amber-400 flex items-center justify-center transition shadow-md">
             <span>🛒</span>
@@ -113,75 +118,18 @@ const userId = Astro.locals.auth?.()?.userId;
     <script define:vars={{ userId }}>
       window.__UNHINGED_USER_ID__ = userId || null;
 
-      function handleSignInClick(e) {
-        e.preventDefault();
-        // @ts-ignore
-        if (window.Clerk && typeof window.Clerk.openSignIn === 'function') {
-          // @ts-ignore
-          window.Clerk.openSignIn();
-        } else {
-          let attempts = 0;
-          const interval = setInterval(() => {
-            attempts++;
-            // @ts-ignore
-            if (window.Clerk && typeof window.Clerk.openSignIn === 'function') {
-              clearInterval(interval);
-              // @ts-ignore
-              window.Clerk.openSignIn();
-            } else if (attempts > 30) {
-              clearInterval(interval);
-              console.error("Clerk client not loaded yet");
-              alert('Authentication modal is loading. Please try again.');
-            }
-          }, 100);
-        }
-      }
-
       function setupNavigationAuth() {
-        const signinBtn = document.getElementById('nav-signin-btn');
-        signinBtn?.addEventListener('click', handleSignInClick);
-
-        document.querySelectorAll('.nav-signin-btn').forEach(btn => {
-          btn.addEventListener('click', handleSignInClick);
-        });
-
-        const projectsBtn = document.getElementById('nav-projects-btn');
-        projectsBtn?.addEventListener('click', (e) => {
-          e.preventDefault();
-          // @ts-ignore
-          const clerkUser = window.Clerk?.user?.id;
-          const serverUser = window.__UNHINGED_USER_ID__;
-          if (!clerkUser && !serverUser) {
-            handleSignInClick(e);
-          } else {
-            renderSavedDesigns();
-            const modal = document.getElementById('saved-designs-modal');
-            if (modal) {
-              modal.classList.remove('hidden');
-              document.body.style.overflow = 'hidden';
-            }
-          }
-        });
-
         const savedDesignsModal = document.getElementById('saved-designs-modal');
         const openSavedDesignsBtns = document.querySelectorAll('.open-saved-designs-btn');
         const closeSavedDesignsBtn = document.getElementById('close-saved-designs-modal-btn');
         const closeSavedDesignsBottomBtn = document.getElementById('close-saved-designs-bottom-btn');
 
         openSavedDesignsBtns.forEach(btn => {
-          if (btn.id === 'nav-projects-btn') return; // Handled above
           btn.addEventListener('click', (e) => {
             e.preventDefault();
-            // @ts-ignore
-            const clerkUser = window.Clerk?.user?.id;
-            const serverUser = window.__UNHINGED_USER_ID__;
-            if (!clerkUser && !serverUser) {
-              handleSignInClick(e);
-            } else {
-              renderSavedDesigns();
-              if (savedDesignsModal) savedDesignsModal.classList.remove('hidden');
-              document.body.style.overflow = 'hidden';
-            }
+            renderSavedDesigns();
+            if (savedDesignsModal) savedDesignsModal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
           });
         });
 
