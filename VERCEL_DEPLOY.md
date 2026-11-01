@@ -1,4 +1,4 @@
-To update your live site at unhingedstore.com right now, you have two options:
+To update your live site at vinncrest.com right now, you have two options:
 
 ### Option 1: Trigger Redeploy via Vercel Dashboard (Easiest)
 1. Go to [vercel.com](https://vercel.com) and log in.

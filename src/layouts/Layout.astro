@@ -4,13 +4,11 @@ interface Props {
   description?: string;
 }
 
-const { title, description = "Unhinged — Obsidian & Gold custom magnets, crystals, and dark luxury desk essentials." } = Astro.props;
+const { title, description = "Vinncrest — Obsidian & Gold custom magnets, crystals, and dark luxury desk essentials." } = Astro.props;
 import "../styles/global.css";
 import CartDrawer from "../components/CartDrawer.astro";
 import PaymentModal from "../components/PaymentModal.astro";
 import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/astro/components';
-
-const userId = Astro.locals.auth?.()?.userId;
 ---
 
 <!doctype html>
@@ -38,7 +36,7 @@ const userId = Astro.locals.auth?.()?.userId;
           <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-600 via-yellow-400 to-amber-200 flex items-center justify-center text-black shadow-lg shadow-amber-500/20 group-hover:scale-105 transition font-black">
             ⚡
           </div>
-          <span>UN<span class="bg-gradient-to-r from-amber-200 via-yellow-400 to-amber-600 bg-clip-text text-transparent">HINGED</span></span>
+          <span>VINN<span class="bg-gradient-to-r from-amber-200 via-yellow-400 to-amber-600 bg-clip-text text-transparent">CREST</span></span>
         </a>
         <div class="hidden md:flex items-center space-x-6 text-sm font-semibold">
           <a href="/custom-magnets" class="text-amber-400 hover:text-amber-300 transition flex items-center gap-1.5 bg-amber-950/60 px-3.5 py-1.5 rounded-full border border-amber-500/30">
@@ -51,6 +49,7 @@ const userId = Astro.locals.auth?.()?.userId;
             </button>
           </SignedIn>
           <SignedOut>
+            {/* @ts-ignore */}
             <SignInButton mode="modal" class="text-slate-300 hover:text-amber-400 transition font-medium cursor-pointer">
               Sign In
             </SignInButton>
@@ -115,8 +114,16 @@ const userId = Astro.locals.auth?.()?.userId;
       </div>
     </div>
 
-    <script define:vars={{ userId }}>
-      window.__UNHINGED_USER_ID__ = userId || null;
+    <script>
+      declare global {
+        interface Window {
+          __VINNCREST_USER_ID__: any;
+          resumeSavedDesign: (idx: number) => void;
+          deleteSavedDesign: (idx: number) => void;
+        }
+      }
+
+      window.__VINNCREST_USER_ID__ = null;
 
       function setupNavigationAuth() {
         const savedDesignsModal = document.getElementById('saved-designs-modal');
@@ -148,19 +155,19 @@ const userId = Astro.locals.auth?.()?.userId;
         // @ts-ignore
         const clerkUserId = window.Clerk?.user?.id;
         if (clerkUserId) return clerkUserId;
-        if (window.__UNHINGED_USER_ID__) return window.__UNHINGED_USER_ID__;
+        if (window.__VINNCREST_USER_ID__) return window.__VINNCREST_USER_ID__;
         return 'guest_user';
       }
 
       function getSavedDesignsKey() {
-        return `unhinged_saved_designs_${getActiveUserId()}`;
+        return `vinncrest_saved_designs_${getActiveUserId()}`;
       }
 
       function getSavedDesigns() {
         const key = getSavedDesignsKey();
         let designsJson = localStorage.getItem(key);
         if (!designsJson) {
-          designsJson = localStorage.getItem('unhinged_saved_designs');
+          designsJson = localStorage.getItem('vinncrest_saved_designs');
         }
         try {
           return designsJson ? JSON.parse(designsJson) : [];
@@ -192,7 +199,7 @@ const userId = Astro.locals.auth?.()?.userId;
           <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-4 flex items-center justify-between gap-4">
             <div class="flex items-center gap-3 overflow-hidden">
               <div class="w-14 h-14 rounded-xl bg-black border border-zinc-800 overflow-hidden flex items-center justify-center flex-shrink-0">
-                ${d.image ? `<img src="${d.image}" class="w-full h-full object-cover" />` : '<span class="text-xl">🧲</span>'}
+                ${d.image ? '<img src="' + d.image + '" class="w-full h-full object-cover" />' : '<span class="text-xl">🧲</span>'}
               </div>
               <div class="text-xs overflow-hidden">
                 <h4 class="font-bold text-white truncate">${d.title || 'Custom 50x50mm Magnet'}</h4>
@@ -211,25 +218,17 @@ const userId = Astro.locals.auth?.()?.userId;
         `).join('');
       }
 
-      declare global {
-        interface Window {
-          resumeSavedDesign: (idx: number) => void;
-          deleteSavedDesign: (idx: number) => void;
-          __UNHINGED_USER_ID__: string | null;
-        }
-      }
-
-      window.resumeSavedDesign = (idx: number) => {
+      window.resumeSavedDesign = (idx) => {
         try {
           const designs = getSavedDesigns();
           if (designs[idx]) {
-            localStorage.setItem('unhinged_resume_design', JSON.stringify(designs[idx]));
+            localStorage.setItem('vinncrest_resume_design', JSON.stringify(designs[idx]));
             window.location.href = '/custom-magnets#studio';
           }
         } catch(e) {}
       };
 
-      window.deleteSavedDesign = (idx: number) => {
+      window.deleteSavedDesign = (idx) => {
         try {
           let designs = getSavedDesigns();
           designs.splice(idx, 1);
@@ -252,7 +251,7 @@ const userId = Astro.locals.auth?.()?.userId;
           <div class="space-y-4">
             <div class="flex items-center gap-2 text-xl font-extrabold text-white tracking-widest">
               <div class="w-8 h-8 rounded-lg bg-gradient-to-tr from-amber-400 to-amber-600 flex items-center justify-center text-sm text-black font-bold shadow-md">⚡</div>
-              <span>UNHINGED</span>
+              <span>VINNCREST</span>
             </div>
             <p class="text-sm text-slate-400 leading-relaxed">
               Obsidian & gold craftsmanship for the unapologetic. Custom magnets with your personal designs, crystals, and elite deskware.
@@ -277,12 +276,12 @@ const userId = Astro.locals.auth?.()?.userId;
             <h4 class="text-xs font-bold uppercase tracking-widest text-amber-400 mb-4">Direct Mailbox Notice</h4>
             <p class="text-xs text-slate-400 mb-2">Order confirmations & custom uploaded design files transmit directly to:</p>
             <p class="text-xs font-mono text-amber-300 bg-zinc-900 p-2.5 rounded-xl border border-amber-500/20">
-              unhinged.sales1@gmail.com
+              vinncrest@gmail.com
             </p>
           </div>
         </div>
         <div class="border-t border-zinc-900 mt-12 pt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500">
-          <p>&copy; {new Date().getFullYear()} Unhinged Brands. Handcrafted in small batches.</p>
+          <p>&copy; {new Date().getFullYear()} Vinncrest Brands. Handcrafted in small batches.</p>
           <p class="mt-2 sm:mt-0">All buttons functional • Direct Amazon & Studio fulfillment.</p>
         </div>
       </div>

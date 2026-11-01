@@ -25,12 +25,12 @@ export const POST: APIRoute = async ({ request }) => {
       });
     }
 
-    const adminEmail = 'unhinged.sales1@gmail.com';
+    const adminEmail = 'vinncrest@gmail.com';
 
     // Construct professional HTML for Admin Notification
     const adminHtmlContent = `
       <div style="font-family: Arial, sans-serif; background-color: #09090b; color: #f4f4f5; padding: 30px; border-radius: 12px;">
-        <h2 style="color: #fbbf24; border-bottom: 2px solid #3f3f46; padding-bottom: 10px;">⚡ New Unhinged Order Received</h2>
+        <h2 style="color: #fbbf24; border-bottom: 2px solid #3f3f46; padding-bottom: 10px;">⚡ New Vinncrest Order Received</h2>
         <p><strong>Order ID:</strong> ${orderId}</p>
         
         <h3 style="color: #fbbf24; margin-top: 20px;">Customer Details</h3>
@@ -53,14 +53,14 @@ export const POST: APIRoute = async ({ request }) => {
         ${designDataUrl ? `<p style="margin-top: 20px;"><strong>Uploaded Design Preview:</strong><br/><img src="${designDataUrl}" alt="Customer Design" style="max-width: 250px; border-radius: 8px; border: 1px solid #3f3f46; margin-top: 10px;"/></p>` : ''}
         
         <hr style="border: 0; border-top: 1px solid #3f3f46; margin: 30px 0;" />
-        <p style="font-size: 12px; color: #a1a1aa;">Dispatched securely via Unhinged Studio Vault.</p>
+        <p style="font-size: 12px; color: #a1a1aa;">Dispatched securely via Vinncrest Studio Vault.</p>
       </div>
     `;
 
     // Construct professional HTML Receipt for Customer
     const customerHtmlContent = `
       <div style="font-family: Arial, sans-serif; background-color: #09090b; color: #f4f4f5; padding: 30px; border-radius: 12px;">
-        <h2 style="color: #fbbf24; border-bottom: 2px solid #3f3f46; padding-bottom: 10px;">⚡ Thank You for Your Order with Unhinged!</h2>
+        <h2 style="color: #fbbf24; border-bottom: 2px solid #3f3f46; padding-bottom: 10px;">⚡ Thank You for Your Order with Vinncrest!</h2>
         <p>Hi ${customerName},</p>
         <p>We have successfully received your custom magnet order! Our studio artisans are preparing your high-gloss magnetic prints for express dispatch within 24-48 hours.</p>
         
@@ -71,10 +71,10 @@ export const POST: APIRoute = async ({ request }) => {
           <p style="margin: 0;"><strong>Shipping Address:</strong> ${shippingAddress}, ${cityPincode}</p>
         </div>
 
-        <p>If you have any questions, need to update your design, or require support, please reach out directly to us at <a href="mailto:unhinged.sales1@gmail.com" style="color: #fbbf24;">unhinged.sales1@gmail.com</a>.</p>
+        <p>If you have any questions, need to update your design, or require support, please reach out directly to us at <a href="mailto:vinncrest@gmail.com" style="color: #fbbf24;">vinncrest@gmail.com</a>.</p>
         
         <hr style="border: 0; border-top: 1px solid #3f3f46; margin: 30px 0;" />
-        <p style="font-size: 12px; color: #a1a1aa;">Unhinged Brands • Obsidian & Gold Craftsmanship</p>
+        <p style="font-size: 12px; color: #a1a1aa;">Vinncrest Brands • Obsidian & Gold Craftsmanship</p>
       </div>
     `;
 
@@ -90,7 +90,7 @@ export const POST: APIRoute = async ({ request }) => {
           'Authorization': `Bearer ${resendApiKey}`
         },
         body: JSON.stringify({
-          from: 'Unhinged Orders <orders@unhingedstore.com>',
+          from: 'Vinncrest Orders <orders@vinncrest.com>',
           to: [adminEmail],
           subject: `[NEW ORDER] ${orderId} - ${customerName}`,
           html: adminHtmlContent
@@ -105,15 +105,15 @@ export const POST: APIRoute = async ({ request }) => {
           'Authorization': `Bearer ${resendApiKey}`
         },
         body: JSON.stringify({
-          from: 'Unhinged Studio <support@unhingedstore.com>',
+          from: 'Vinncrest Studio <support@vinncrest.com>',
           to: [customerEmail],
-          subject: `Thank You for Your Order with Unhinged! ⚡ (${orderId})`,
+          subject: `Thank You for Your Order with Vinncrest! ⚡ (${orderId})`,
           html: customerHtmlContent
         })
       });
     } else {
       console.log('--- MOCK DUAL EMAIL DISPATCH ---');
-      console.log('To Admin (unhinged.sales1@gmail.com):', { orderId, customerName, totalPrice });
+      console.log('To Admin (vinncrest@gmail.com):', { orderId, customerName, totalPrice });
       console.log('To Customer (' + customerEmail + '):', { orderId, totalPrice });
     }
 

@@ -13,7 +13,7 @@ const { product } = Astro.props;
 const isSquareMagnet = product.slug === 'custom-square-magnet';
 ---
 
-<Layout title={`${product.title} | Unhinged Store`}>
+<Layout title={`${product.title} | Vinncrest Store`}>
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
       
@@ -140,7 +140,7 @@ const isSquareMagnet = product.slug === 'custom-square-magnet';
           emoji: product.emoji,
           options: product.category
         };
-        window.dispatchEvent(new CustomEvent('unhinged-add-to-cart', { detail: item }));
+        window.dispatchEvent(new CustomEvent('vinncrest-add-to-cart', { detail: item }));
       });
     });
   </script>

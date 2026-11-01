@@ -25,12 +25,12 @@ export const POST: APIRoute = async ({ request }) => {
       });
     }
 
-    const adminEmail = 'unhinged.sales1@gmail.com';
+    const adminEmail = 'vinncrest@gmail.com';
 
     // Construct professional HTML for Admin Notification including Image Preview & Attachment
     const adminHtmlContent = `
       <div style="font-family: Arial, sans-serif; background-color: #09090b; color: #f4f4f5; padding: 30px; border-radius: 12px; max-width: 600px; margin: 0 auto;">
-        <h2 style="color: #fbbf24; border-bottom: 2px solid #3f3f46; padding-bottom: 10px;">⚡ New Unhinged Order (50x50mm Studio Dispatch)</h2>
+        <h2 style="color: #fbbf24; border-bottom: 2px solid #3f3f46; padding-bottom: 10px;">⚡ New Vinncrest Order (50x50mm Studio Dispatch)</h2>
         <p style="font-size: 14px;"><strong>Order ID:</strong> <span style="color: #fbbf24; font-family: monospace;">${orderId}</span></p>
         
         <h3 style="color: #fbbf24; margin-top: 20px; font-size: 16px;">Customer Details</h3>
@@ -59,7 +59,7 @@ export const POST: APIRoute = async ({ request }) => {
         ` : ''}
         
         <hr style="border: 0; border-top: 1px solid #3f3f46; margin: 30px 0;" />
-        <p style="font-size: 12px; color: #a1a1aa;">Unhinged Brands • Obsidian & Gold Craftsmanship</p>
+        <p style="font-size: 12px; color: #a1a1aa;">Vinncrest Brands • Obsidian & Gold Craftsmanship</p>
       </div>
     `;
 
@@ -73,7 +73,7 @@ export const POST: APIRoute = async ({ request }) => {
           'Authorization': `Bearer ${resendApiKey}`
         },
         body: JSON.stringify({
-          from: 'Unhinged Orders <orders@unhingedstore.com>',
+          from: 'Vinncrest Orders <orders@vinncrest.com>',
           to: [adminEmail],
           subject: `[NEW ORDER] ${orderId} - ${customerName} (50x50mm Magnet)`,
           html: adminHtmlContent,

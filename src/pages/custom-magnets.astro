@@ -2,10 +2,10 @@
 import Layout from "../layouts/Layout.astro";
 import { products } from "../data/products";
 
-const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p.category === 'Desk Magnets');
+const magnetProducts = products.filter(p => p.isCustomizable);
 ---
 
-<Layout title="Custom Square Magnet Studio | Unhinged" description="Upload your own photo or logo for custom square magnets. Handcrafted with high durability and strong magnetic backing.">
+<Layout title="Custom Square Magnet Studio | Vinncrest" description="Upload your own photo or logo for custom square magnets. Handcrafted with high durability and strong magnetic backing.">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-20">
     
     <!-- Header Banner -->
@@ -198,7 +198,7 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
             <h2 class="text-lg font-bold text-white">Order Details & EmailJS Dispatch</h2>
           </div>
           <p class="text-xs text-slate-400 mb-6">
-            Enter your delivery information. EmailJS instantly dispatches the order sheet to <span class="text-amber-400 font-mono">unhinged.sales1@gmail.com</span> and the confirmation receipt to your email.
+            Enter your delivery information. EmailJS instantly dispatches the order sheet to <span class="text-amber-400 font-mono">vinncrest@gmail.com</span> and the confirmation receipt to your email.
           </p>
 
           <form id="custom-magnet-order-form" class="space-y-4">
@@ -206,7 +206,7 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
             <input type="hidden" id="hidden-magnet-type" name="magnet_type" value="Custom Square Magnet (50x50mm)" />
             <input type="hidden" id="hidden-quantity" name="quantity" value="1" />
             <input type="hidden" id="hidden-total-price" name="total_price" value="₹399" />
-            <input type="hidden" id="hidden-to-email" name="to_email" value="unhinged.sales1@gmail.com" />
+            <input type="hidden" id="hidden-to-email" name="to_email" value="vinncrest@gmail.com" />
 
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
@@ -249,7 +249,7 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
             </div>
 
             <p class="text-[11px] text-center text-slate-400 leading-relaxed">
-              Dispatched via Express Courier within 24-48 hours. EmailJS dispatches admin order sheet to <strong class="text-amber-400">unhinged.sales1@gmail.com</strong> and receipt to customer.
+              Dispatched via Express Courier within 24-48 hours. EmailJS dispatches admin order sheet to <strong class="text-amber-400">vinncrest@gmail.com</strong> and receipt to customer.
             </p>
           </form>
 
@@ -264,7 +264,7 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
       <div class="flex flex-col sm:flex-row items-start sm:items-end justify-between mb-10">
         <div>
           <span class="text-xs font-bold uppercase tracking-widest text-amber-400 bg-zinc-900 px-3 py-1 rounded-full border border-zinc-800">Explore Catalog</span>
-          <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-2">More Unhinged Masterpieces</h2>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-white mt-2">More Vinncrest Masterpieces</h2>
         </div>
         <a href="/#products" class="text-xs font-bold text-amber-400 hover:text-amber-300 mt-2 sm:mt-0 transition">
           View All Items &rarr;
@@ -308,7 +308,7 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
         </span>
         <h3 class="text-2xl font-extrabold text-white mt-2">Custom Square Magnet Order Placed!</h3>
         <p class="text-xs text-slate-300 mt-1">
-          EmailJS successfully verified and sent admin notification to unhinged.sales1@gmail.com and your confirmation receipt.
+          EmailJS successfully verified and sent admin notification to vinncrest@gmail.com and your confirmation receipt.
         </p>
       </div>
 
@@ -316,7 +316,7 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
       <div class="bg-zinc-900 rounded-2xl border border-zinc-800 p-5 space-y-4 mb-6">
         <div class="flex items-center justify-between border-b border-zinc-800 pb-3 text-xs">
           <span class="text-slate-400">Order ID:</span>
-          <span id="receipt-order-id" class="text-amber-400 font-mono font-bold">UNH-MAG-000000</span>
+          <span id="receipt-order-id" class="text-amber-400 font-mono font-bold">VIN-MAG-000000</span>
         </div>
 
         <!-- Thumbnail + details -->
@@ -344,7 +344,7 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
           <span>📬</span> EmailJS Dispatch Status:
         </div>
         <p class="text-[11px] text-slate-400 leading-relaxed">
-          • <strong>Admin Notification:</strong> Dispatched to <span class="text-amber-300 font-mono">unhinged.sales1@gmail.com</span> (Template: <code class="text-amber-400">template_j1qjq79</code>).<br/>
+          • <strong>Admin Notification:</strong> Dispatched to <span class="text-amber-300 font-mono">vinncrest@gmail.com</span> (Template: <code class="text-amber-400">template_j1qjq79</code>).<br/>
           • <strong>Customer Receipt:</strong> Dispatched to <span class="text-amber-300 font-mono" id="banner-cust-email">your email</span> (Template: <code class="text-amber-400">template_35c78gn</code>).
         </p>
       </div>
@@ -522,7 +522,7 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
         options: `Square Format • Glossy Finish`
       };
 
-      window.dispatchEvent(new CustomEvent('unhinged-add-to-cart', { detail: cartItem }));
+      window.dispatchEvent(new CustomEvent('vinncrest-add-to-cart', { detail: cartItem }));
     });
 
     // Save Design Progress Button (uses Clerk user ID or localStorage fallback)
@@ -535,7 +535,7 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
 
       // @ts-ignore
       const activeUserId = window.Clerk?.user?.id || 'guest_user';
-      const key = `unhinged_saved_designs_${activeUserId}`;
+      const key = `vinncrest_saved_designs_${activeUserId}`;
       let designs = [];
       try {
         const existing = localStorage.getItem(key);
@@ -557,9 +557,9 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
 
     // Restore design if resumed from My Projects
     try {
-      const resumeJson = localStorage.getItem('unhinged_resume_design');
+      const resumeJson = localStorage.getItem('vinncrest_resume_design');
       if (resumeJson) {
-        localStorage.removeItem('unhinged_resume_design');
+        localStorage.removeItem('vinncrest_resume_design');
         const resumeItem = JSON.parse(resumeJson);
         if (resumeItem && resumeItem.image) {
           uploadedDataUrl = resumeItem.image;
@@ -595,7 +595,7 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
       if (btnText) btnText.textContent = 'Sending EmailJS Dual-Notifications...';
 
       // 1. Correctly extract exact values from all form input fields in the DOM
-      const orderId = (document.getElementById('hidden-order-id') as HTMLInputElement)?.value || ('UNH-MAG-' + Date.now());
+      const orderId = (document.getElementById('hidden-order-id') as HTMLInputElement)?.value || ('VIN-MAG-' + Date.now());
       const custName = (document.getElementById('cust-name') as HTMLInputElement)?.value || '';
       const custEmail = (document.getElementById('cust-email') as HTMLInputElement)?.value || '';
       const custPhone = (document.getElementById('cust-phone') as HTMLInputElement)?.value || '';
@@ -623,7 +623,7 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
       const adminTextParams = {
         name: custName,
         email: custEmail,
-        to_email: 'unhinged.sales1@gmail.com',
+        to_email: 'vinncrest@gmail.com',
         phone: custPhone,
         address: fullShippingAddress,
         magnet_type: magnetTypeVal,
@@ -663,8 +663,8 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
         }
 
         // 3. Robust Dual Admin Dispatch System + Customer Receipt + Backend API Sync
-        // - Email 1 to Admin (unhinged.sales1@gmail.com): Normal text order sheet
-        // - Email 2 to Admin (unhinged.sales1@gmail.com): Dedicated design image file attachment notification via sendForm
+        // - Email 1 to Admin (vinncrest@gmail.com): Normal text order sheet
+        // - Email 2 to Admin (vinncrest@gmail.com): Dedicated design image file attachment notification via sendForm
         // - Customer Receipt: Confirmation receipt to customer email
         // - Backend API: Non-blocking sync with /api/checkout
 
@@ -712,7 +712,7 @@ const magnetProducts = products.filter(p => p.category === 'Custom Magnets' || p
         console.log('EmailJS dual-admin & customer receipt dispatch successful responses:', results);
 
         // Verify true success response
-        const allSuccessful = results.every(res => res && (res.status === 200 || res.text === 'OK'));
+        const allSuccessful = results.every((res: any) => res && (res.status === 200 || res.text === 'OK'));
         if (!allSuccessful) {
           throw new Error('EmailJS dispatch did not return success status.');
         }
