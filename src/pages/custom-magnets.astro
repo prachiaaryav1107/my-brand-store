@@ -501,10 +501,10 @@ const magnetProducts = products.filter(p => p.isCustomizable);
         selectedPrice = parseInt((btn as HTMLElement).dataset.price || '399', 10);
 
         if (summaryQty) summaryQty.textContent = selectedQty.toString();
-        if (summaryPrice) summaryPrice.textContent = `₹${selectedPrice.toLocaleString('en-IN')}`;
+        if (summaryPrice) summaryPrice.textContent = '₹' + selectedPrice.toLocaleString('en-IN');
 
         if (hiddenQtyInput) hiddenQtyInput.value = selectedQty.toString();
-        if (hiddenPriceInput) hiddenPriceInput.value = `₹${selectedPrice.toLocaleString('en-IN')}`;
+        if (hiddenPriceInput) hiddenPriceInput.value = '₹' + selectedPrice.toLocaleString('en-IN');
       });
     });
 
@@ -514,12 +514,12 @@ const magnetProducts = products.filter(p => p.isCustomizable);
       const cartItem = {
         id: 'custom-square-mag-' + Date.now(),
         slug: 'custom-square-magnet',
-        title: `Custom Square Magnet (50x50mm)`,
+        title: 'Custom Square Magnet (50x50mm)',
         price: selectedPrice / selectedQty,
         quantity: selectedQty,
         emoji: '🧲',
         image: uploadedDataUrl || '',
-        options: `Square Format • Glossy Finish`
+        options: 'Square Format • Glossy Finish'
       };
 
       window.dispatchEvent(new CustomEvent('vinncrest-add-to-cart', { detail: cartItem }));
@@ -535,7 +535,7 @@ const magnetProducts = products.filter(p => p.isCustomizable);
 
       // @ts-ignore
       const activeUserId = window.Clerk?.user?.id || 'guest_user';
-      const key = `vinncrest_saved_designs_${activeUserId}`;
+      const key = 'vinncrest_saved_designs_' + activeUserId;
       let designs = [];
       try {
         const existing = localStorage.getItem(key);
@@ -546,7 +546,7 @@ const magnetProducts = products.filter(p => p.isCustomizable);
         id: 'design-' + Date.now(),
         title: 'Custom 50x50mm Magnet',
         quantity: selectedQty,
-        price: `₹${selectedPrice.toLocaleString('en-IN')}`,
+        price: '₹' + selectedPrice.toLocaleString('en-IN'),
         image: uploadedDataUrl,
         date: new Date().toLocaleDateString()
       });
@@ -601,10 +601,10 @@ const magnetProducts = products.filter(p => p.isCustomizable);
       const custPhone = (document.getElementById('cust-phone') as HTMLInputElement)?.value || '';
       const custCity = (document.getElementById('cust-city') as HTMLInputElement)?.value || '';
       const custAddressText = (document.getElementById('cust-address') as HTMLTextAreaElement)?.value || '';
-      const fullShippingAddress = `${custAddressText}, ${custCity}`.trim();
+      const fullShippingAddress = (custAddressText + ', ' + custCity).trim();
       const magnetTypeVal = (document.getElementById('hidden-magnet-type') as HTMLInputElement)?.value || 'Custom Square Magnet (50x50mm)';
       const quantityVal = (document.getElementById('hidden-quantity') as HTMLInputElement)?.value || selectedQty.toString();
-      const totalPriceVal = (document.getElementById('hidden-total-price') as HTMLInputElement)?.value || `₹${selectedPrice.toLocaleString('en-IN')}`;
+      const totalPriceVal = (document.getElementById('hidden-total-price') as HTMLInputElement)?.value || ('₹' + selectedPrice.toLocaleString('en-IN'));
       const custNotes = (document.getElementById('cust-notes') as HTMLTextAreaElement)?.value || 'None';
 
       // Update hidden full address before sendForm
@@ -632,7 +632,7 @@ const magnetProducts = products.filter(p => p.isCustomizable);
         notes: custNotes,
         order_id: orderId,
         design_filename: uploadedFile ? uploadedFile.name : 'Custom_Design_File.png',
-        design_filesize: uploadedFile ? `${(uploadedFile.size / (1024 * 1024)).toFixed(2)} MB` : 'Attached in Studio'
+        design_filesize: uploadedFile ? ((uploadedFile.size / (1024 * 1024)).toFixed(2) + ' MB') : 'Attached in Studio'
       };
 
       const customerParams = {
@@ -647,7 +647,7 @@ const magnetProducts = products.filter(p => p.isCustomizable);
         notes: custNotes,
         order_id: orderId,
         design_filename: uploadedFile ? uploadedFile.name : 'Custom_Design_File.png',
-        design_filesize: uploadedFile ? `${(uploadedFile.size / (1024 * 1024)).toFixed(2)} MB` : 'Attached in Studio'
+        design_filesize: uploadedFile ? ((uploadedFile.size / (1024 * 1024)).toFixed(2) + ' MB') : 'Attached in Studio'
       };
 
       console.log('--- EmailJS Transmission Payload ---');

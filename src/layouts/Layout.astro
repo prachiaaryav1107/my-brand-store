@@ -195,27 +195,24 @@ import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/astro/comp
         }
 
         emptyContainer.classList.add('hidden');
-        listContainer.innerHTML = designs.map((d: any, idx: number) => `
-          <div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-4 flex items-center justify-between gap-4">
-            <div class="flex items-center gap-3 overflow-hidden">
-              <div class="w-14 h-14 rounded-xl bg-black border border-zinc-800 overflow-hidden flex items-center justify-center flex-shrink-0">
-                ${d.image ? '<img src="' + d.image + '" class="w-full h-full object-cover" />' : '<span class="text-xl">🧲</span>'}
-              </div>
-              <div class="text-xs overflow-hidden">
-                <h4 class="font-bold text-white truncate">${d.title || 'Custom 50x50mm Magnet'}</h4>
-                <p class="text-slate-400 text-[11px]">Qty: ${d.quantity} • ${d.price} • Saved: ${d.date}</p>
-              </div>
-            </div>
-            <div class="flex items-center gap-2 flex-shrink-0">
-              <button onclick="window.resumeSavedDesign(${idx})" class="bg-amber-400 hover:bg-amber-500 text-black font-extrabold px-3 py-2 rounded-xl text-xs transition">
-                Resume ⚡
-              </button>
-              <button onclick="window.deleteSavedDesign(${idx})" class="bg-zinc-800 hover:bg-red-950/60 text-red-400 hover:text-red-300 px-3 py-2 rounded-xl text-xs transition border border-zinc-700">
-                Delete
-              </button>
-            </div>
-          </div>
-        `).join('');
+        listContainer.innerHTML = designs.map((d: any, idx: number) => {
+          const imgHtml = d.image ? '<img src="' + d.image + '" class="w-full h-full object-cover" />' : '<span class="text-xl">🧲</span>';
+          return '<div class="bg-zinc-900 border border-zinc-800 rounded-2xl p-4 flex items-center justify-between gap-4">' +
+            '<div class="flex items-center gap-3 overflow-hidden">' +
+              '<div class="w-14 h-14 rounded-xl bg-black border border-zinc-800 overflow-hidden flex items-center justify-center flex-shrink-0">' +
+                imgHtml +
+              '</div>' +
+              '<div class="text-xs overflow-hidden">' +
+                '<h4 class="font-bold text-white truncate">' + (d.title || 'Custom 50x50mm Magnet') + '</h4>' +
+                '<p class="text-slate-400 text-[11px]">Qty: ' + d.quantity + ' • ' + d.price + ' • Saved: ' + d.date + '</p>' +
+              '</div>' +
+            '</div>' +
+            '<div class="flex items-center gap-2 flex-shrink-0">' +
+              '<button onclick="window.resumeSavedDesign(' + idx + ')" class="bg-amber-400 hover:bg-amber-500 text-black font-extrabold px-3 py-2 rounded-xl text-xs transition">Resume ⚡</button>' +
+              '<button onclick="window.deleteSavedDesign(' + idx + ')" class="bg-zinc-800 hover:bg-red-950/60 text-red-400 hover:text-red-300 px-3 py-2 rounded-xl text-xs transition border border-zinc-700">Delete</button>' +
+            '</div>' +
+          '</div>';
+        }).join('');
       }
 
       window.resumeSavedDesign = (idx) => {
